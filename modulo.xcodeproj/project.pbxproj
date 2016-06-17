@@ -8,7 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		CAE55C451D14928B00411727 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C441D14928B00411727 /* main.swift */; };
+		CAE55C531D1492A500411727 /* ModuloKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CAE55C521D1492A500411727 /* ModuloKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CAE55C5A1D1492A500411727 /* ModuloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C501D1492A500411727 /* ModuloKit.framework */; };
+		CAE55C5F1D1492A500411727 /* ModuloKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C5E1D1492A500411727 /* ModuloKitTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CAE55C5B1D1492A500411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C391D14928B00411727 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CAE55C4F1D1492A500411727;
+			remoteInfo = ModuloKit;
+		};
+		CAE55C671D1492AE00411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C391D14928B00411727 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CAE55C4F1D1492A500411727;
+			remoteInfo = ModuloKit;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		CAE55C3F1D14928B00411727 /* CopyFiles */ = {
@@ -25,6 +45,12 @@
 /* Begin PBXFileReference section */
 		CAE55C411D14928B00411727 /* modulo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = modulo; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAE55C441D14928B00411727 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		CAE55C501D1492A500411727 /* ModuloKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ModuloKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAE55C521D1492A500411727 /* ModuloKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModuloKit.h; sourceTree = "<group>"; };
+		CAE55C541D1492A500411727 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAE55C591D1492A500411727 /* ModuloKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModuloKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAE55C5E1D1492A500411727 /* ModuloKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuloKitTests.swift; sourceTree = "<group>"; };
+		CAE55C601D1492A500411727 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +61,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CAE55C4C1D1492A500411727 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAE55C561D1492A500411727 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAE55C5A1D1492A500411727 /* ModuloKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -42,6 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				CAE55C431D14928B00411727 /* modulo */,
+				CAE55C511D1492A500411727 /* ModuloKit */,
+				CAE55C5D1D1492A500411727 /* ModuloKitTests */,
 				CAE55C421D14928B00411727 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				CAE55C411D14928B00411727 /* modulo */,
+				CAE55C501D1492A500411727 /* ModuloKit.framework */,
+				CAE55C591D1492A500411727 /* ModuloKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -62,7 +107,36 @@
 			path = modulo;
 			sourceTree = "<group>";
 		};
+		CAE55C511D1492A500411727 /* ModuloKit */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55C521D1492A500411727 /* ModuloKit.h */,
+				CAE55C541D1492A500411727 /* Info.plist */,
+			);
+			path = ModuloKit;
+			sourceTree = "<group>";
+		};
+		CAE55C5D1D1492A500411727 /* ModuloKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55C5E1D1492A500411727 /* ModuloKitTests.swift */,
+				CAE55C601D1492A500411727 /* Info.plist */,
+			);
+			path = ModuloKitTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		CAE55C4D1D1492A500411727 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAE55C531D1492A500411727 /* ModuloKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		CAE55C401D14928B00411727 /* modulo */ = {
@@ -76,11 +150,48 @@
 			buildRules = (
 			);
 			dependencies = (
+				CAE55C681D1492AE00411727 /* PBXTargetDependency */,
 			);
 			name = modulo;
 			productName = modulo;
 			productReference = CAE55C411D14928B00411727 /* modulo */;
 			productType = "com.apple.product-type.tool";
+		};
+		CAE55C4F1D1492A500411727 /* ModuloKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAE55C611D1492A500411727 /* Build configuration list for PBXNativeTarget "ModuloKit" */;
+			buildPhases = (
+				CAE55C4B1D1492A500411727 /* Sources */,
+				CAE55C4C1D1492A500411727 /* Frameworks */,
+				CAE55C4D1D1492A500411727 /* Headers */,
+				CAE55C4E1D1492A500411727 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ModuloKit;
+			productName = ModuloKit;
+			productReference = CAE55C501D1492A500411727 /* ModuloKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CAE55C581D1492A500411727 /* ModuloKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAE55C641D1492A500411727 /* Build configuration list for PBXNativeTarget "ModuloKitTests" */;
+			buildPhases = (
+				CAE55C551D1492A500411727 /* Sources */,
+				CAE55C561D1492A500411727 /* Frameworks */,
+				CAE55C571D1492A500411727 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CAE55C5C1D1492A500411727 /* PBXTargetDependency */,
+			);
+			name = ModuloKitTests;
+			productName = ModuloKitTests;
+			productReference = CAE55C591D1492A500411727 /* ModuloKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -93,6 +204,12 @@
 				ORGANIZATIONNAME = TheHolyGrail;
 				TargetAttributes = {
 					CAE55C401D14928B00411727 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					CAE55C4F1D1492A500411727 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					CAE55C581D1492A500411727 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
@@ -110,9 +227,28 @@
 			projectRoot = "";
 			targets = (
 				CAE55C401D14928B00411727 /* modulo */,
+				CAE55C4F1D1492A500411727 /* ModuloKit */,
+				CAE55C581D1492A500411727 /* ModuloKitTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CAE55C4E1D1492A500411727 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAE55C571D1492A500411727 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CAE55C3D1D14928B00411727 /* Sources */ = {
@@ -123,7 +259,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CAE55C4B1D1492A500411727 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAE55C551D1492A500411727 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAE55C5F1D1492A500411727 /* ModuloKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CAE55C5C1D1492A500411727 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CAE55C4F1D1492A500411727 /* ModuloKit */;
+			targetProxy = CAE55C5B1D1492A500411727 /* PBXContainerItemProxy */;
+		};
+		CAE55C681D1492AE00411727 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CAE55C4F1D1492A500411727 /* ModuloKit */;
+			targetProxy = CAE55C671D1492AE00411727 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CAE55C461D14928B00411727 /* Debug */ = {
@@ -222,6 +386,70 @@
 			};
 			name = Release;
 		};
+		CAE55C621D1492A500411727 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = ModuloKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.theholygrail.ModuloKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CAE55C631D1492A500411727 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = ModuloKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.theholygrail.ModuloKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		CAE55C651D1492A500411727 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ModuloKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.theholygrail.ModuloKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CAE55C661D1492A500411727 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ModuloKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.theholygrail.ModuloKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -239,6 +467,22 @@
 			buildConfigurations = (
 				CAE55C491D14928B00411727 /* Debug */,
 				CAE55C4A1D14928B00411727 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CAE55C611D1492A500411727 /* Build configuration list for PBXNativeTarget "ModuloKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAE55C621D1492A500411727 /* Debug */,
+				CAE55C631D1492A500411727 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CAE55C641D1492A500411727 /* Build configuration list for PBXNativeTarget "ModuloKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAE55C651D1492A500411727 /* Debug */,
+				CAE55C661D1492A500411727 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

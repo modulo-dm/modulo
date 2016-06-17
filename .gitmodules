@@ -1,0 +1,9 @@
+[submodule "modules/ELFoundation"]
+	path = modules/ELFoundation
+	url = git@github.com:Electrode-iOS/ELFoundation.git
+[submodule "modules/ELCodable"]
+	path = modules/ELCodable
+	url = git@github.com:Electrode-iOS/ELCodable.git
+[submodule "modules/ELCLI"]
+	path = modules/ELCLI
+	url = git@github.com:Electrode-iOS/ELCLI.git
