@@ -7,13 +7,79 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA3354461D15C91000ACD91C /* TestAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3354441D15C91000ACD91C /* TestAdd.swift */; };
+		CA3354471D15C91000ACD91C /* TestInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3354451D15C91000ACD91C /* TestInit.swift */; };
+		CA33544A1D15CA3600ACD91C /* XCTestCase+Exceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3354491D15CA3600ACD91C /* XCTestCase+Exceptions.m */; };
+		CA3354511D185C7600ACD91C /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3354501D185C7600ACD91C /* Actions.swift */; };
+		CA3354591D185C7A00ACD91C /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3354501D185C7600ACD91C /* Actions.swift */; };
+		CAAB6E1E1D19BD3B00F22C48 /* UpdateCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAB6E1D1D19BD3B00F22C48 /* UpdateCommand.swift */; };
+		CAAB6E1F1D19BD3B00F22C48 /* UpdateCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAB6E1D1D19BD3B00F22C48 /* UpdateCommand.swift */; };
+		CACB20BA1D341A9200ACA574 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB20B91D341A9200ACA574 /* Utils.swift */; };
 		CAE55C451D14928B00411727 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C441D14928B00411727 /* main.swift */; };
 		CAE55C531D1492A500411727 /* ModuloKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CAE55C521D1492A500411727 /* ModuloKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAE55C5A1D1492A500411727 /* ModuloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C501D1492A500411727 /* ModuloKit.framework */; };
 		CAE55C5F1D1492A500411727 /* ModuloKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C5E1D1492A500411727 /* ModuloKitTests.swift */; };
+		CAE55C8C1D14944B00411727 /* ELCLI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C801D14943300411727 /* ELCLI.framework */; };
+		CAE55C8E1D14944B00411727 /* ELFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C761D14942D00411727 /* ELFoundation.framework */; };
+		CAE55CA11D1494B200411727 /* InitCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C961D1494B200411727 /* InitCommand.swift */; };
+		CAE55CA21D1494B200411727 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C971D1494B200411727 /* ErrorCode.swift */; };
+		CAE55CA31D1494B200411727 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C981D1494B200411727 /* Extensions.swift */; };
+		CAE55CA41D1494B200411727 /* Modulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C991D1494B200411727 /* Modulo.swift */; };
+		CAE55CA51D1494B200411727 /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C9B1D1494B200411727 /* Git.swift */; };
+		CAE55CA61D1494B200411727 /* SCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C9C1D1494B200411727 /* SCM.swift */; };
+		CAE55CA71D1494B200411727 /* DependencySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C9E1D1494B200411727 /* DependencySpec.swift */; };
+		CAE55CA81D1494B200411727 /* ModuleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C9F1D1494B200411727 /* ModuleSpec.swift */; };
+		CAE55CA91D1494B200411727 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CA01D1494B200411727 /* State.swift */; };
+		CAE55CB01D1496AB00411727 /* ELCodable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55CAD1D1496A100411727 /* ELCodable.framework */; };
+		CAE55CC71D1497A200411727 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CB71D1497A200411727 /* Array.swift */; };
+		CAE55CC81D1497A200411727 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CB81D1497A200411727 /* NSBundle.swift */; };
+		CAE55CC91D1497A200411727 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CB91D1497A200411727 /* NSError.swift */; };
+		CAE55CCA1D1497A200411727 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CBA1D1497A200411727 /* NSObject.swift */; };
+		CAE55CCB1D1497A200411727 /* NSThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CBB1D1497A200411727 /* NSThread.swift */; };
+		CAE55CCC1D1497A200411727 /* NSURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CBC1D1497A200411727 /* NSURL.swift */; };
+		CAE55CCD1D1497A200411727 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CBD1D1497A200411727 /* String.swift */; };
+		CAE55CCE1D1497A200411727 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CBF1D1497A200411727 /* TestHelper.swift */; };
+		CAE55CD01D1497A200411727 /* Exceptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CC31D1497A200411727 /* Exceptions.swift */; };
+		CAE55CD11D1497A200411727 /* ObjectAssociation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CC41D1497A200411727 /* ObjectAssociation.swift */; };
+		CAE55CD21D1497A200411727 /* Swizzling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CC51D1497A200411727 /* Swizzling.swift */; };
+		CAE55CD31D1497A200411727 /* Synchronization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CC61D1497A200411727 /* Synchronization.swift */; };
+		CAE55CDF1D149BD800411727 /* Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CD51D149BD800411727 /* Decimal.swift */; };
+		CAE55CE01D149BD800411727 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CD61D149BD800411727 /* Decodable.swift */; };
+		CAE55CE11D149BD800411727 /* DecodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CD71D149BD800411727 /* DecodableExtensions.swift */; };
+		CAE55CE21D149BD800411727 /* DecodeOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CD81D149BD800411727 /* DecodeOperators.swift */; };
+		CAE55CE31D149BD800411727 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CDA1D149BD800411727 /* Encodable.swift */; };
+		CAE55CE41D149BD800411727 /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CDB1D149BD800411727 /* EncodableExtensions.swift */; };
+		CAE55CE51D149BD800411727 /* EncodeOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CDC1D149BD800411727 /* EncodeOperators.swift */; };
+		CAE55CE61D149BD800411727 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CDE1D149BD800411727 /* JSON.swift */; };
+		CAE55CF11D149C0B00411727 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CE81D149C0B00411727 /* CLI.swift */; };
+		CAE55CF21D149C0B00411727 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CE91D149C0B00411727 /* Command.swift */; };
+		CAE55CF31D149C0B00411727 /* HelpCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CEB1D149C0B00411727 /* HelpCommand.swift */; };
+		CAE55CF41D149C0B00411727 /* VersionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CEC1D149C0B00411727 /* VersionCommand.swift */; };
+		CAE55CF51D149C0B00411727 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CEF1D149C0B00411727 /* Options.swift */; };
+		CAE55CF61D149C0B00411727 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CF01D149C0B00411727 /* Output.swift */; };
+		CAE55D111D14A12600411727 /* modulo in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAE55C411D14928B00411727 /* modulo */; };
+		CAE55D121D14C9EE00411727 /* Modulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C991D1494B200411727 /* Modulo.swift */; };
+		CAE55D131D14C9EE00411727 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CA01D1494B200411727 /* State.swift */; };
+		CAE55D141D14C9EE00411727 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C971D1494B200411727 /* ErrorCode.swift */; };
+		CAE55D151D14C9EE00411727 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C981D1494B200411727 /* Extensions.swift */; };
+		CAE55D161D14C9FB00411727 /* DependencySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C9E1D1494B200411727 /* DependencySpec.swift */; };
+		CAE55D171D14C9FB00411727 /* ModuleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C9F1D1494B200411727 /* ModuleSpec.swift */; };
+		CAE55D181D14CA0200411727 /* Git.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C9B1D1494B200411727 /* Git.swift */; };
+		CAE55D191D14CA0200411727 /* SCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C9C1D1494B200411727 /* SCM.swift */; };
+		CAE55D1A1D14CA0700411727 /* InitCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C961D1494B200411727 /* InitCommand.swift */; };
+		CAE55D1C1D14CA1800411727 /* AddCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55D1B1D14CA1800411727 /* AddCommand.swift */; };
+		CAE55D1D1D14CA1800411727 /* AddCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55D1B1D14CA1800411727 /* AddCommand.swift */; };
+		CAE93D111D21A7BD00C00811 /* TestUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE93D101D21A7BD00C00811 /* TestUpdate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CAAB6E141D18933400F22C48 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C391D14928B00411727 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CAE55C401D14928B00411727;
+			remoteInfo = modulo;
+		};
 		CAE55C5B1D1492A500411727 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CAE55C391D14928B00411727 /* Project object */;
@@ -21,7 +87,98 @@
 			remoteGlobalIDString = CAE55C4F1D1492A500411727;
 			remoteInfo = ModuloKit;
 		};
-		CAE55C671D1492AE00411727 /* PBXContainerItemProxy */ = {
+		CAE55C711D14942D00411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C6A1D14942D00411727 /* ELFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CACF2A0A1A9614D20084EFAE;
+			remoteInfo = ELFoundation;
+		};
+		CAE55C731D14942D00411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C6A1D14942D00411727 /* ELFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CACF2A151A9614D20084EFAE;
+			remoteInfo = ELFoundationTests;
+		};
+		CAE55C751D14942D00411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C6A1D14942D00411727 /* ELFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CA8CD55A1B7A9DCA00DA8BF7;
+			remoteInfo = ELFoundation_osx;
+		};
+		CAE55C771D14942D00411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C6A1D14942D00411727 /* ELFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CA8CD5631B7A9DCB00DA8BF7;
+			remoteInfo = ELFoundation_osxTests;
+		};
+		CAE55C7F1D14943300411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C791D14943300411727 /* ELCLI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CAA9770F1B66A10F0068AB25;
+			remoteInfo = ELCLI;
+		};
+		CAE55C811D14943300411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C791D14943300411727 /* ELCLI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CAA9771A1B66A10F0068AB25;
+			remoteInfo = ELCLITests;
+		};
+		CAE55C881D14943900411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C831D14943900411727 /* ELCodable.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CA0C9F161BF4AD08006459C7;
+			remoteInfo = ELCodable;
+		};
+		CAE55C8A1D14943900411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C831D14943900411727 /* ELCodable.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CA0C9F201BF4AD08006459C7;
+			remoteInfo = ELCodableTests;
+		};
+		CAE55C911D14945400411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C791D14943300411727 /* ELCLI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CAA9770E1B66A10F0068AB25;
+			remoteInfo = ELCLI;
+		};
+		CAE55C931D14945400411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C6A1D14942D00411727 /* ELFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CA8CD5591B7A9DCA00DA8BF7;
+			remoteInfo = ELFoundation_osx;
+		};
+		CAE55CAC1D1496A100411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C831D14943900411727 /* ELCodable.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CAE55BFE1D13A61900411727;
+			remoteInfo = ELCodable_osx;
+		};
+		CAE55CAE1D1496A100411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C831D14943900411727 /* ELCodable.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CAE55C071D13A61A00411727;
+			remoteInfo = ELCodable_osxTests;
+		};
+		CAE55CB11D1496B400411727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C831D14943900411727 /* ELCodable.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CAE55BFD1D13A61900411727;
+			remoteInfo = ELCodable_osx;
+		};
+		CAE55D0F1D149F1B00411727 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CAE55C391D14928B00411727 /* Project object */;
 			proxyType = 1;
@@ -33,16 +190,25 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		CAE55C3F1D14928B00411727 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
+			buildActionMask = 12;
+			dstPath = "~";
 			dstSubfolderSpec = 0;
 			files = (
+				CAE55D111D14A12600411727 /* modulo in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CA3354441D15C91000ACD91C /* TestAdd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAdd.swift; sourceTree = "<group>"; };
+		CA3354451D15C91000ACD91C /* TestInit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestInit.swift; sourceTree = "<group>"; };
+		CA3354481D15CA3500ACD91C /* ModuloKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ModuloKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		CA3354491D15CA3600ACD91C /* XCTestCase+Exceptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestCase+Exceptions.m"; sourceTree = "<group>"; };
+		CA33544B1D15CA4800ACD91C /* XCTestCase+Exceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+Exceptions.h"; sourceTree = "<group>"; };
+		CA3354501D185C7600ACD91C /* Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
+		CAAB6E1D1D19BD3B00F22C48 /* UpdateCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateCommand.swift; sourceTree = "<group>"; };
+		CACB20B91D341A9200ACA574 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		CAE55C411D14928B00411727 /* modulo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = modulo; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAE55C441D14928B00411727 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CAE55C501D1492A500411727 /* ModuloKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ModuloKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +217,46 @@
 		CAE55C591D1492A500411727 /* ModuloKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModuloKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAE55C5E1D1492A500411727 /* ModuloKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuloKitTests.swift; sourceTree = "<group>"; };
 		CAE55C601D1492A500411727 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAE55C6A1D14942D00411727 /* ELFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ELFoundation.xcodeproj; path = modules/ELFoundation/ELFoundation.xcodeproj; sourceTree = SOURCE_ROOT; };
+		CAE55C791D14943300411727 /* ELCLI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ELCLI.xcodeproj; path = modules/ELCLI/ELCLI.xcodeproj; sourceTree = SOURCE_ROOT; };
+		CAE55C831D14943900411727 /* ELCodable.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ELCodable.xcodeproj; path = modules/ELCodable/ELCodable.xcodeproj; sourceTree = SOURCE_ROOT; };
+		CAE55C961D1494B200411727 /* InitCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitCommand.swift; sourceTree = "<group>"; };
+		CAE55C971D1494B200411727 /* ErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
+		CAE55C981D1494B200411727 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CAE55C991D1494B200411727 /* Modulo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modulo.swift; sourceTree = "<group>"; };
+		CAE55C9B1D1494B200411727 /* Git.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Git.swift; sourceTree = "<group>"; };
+		CAE55C9C1D1494B200411727 /* SCM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCM.swift; sourceTree = "<group>"; };
+		CAE55C9E1D1494B200411727 /* DependencySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencySpec.swift; sourceTree = "<group>"; };
+		CAE55C9F1D1494B200411727 /* ModuleSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleSpec.swift; sourceTree = "<group>"; };
+		CAE55CA01D1494B200411727 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		CAE55CB71D1497A200411727 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		CAE55CB81D1497A200411727 /* NSBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBundle.swift; sourceTree = "<group>"; };
+		CAE55CB91D1497A200411727 /* NSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSError.swift; sourceTree = "<group>"; };
+		CAE55CBA1D1497A200411727 /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
+		CAE55CBB1D1497A200411727 /* NSThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSThread.swift; sourceTree = "<group>"; };
+		CAE55CBC1D1497A200411727 /* NSURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURL.swift; sourceTree = "<group>"; };
+		CAE55CBD1D1497A200411727 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		CAE55CBF1D1497A200411727 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
+		CAE55CC31D1497A200411727 /* Exceptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exceptions.swift; sourceTree = "<group>"; };
+		CAE55CC41D1497A200411727 /* ObjectAssociation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectAssociation.swift; sourceTree = "<group>"; };
+		CAE55CC51D1497A200411727 /* Swizzling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swizzling.swift; sourceTree = "<group>"; };
+		CAE55CC61D1497A200411727 /* Synchronization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synchronization.swift; sourceTree = "<group>"; };
+		CAE55CD51D149BD800411727 /* Decimal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decimal.swift; sourceTree = "<group>"; };
+		CAE55CD61D149BD800411727 /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
+		CAE55CD71D149BD800411727 /* DecodableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodableExtensions.swift; sourceTree = "<group>"; };
+		CAE55CD81D149BD800411727 /* DecodeOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeOperators.swift; sourceTree = "<group>"; };
+		CAE55CDA1D149BD800411727 /* Encodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
+		CAE55CDB1D149BD800411727 /* EncodableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodableExtensions.swift; sourceTree = "<group>"; };
+		CAE55CDC1D149BD800411727 /* EncodeOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodeOperators.swift; sourceTree = "<group>"; };
+		CAE55CDE1D149BD800411727 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		CAE55CE81D149C0B00411727 /* CLI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
+		CAE55CE91D149C0B00411727 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		CAE55CEB1D149C0B00411727 /* HelpCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpCommand.swift; sourceTree = "<group>"; };
+		CAE55CEC1D149C0B00411727 /* VersionCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCommand.swift; sourceTree = "<group>"; };
+		CAE55CEF1D149C0B00411727 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		CAE55CF01D149C0B00411727 /* Output.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
+		CAE55D1B1D14CA1800411727 /* AddCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCommand.swift; sourceTree = "<group>"; };
+		CAE93D101D21A7BD00C00811 /* TestUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUpdate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +271,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAE55CB01D1496AB00411727 /* ELCodable.framework in Frameworks */,
+				CAE55C8C1D14944B00411727 /* ELCLI.framework in Frameworks */,
+				CAE55C8E1D14944B00411727 /* ELFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				CAE55C441D14928B00411727 /* main.swift */,
+				CAE55CB41D14976300411727 /* Modules - Source */,
 			);
 			path = modulo;
 			sourceTree = "<group>";
@@ -110,7 +320,16 @@
 		CAE55C511D1492A500411727 /* ModuloKit */ = {
 			isa = PBXGroup;
 			children = (
+				CAE55C691D14941E00411727 /* Modules */,
 				CAE55C521D1492A500411727 /* ModuloKit.h */,
+				CAE55C991D1494B200411727 /* Modulo.swift */,
+				CAE55CA01D1494B200411727 /* State.swift */,
+				CAE55C971D1494B200411727 /* ErrorCode.swift */,
+				CAE55C981D1494B200411727 /* Extensions.swift */,
+				CA3354501D185C7600ACD91C /* Actions.swift */,
+				CAE55C9D1D1494B200411727 /* Specs */,
+				CAE55C9A1D1494B200411727 /* SCM */,
+				CAE55C951D1494B200411727 /* Commands */,
 				CAE55C541D1492A500411727 /* Info.plist */,
 			);
 			path = ModuloKit;
@@ -120,9 +339,179 @@
 			isa = PBXGroup;
 			children = (
 				CAE55C5E1D1492A500411727 /* ModuloKitTests.swift */,
+				CACB20B91D341A9200ACA574 /* Utils.swift */,
+				CA3354441D15C91000ACD91C /* TestAdd.swift */,
+				CA3354451D15C91000ACD91C /* TestInit.swift */,
+				CAE93D101D21A7BD00C00811 /* TestUpdate.swift */,
+				CA3354491D15CA3600ACD91C /* XCTestCase+Exceptions.m */,
+				CA33544B1D15CA4800ACD91C /* XCTestCase+Exceptions.h */,
 				CAE55C601D1492A500411727 /* Info.plist */,
+				CA3354481D15CA3500ACD91C /* ModuloKitTests-Bridging-Header.h */,
 			);
 			path = ModuloKitTests;
+			sourceTree = "<group>";
+		};
+		CAE55C691D14941E00411727 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55C831D14943900411727 /* ELCodable.xcodeproj */,
+				CAE55C791D14943300411727 /* ELCLI.xcodeproj */,
+				CAE55C6A1D14942D00411727 /* ELFoundation.xcodeproj */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		CAE55C6B1D14942D00411727 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55C721D14942D00411727 /* ELFoundation.framework */,
+				CAE55C741D14942D00411727 /* ELFoundationTests.xctest */,
+				CAE55C761D14942D00411727 /* ELFoundation.framework */,
+				CAE55C781D14942D00411727 /* ELFoundation_osxTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CAE55C7A1D14943300411727 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55C801D14943300411727 /* ELCLI.framework */,
+				CAE55C821D14943300411727 /* ELCLITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CAE55C841D14943900411727 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55C891D14943900411727 /* ELCodable.framework */,
+				CAE55C8B1D14943900411727 /* ELCodableTests.xctest */,
+				CAE55CAD1D1496A100411727 /* ELCodable.framework */,
+				CAE55CAF1D1496A100411727 /* ELCodable_osxTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CAE55C951D1494B200411727 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55C961D1494B200411727 /* InitCommand.swift */,
+				CAE55D1B1D14CA1800411727 /* AddCommand.swift */,
+				CAAB6E1D1D19BD3B00F22C48 /* UpdateCommand.swift */,
+			);
+			path = Commands;
+			sourceTree = "<group>";
+		};
+		CAE55C9A1D1494B200411727 /* SCM */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55C9B1D1494B200411727 /* Git.swift */,
+				CAE55C9C1D1494B200411727 /* SCM.swift */,
+			);
+			path = SCM;
+			sourceTree = "<group>";
+		};
+		CAE55C9D1D1494B200411727 /* Specs */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55C9E1D1494B200411727 /* DependencySpec.swift */,
+				CAE55C9F1D1494B200411727 /* ModuleSpec.swift */,
+			);
+			path = Specs;
+			sourceTree = "<group>";
+		};
+		CAE55CB41D14976300411727 /* Modules - Source */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55CE71D149C0B00411727 /* ELCLI */,
+				CAE55CD41D149BD800411727 /* ELCodable */,
+				CAE55CB51D14976B00411727 /* ELFoundation */,
+			);
+			name = "Modules - Source";
+			sourceTree = "<group>";
+		};
+		CAE55CB51D14976B00411727 /* ELFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55CB61D1497A200411727 /* Extensions */,
+				CAE55CBE1D1497A200411727 /* TestExtensions */,
+				CAE55CC21D1497A200411727 /* Utilities */,
+			);
+			name = ELFoundation;
+			sourceTree = "<group>";
+		};
+		CAE55CB61D1497A200411727 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55CB71D1497A200411727 /* Array.swift */,
+				CAE55CB81D1497A200411727 /* NSBundle.swift */,
+				CAE55CB91D1497A200411727 /* NSError.swift */,
+				CAE55CBA1D1497A200411727 /* NSObject.swift */,
+				CAE55CBB1D1497A200411727 /* NSThread.swift */,
+				CAE55CBC1D1497A200411727 /* NSURL.swift */,
+				CAE55CBD1D1497A200411727 /* String.swift */,
+			);
+			name = Extensions;
+			path = modules/ELFoundation/ELFoundation/Extensions;
+			sourceTree = SOURCE_ROOT;
+		};
+		CAE55CBE1D1497A200411727 /* TestExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55CBF1D1497A200411727 /* TestHelper.swift */,
+			);
+			name = TestExtensions;
+			path = modules/ELFoundation/ELFoundation/TestExtensions;
+			sourceTree = SOURCE_ROOT;
+		};
+		CAE55CC21D1497A200411727 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55CC31D1497A200411727 /* Exceptions.swift */,
+				CAE55CC41D1497A200411727 /* ObjectAssociation.swift */,
+				CAE55CC51D1497A200411727 /* Swizzling.swift */,
+				CAE55CC61D1497A200411727 /* Synchronization.swift */,
+			);
+			name = Utilities;
+			path = modules/ELFoundation/ELFoundation/Utilities;
+			sourceTree = SOURCE_ROOT;
+		};
+		CAE55CD41D149BD800411727 /* ELCodable */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55CD51D149BD800411727 /* Decimal.swift */,
+				CAE55CD61D149BD800411727 /* Decodable.swift */,
+				CAE55CD71D149BD800411727 /* DecodableExtensions.swift */,
+				CAE55CD81D149BD800411727 /* DecodeOperators.swift */,
+				CAE55CDA1D149BD800411727 /* Encodable.swift */,
+				CAE55CDB1D149BD800411727 /* EncodableExtensions.swift */,
+				CAE55CDC1D149BD800411727 /* EncodeOperators.swift */,
+				CAE55CDE1D149BD800411727 /* JSON.swift */,
+			);
+			name = ELCodable;
+			path = modules/ELCodable/ELCodable;
+			sourceTree = SOURCE_ROOT;
+		};
+		CAE55CE71D149C0B00411727 /* ELCLI */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55CE81D149C0B00411727 /* CLI.swift */,
+				CAE55CE91D149C0B00411727 /* Command.swift */,
+				CAE55CEF1D149C0B00411727 /* Options.swift */,
+				CAE55CF01D149C0B00411727 /* Output.swift */,
+				CAE55CEA1D149C0B00411727 /* Commands */,
+			);
+			name = ELCLI;
+			path = modules/ELCLI/ELCLI;
+			sourceTree = SOURCE_ROOT;
+		};
+		CAE55CEA1D149C0B00411727 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				CAE55CEB1D149C0B00411727 /* HelpCommand.swift */,
+				CAE55CEC1D149C0B00411727 /* VersionCommand.swift */,
+			);
+			path = Commands;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,7 +539,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				CAE55C681D1492AE00411727 /* PBXTargetDependency */,
+				CAE55D101D149F1B00411727 /* PBXTargetDependency */,
 			);
 			name = modulo;
 			productName = modulo;
@@ -169,6 +558,10 @@
 			buildRules = (
 			);
 			dependencies = (
+				CAAB6E151D18933400F22C48 /* PBXTargetDependency */,
+				CAE55CB21D1496B400411727 /* PBXTargetDependency */,
+				CAE55C921D14945400411727 /* PBXTargetDependency */,
+				CAE55C941D14945400411727 /* PBXTargetDependency */,
 			);
 			name = ModuloKit;
 			productName = ModuloKit;
@@ -224,6 +617,20 @@
 			mainGroup = CAE55C381D14928B00411727;
 			productRefGroup = CAE55C421D14928B00411727 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CAE55C7A1D14943300411727 /* Products */;
+					ProjectRef = CAE55C791D14943300411727 /* ELCLI.xcodeproj */;
+				},
+				{
+					ProductGroup = CAE55C841D14943900411727 /* Products */;
+					ProjectRef = CAE55C831D14943900411727 /* ELCodable.xcodeproj */;
+				},
+				{
+					ProductGroup = CAE55C6B1D14942D00411727 /* Products */;
+					ProjectRef = CAE55C6A1D14942D00411727 /* ELFoundation.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				CAE55C401D14928B00411727 /* modulo */,
@@ -232,6 +639,79 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CAE55C721D14942D00411727 /* ELFoundation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ELFoundation.framework;
+			remoteRef = CAE55C711D14942D00411727 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAE55C741D14942D00411727 /* ELFoundationTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ELFoundationTests.xctest;
+			remoteRef = CAE55C731D14942D00411727 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAE55C761D14942D00411727 /* ELFoundation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ELFoundation.framework;
+			remoteRef = CAE55C751D14942D00411727 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAE55C781D14942D00411727 /* ELFoundation_osxTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ELFoundation_osxTests.xctest;
+			remoteRef = CAE55C771D14942D00411727 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAE55C801D14943300411727 /* ELCLI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ELCLI.framework;
+			remoteRef = CAE55C7F1D14943300411727 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAE55C821D14943300411727 /* ELCLITests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ELCLITests.xctest;
+			remoteRef = CAE55C811D14943300411727 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAE55C891D14943900411727 /* ELCodable.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ELCodable.framework;
+			remoteRef = CAE55C881D14943900411727 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAE55C8B1D14943900411727 /* ELCodableTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ELCodableTests.xctest;
+			remoteRef = CAE55C8A1D14943900411727 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAE55CAD1D1496A100411727 /* ELCodable.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ELCodable.framework;
+			remoteRef = CAE55CAC1D1496A100411727 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAE55CAF1D1496A100411727 /* ELCodable_osxTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ELCodable_osxTests.xctest;
+			remoteRef = CAE55CAE1D1496A100411727 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		CAE55C4E1D1492A500411727 /* Resources */ = {
@@ -255,7 +735,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAE55CF41D149C0B00411727 /* VersionCommand.swift in Sources */,
+				CAE55CE41D149BD800411727 /* EncodableExtensions.swift in Sources */,
+				CAE55CF51D149C0B00411727 /* Options.swift in Sources */,
+				CAE55CCC1D1497A200411727 /* NSURL.swift in Sources */,
+				CAE55CE31D149BD800411727 /* Encodable.swift in Sources */,
+				CAE55D141D14C9EE00411727 /* ErrorCode.swift in Sources */,
+				CAE55CCB1D1497A200411727 /* NSThread.swift in Sources */,
+				CAAB6E1E1D19BD3B00F22C48 /* UpdateCommand.swift in Sources */,
+				CA3354591D185C7A00ACD91C /* Actions.swift in Sources */,
+				CAE55D1A1D14CA0700411727 /* InitCommand.swift in Sources */,
+				CAE55CF11D149C0B00411727 /* CLI.swift in Sources */,
+				CAE55D1C1D14CA1800411727 /* AddCommand.swift in Sources */,
+				CAE55CD31D1497A200411727 /* Synchronization.swift in Sources */,
+				CAE55CE51D149BD800411727 /* EncodeOperators.swift in Sources */,
+				CAE55CE01D149BD800411727 /* Decodable.swift in Sources */,
+				CAE55CC81D1497A200411727 /* NSBundle.swift in Sources */,
+				CAE55D191D14CA0200411727 /* SCM.swift in Sources */,
+				CAE55D171D14C9FB00411727 /* ModuleSpec.swift in Sources */,
 				CAE55C451D14928B00411727 /* main.swift in Sources */,
+				CAE55CE21D149BD800411727 /* DecodeOperators.swift in Sources */,
+				CAE55CF61D149C0B00411727 /* Output.swift in Sources */,
+				CAE55CCA1D1497A200411727 /* NSObject.swift in Sources */,
+				CAE55CF31D149C0B00411727 /* HelpCommand.swift in Sources */,
+				CAE55CE11D149BD800411727 /* DecodableExtensions.swift in Sources */,
+				CAE55CC71D1497A200411727 /* Array.swift in Sources */,
+				CAE55D151D14C9EE00411727 /* Extensions.swift in Sources */,
+				CAE55CD11D1497A200411727 /* ObjectAssociation.swift in Sources */,
+				CAE55D121D14C9EE00411727 /* Modulo.swift in Sources */,
+				CAE55CCE1D1497A200411727 /* TestHelper.swift in Sources */,
+				CAE55CE61D149BD800411727 /* JSON.swift in Sources */,
+				CAE55CCD1D1497A200411727 /* String.swift in Sources */,
+				CAE55D161D14C9FB00411727 /* DependencySpec.swift in Sources */,
+				CAE55CD21D1497A200411727 /* Swizzling.swift in Sources */,
+				CAE55CF21D149C0B00411727 /* Command.swift in Sources */,
+				CAE55CC91D1497A200411727 /* NSError.swift in Sources */,
+				CAE55D181D14CA0200411727 /* Git.swift in Sources */,
+				CAE55CD01D1497A200411727 /* Exceptions.swift in Sources */,
+				CAE55CDF1D149BD800411727 /* Decimal.swift in Sources */,
+				CAE55D131D14C9EE00411727 /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +781,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAE55CA11D1494B200411727 /* InitCommand.swift in Sources */,
+				CAE55CA61D1494B200411727 /* SCM.swift in Sources */,
+				CAE55CA31D1494B200411727 /* Extensions.swift in Sources */,
+				CAE55CA21D1494B200411727 /* ErrorCode.swift in Sources */,
+				CAAB6E1F1D19BD3B00F22C48 /* UpdateCommand.swift in Sources */,
+				CAE55CA41D1494B200411727 /* Modulo.swift in Sources */,
+				CA3354511D185C7600ACD91C /* Actions.swift in Sources */,
+				CAE55D1D1D14CA1800411727 /* AddCommand.swift in Sources */,
+				CAE55CA91D1494B200411727 /* State.swift in Sources */,
+				CAE55CA51D1494B200411727 /* Git.swift in Sources */,
+				CAE55CA81D1494B200411727 /* ModuleSpec.swift in Sources */,
+				CAE55CA71D1494B200411727 /* DependencySpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,21 +801,46 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAE55C5F1D1492A500411727 /* ModuloKitTests.swift in Sources */,
+				CA3354471D15C91000ACD91C /* TestInit.swift in Sources */,
+				CA33544A1D15CA3600ACD91C /* XCTestCase+Exceptions.m in Sources */,
+				CAE93D111D21A7BD00C00811 /* TestUpdate.swift in Sources */,
+				CA3354461D15C91000ACD91C /* TestAdd.swift in Sources */,
+				CACB20BA1D341A9200ACA574 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		CAAB6E151D18933400F22C48 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CAE55C401D14928B00411727 /* modulo */;
+			targetProxy = CAAB6E141D18933400F22C48 /* PBXContainerItemProxy */;
+		};
 		CAE55C5C1D1492A500411727 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CAE55C4F1D1492A500411727 /* ModuloKit */;
 			targetProxy = CAE55C5B1D1492A500411727 /* PBXContainerItemProxy */;
 		};
-		CAE55C681D1492AE00411727 /* PBXTargetDependency */ = {
+		CAE55C921D14945400411727 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ELCLI;
+			targetProxy = CAE55C911D14945400411727 /* PBXContainerItemProxy */;
+		};
+		CAE55C941D14945400411727 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ELFoundation_osx;
+			targetProxy = CAE55C931D14945400411727 /* PBXContainerItemProxy */;
+		};
+		CAE55CB21D1496B400411727 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ELCodable_osx;
+			targetProxy = CAE55CB11D1496B400411727 /* PBXContainerItemProxy */;
+		};
+		CAE55D101D149F1B00411727 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CAE55C4F1D1492A500411727 /* ModuloKit */;
-			targetProxy = CAE55C671D1492AE00411727 /* PBXContainerItemProxy */;
+			targetProxy = CAE55D0F1D149F1B00411727 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -375,6 +930,7 @@
 		CAE55C491D14928B00411727 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OTHER_SWIFT_FLAGS = "-DNOFRAMEWORKS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -382,6 +938,7 @@
 		CAE55C4A1D14928B00411727 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OTHER_SWIFT_FLAGS = "-DNOFRAMEWORKS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -389,6 +946,7 @@
 		CAE55C621D1492A500411727 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -402,6 +960,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.theholygrail.ModuloKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -410,6 +969,7 @@
 		CAE55C631D1492A500411727 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -431,22 +991,27 @@
 		CAE55C651D1492A500411727 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ModuloKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.theholygrail.ModuloKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ModuloKitTests/ModuloKitTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		CAE55C661D1492A500411727 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ModuloKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.theholygrail.ModuloKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ModuloKitTests/ModuloKitTests-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -469,6 +1034,7 @@
 				CAE55C4A1D14928B00411727 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CAE55C611D1492A500411727 /* Build configuration list for PBXNativeTarget "ModuloKit" */ = {
 			isa = XCConfigurationList;
@@ -477,6 +1043,7 @@
 				CAE55C631D1492A500411727 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CAE55C641D1492A500411727 /* Build configuration list for PBXNativeTarget "ModuloKitTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +1052,7 @@
 				CAE55C661D1492A500411727 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

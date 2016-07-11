@@ -1,0 +1,36 @@
+{
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8793D34A7BF94DA191D8F935B1E0425A8C1B2681" : 0,
+    "B78D931F23AF2B103B07F472BC9BDF733D7C9BCF" : 0,
+    "3AA9B528BC4DFC86D9B300333E6A7EF9B619AC2B" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4B054CB3-2BAA-4373-AFFD-D86A0889C2A3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8793D34A7BF94DA191D8F935B1E0425A8C1B2681" : "modulo\/modules\/ELFoundation\/",
+    "B78D931F23AF2B103B07F472BC9BDF733D7C9BCF" : "modulo\/modules\/ELCodable\/",
+    "3AA9B528BC4DFC86D9B300333E6A7EF9B619AC2B" : "modulo\/modules\/ELCLI\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "modulo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "modulo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Electrode-iOS\/ELCLI.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3AA9B528BC4DFC86D9B300333E6A7EF9B619AC2B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Electrode-iOS\/ELFoundation.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8793D34A7BF94DA191D8F935B1E0425A8C1B2681"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Electrode-iOS\/ELCodable.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B78D931F23AF2B103B07F472BC9BDF733D7C9BCF"
+    }
+  ]
+}
