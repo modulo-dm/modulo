@@ -45,6 +45,12 @@ extension DependencySpec: Encodable {
     }
 }
 
+extension DependencySpec {
+    func name() -> String {
+        return repositoryURL.nameFromRemoteURL()
+    }
+}
+
 extension DependencySpec: Hashable {
     public var hashValue: Int {
         return repositoryURL.hashValue

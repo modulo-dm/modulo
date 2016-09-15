@@ -18,6 +18,7 @@ let specFilename = ".modulo"
 public struct ModuleSpec {
     public let name: String
     public let module: Bool
+    public let sourcePath: String?
     public var dependencies: [DependencySpec]
     
     public var path: String
@@ -28,6 +29,7 @@ extension ModuleSpec: Decodable {
         return try ModuleSpec(
             name: json ==> "name",
             module: json ==> "module",
+            sourcePath: json ==> "sourcePath",
             dependencies: json ==> "dependencies",
             path: ""
         )
@@ -43,6 +45,7 @@ extension ModuleSpec: Encodable {
         return try encodeToJSON([
             "name" <== name,
             "module" <== module,
+            "sourcePath" <== sourcePath,
             "dependencies" <== dependencies
         ])
     }
@@ -131,19 +134,20 @@ extension ModuleSpec {
     
 }
 
-// MARK: DependencySpec helpers
 
 public extension ModuleSpec {
     public func allDependencies() -> [DependencySpec] {
-        var deps = dependencies
+        var deps = Set<DependencySpec>()
+        
+        deps.unionInPlace(dependencies)
         
         for dep in dependencies {
             if let spec = ModuleSpec.load(dep) {
-                spec.addDependencies(&deps)
+                deps.unionInPlace(spec.dependencies)
             }
         }
         
-        return deps
+        return [DependencySpec](deps)
     }
     
     public func dependencyForURL(repoURL: String) -> DependencySpec? {

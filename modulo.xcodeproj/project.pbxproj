@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA0A3F131D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
+		CA0A3F141D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
+		CA0A3F1D1D5A557A00A7F0BB /* SemverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F1C1D5A557A00A7F0BB /* SemverTests.swift */; };
 		CA3354461D15C91000ACD91C /* TestAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3354441D15C91000ACD91C /* TestAdd.swift */; };
 		CA3354471D15C91000ACD91C /* TestInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3354451D15C91000ACD91C /* TestInit.swift */; };
 		CA33544A1D15CA3600ACD91C /* XCTestCase+Exceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3354491D15CA3600ACD91C /* XCTestCase+Exceptions.m */; };
@@ -15,6 +18,11 @@
 		CAAB6E1E1D19BD3B00F22C48 /* UpdateCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAB6E1D1D19BD3B00F22C48 /* UpdateCommand.swift */; };
 		CAAB6E1F1D19BD3B00F22C48 /* UpdateCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAB6E1D1D19BD3B00F22C48 /* UpdateCommand.swift */; };
 		CACB20BA1D341A9200ACA574 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB20B91D341A9200ACA574 /* Utils.swift */; };
+		CACB20C31D3457A100ACA574 /* StatusCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB20C21D3457A100ACA574 /* StatusCommand.swift */; };
+		CACB212D1D3D45B300ACA574 /* TestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB212C1D3D45B300ACA574 /* TestStatus.swift */; };
+		CACB21351D3D4DE500ACA574 /* StatusCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB20C21D3457A100ACA574 /* StatusCommand.swift */; };
+		CACB213E1D3D8D7B00ACA574 /* RemoveCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB213D1D3D8D7B00ACA574 /* RemoveCommand.swift */; };
+		CACB213F1D3D8D7B00ACA574 /* RemoveCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB213D1D3D8D7B00ACA574 /* RemoveCommand.swift */; };
 		CAE55C451D14928B00411727 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C441D14928B00411727 /* main.swift */; };
 		CAE55C531D1492A500411727 /* ModuloKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CAE55C521D1492A500411727 /* ModuloKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAE55C5A1D1492A500411727 /* ModuloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C501D1492A500411727 /* ModuloKit.framework */; };
@@ -201,6 +209,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CA0A3F121D5A3D7700A7F0BB /* Semver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semver.swift; sourceTree = "<group>"; };
+		CA0A3F1C1D5A557A00A7F0BB /* SemverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemverTests.swift; sourceTree = "<group>"; };
 		CA3354441D15C91000ACD91C /* TestAdd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAdd.swift; sourceTree = "<group>"; };
 		CA3354451D15C91000ACD91C /* TestInit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestInit.swift; sourceTree = "<group>"; };
 		CA3354481D15CA3500ACD91C /* ModuloKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ModuloKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -209,6 +219,9 @@
 		CA3354501D185C7600ACD91C /* Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 		CAAB6E1D1D19BD3B00F22C48 /* UpdateCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateCommand.swift; sourceTree = "<group>"; };
 		CACB20B91D341A9200ACA574 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		CACB20C21D3457A100ACA574 /* StatusCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCommand.swift; sourceTree = "<group>"; };
+		CACB212C1D3D45B300ACA574 /* TestStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStatus.swift; sourceTree = "<group>"; };
+		CACB213D1D3D8D7B00ACA574 /* RemoveCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveCommand.swift; sourceTree = "<group>"; };
 		CAE55C411D14928B00411727 /* modulo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = modulo; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAE55C441D14928B00411727 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CAE55C501D1492A500411727 /* ModuloKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ModuloKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -327,6 +340,7 @@
 				CAE55C971D1494B200411727 /* ErrorCode.swift */,
 				CAE55C981D1494B200411727 /* Extensions.swift */,
 				CA3354501D185C7600ACD91C /* Actions.swift */,
+				CA0A3F121D5A3D7700A7F0BB /* Semver.swift */,
 				CAE55C9D1D1494B200411727 /* Specs */,
 				CAE55C9A1D1494B200411727 /* SCM */,
 				CAE55C951D1494B200411727 /* Commands */,
@@ -339,10 +353,12 @@
 			isa = PBXGroup;
 			children = (
 				CAE55C5E1D1492A500411727 /* ModuloKitTests.swift */,
+				CA0A3F1C1D5A557A00A7F0BB /* SemverTests.swift */,
 				CACB20B91D341A9200ACA574 /* Utils.swift */,
 				CA3354441D15C91000ACD91C /* TestAdd.swift */,
 				CA3354451D15C91000ACD91C /* TestInit.swift */,
 				CAE93D101D21A7BD00C00811 /* TestUpdate.swift */,
+				CACB212C1D3D45B300ACA574 /* TestStatus.swift */,
 				CA3354491D15CA3600ACD91C /* XCTestCase+Exceptions.m */,
 				CA33544B1D15CA4800ACD91C /* XCTestCase+Exceptions.h */,
 				CAE55C601D1492A500411727 /* Info.plist */,
@@ -398,6 +414,8 @@
 				CAE55C961D1494B200411727 /* InitCommand.swift */,
 				CAE55D1B1D14CA1800411727 /* AddCommand.swift */,
 				CAAB6E1D1D19BD3B00F22C48 /* UpdateCommand.swift */,
+				CACB20C21D3457A100ACA574 /* StatusCommand.swift */,
+				CACB213D1D3D8D7B00ACA574 /* RemoveCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -750,6 +768,7 @@
 				CAE55CD31D1497A200411727 /* Synchronization.swift in Sources */,
 				CAE55CE51D149BD800411727 /* EncodeOperators.swift in Sources */,
 				CAE55CE01D149BD800411727 /* Decodable.swift in Sources */,
+				CA0A3F131D5A3D7700A7F0BB /* Semver.swift in Sources */,
 				CAE55CC81D1497A200411727 /* NSBundle.swift in Sources */,
 				CAE55D191D14CA0200411727 /* SCM.swift in Sources */,
 				CAE55D171D14C9FB00411727 /* ModuleSpec.swift in Sources */,
@@ -760,12 +779,14 @@
 				CAE55CF31D149C0B00411727 /* HelpCommand.swift in Sources */,
 				CAE55CE11D149BD800411727 /* DecodableExtensions.swift in Sources */,
 				CAE55CC71D1497A200411727 /* Array.swift in Sources */,
+				CACB21351D3D4DE500ACA574 /* StatusCommand.swift in Sources */,
 				CAE55D151D14C9EE00411727 /* Extensions.swift in Sources */,
 				CAE55CD11D1497A200411727 /* ObjectAssociation.swift in Sources */,
 				CAE55D121D14C9EE00411727 /* Modulo.swift in Sources */,
 				CAE55CCE1D1497A200411727 /* TestHelper.swift in Sources */,
 				CAE55CE61D149BD800411727 /* JSON.swift in Sources */,
 				CAE55CCD1D1497A200411727 /* String.swift in Sources */,
+				CACB213E1D3D8D7B00ACA574 /* RemoveCommand.swift in Sources */,
 				CAE55D161D14C9FB00411727 /* DependencySpec.swift in Sources */,
 				CAE55CD21D1497A200411727 /* Swizzling.swift in Sources */,
 				CAE55CF21D149C0B00411727 /* Command.swift in Sources */,
@@ -787,7 +808,10 @@
 				CAE55CA21D1494B200411727 /* ErrorCode.swift in Sources */,
 				CAAB6E1F1D19BD3B00F22C48 /* UpdateCommand.swift in Sources */,
 				CAE55CA41D1494B200411727 /* Modulo.swift in Sources */,
+				CA0A3F141D5A3D7700A7F0BB /* Semver.swift in Sources */,
 				CA3354511D185C7600ACD91C /* Actions.swift in Sources */,
+				CACB213F1D3D8D7B00ACA574 /* RemoveCommand.swift in Sources */,
+				CACB20C31D3457A100ACA574 /* StatusCommand.swift in Sources */,
 				CAE55D1D1D14CA1800411727 /* AddCommand.swift in Sources */,
 				CAE55CA91D1494B200411727 /* State.swift in Sources */,
 				CAE55CA51D1494B200411727 /* Git.swift in Sources */,
@@ -800,6 +824,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CACB212D1D3D45B300ACA574 /* TestStatus.swift in Sources */,
+				CA0A3F1D1D5A557A00A7F0BB /* SemverTests.swift in Sources */,
 				CAE55C5F1D1492A500411727 /* ModuloKitTests.swift in Sources */,
 				CA3354471D15C91000ACD91C /* TestInit.swift in Sources */,
 				CA33544A1D15CA3600ACD91C /* XCTestCase+Exceptions.m in Sources */,

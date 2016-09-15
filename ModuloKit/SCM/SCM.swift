@@ -17,14 +17,23 @@ public typealias SCMCommandParser = (status: Int32, output: String?) -> Void
 
 public enum SCMResult {
     case Success
-    case Error(message: String)
+    case Error(code: Int32, message: String)
     
     func errorMessage() -> String {
         switch self {
-        case Error(let message) :
-            return message
+        case Error(let code, let message) :
+            return "\(message), (code \(code))"
         default:
             return ""
+        }
+    }
+    
+    func errorCode() -> Int32 {
+        switch self {
+        case Error(let code, _) :
+            return code
+        default:
+            return 0
         }
     }
 }
@@ -41,10 +50,10 @@ public func == (left: SCMResult, right: SCMResult) -> Bool {
             return false
         }
         
-    case .Error(let leftMessage):
+    case .Error(let leftCode, let leftMessage):
         switch right {
-        case .Error(let rightMessage):
-            return leftMessage == rightMessage
+        case .Error(let rightCode, let rightMessage):
+            return leftMessage == rightMessage && leftCode == rightCode
         default:
             return false
         }
@@ -87,11 +96,14 @@ public protocol SCM {
     func runCommand(command: String, completion: SCMCommandParser?) -> Int32
     func remoteURL() -> String?
     func nameFromRemoteURL(url: String) -> String
+    func branchName(path: String) -> String?
     func clone(url: String, path: String) -> SCMResult
     func fetch(path: String) -> SCMResult
     func checkout(type: SCMCheckoutType, path: String) -> SCMResult
     func remove(path: String) -> SCMResult
     func addModulesIgnore() -> SCMResult
+    func checkStatus(path: String, assumedCheckout: String?) -> SCMResult
+    func tags(path: String) -> [String]
 }
 
 extension SCM {
@@ -126,7 +138,7 @@ extension SCM {
         if result == 0 {
             return SCMResult.Success
         } else {
-            return SCMResult.Error(message: "Unable to remove \(path).  Check your permissions.")
+            return SCMResult.Error(code: result, message: "Unable to remove \(path).  Check your permissions.")
         }
     }
     

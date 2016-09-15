@@ -24,6 +24,7 @@ public enum ErrorCode: Int {
     case NotInitialized = 7
     case NoMatchingDependencies = 8
     case DependencyAlreadyExists = 9
+    case DependencyUnclean = 10
     
     var description: String {
         var result: String = ""
@@ -48,6 +49,8 @@ public enum ErrorCode: Int {
             result = "No matching dependencies were found."
         case .DependencyAlreadyExists:
             result = "The dependency already exists."
+        case .DependencyUnclean:
+            result = "The dependency is not clean."
         }
         return result
     }

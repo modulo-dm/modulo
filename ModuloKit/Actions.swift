@@ -13,21 +13,12 @@ import Foundation
     import ELFoundation
 #endif
 
-public typealias DependencyClosure = (dependency: DependencySpec) -> ErrorCode
-
 public class Actions {
     let scm = currentSCM()
     
     public init() {
         if !ModuleSpec.exists() {
             exit(.NotInitialized)
-        }
-    }
-    
-    public func recurse(dependencies: [DependencySpec], apply: DependencyClosure) {
-        for dep in dependencies {
-            apply(dependency: dep)
-            recurse([dep], apply: apply)
         }
     }
     
@@ -53,6 +44,12 @@ public class Actions {
         } else {
             return ErrorCode.SpecNotFound
         }
+    }
+    
+    public func removeDependencies(dependencies: [DependencySpec]) -> ErrorCode {
+        var result = ErrorCode.Success
+        
+        return result
     }
     
     public func updateDependencies(dependencies: [DependencySpec], explicit: Bool) -> ErrorCode {
@@ -102,6 +99,37 @@ public class Actions {
         }
         
         return ErrorCode.Success
+    }
+    
+    public func checkDependenciesStatus() -> ErrorCode {
+        var result: ErrorCode = .Success
+        
+        if let workingSpec = ModuleSpec.workingSpec() {
+            // need to look at main dir too, not just deps.
+            let mainPath = workingSpec.path.removeLastPathComponent()
+            let branchName = scm.branchName(mainPath)
+            let status = scm.checkStatus(mainPath, assumedCheckout: branchName)
+            if status != .Success {
+                result = ErrorCode(rawValue: Int(status.errorCode()))!
+                writeln(.Stdout, "main project has \(status.errorMessage()).")
+            }
+            
+            // now check the deps.
+            let deps = workingSpec.allDependencies()
+            deps.forEach { (dependency) in
+                let name = dependency.name()
+                let path = ModuleSpec.modulePath().appendPathComponent(name)
+                let status = scm.checkStatus(path, assumedCheckout: dependency.checkout)
+                if status != .Success {
+                    result = ErrorCode(rawValue: Int(status.errorCode()))!
+                    writeln(.Stdout, "\(name) has \(status.errorMessage()).")
+                }
+            }
+        } else {
+            result = .SpecNotFound
+        }
+        
+        return result
     }
 }
 

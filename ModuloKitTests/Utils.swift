@@ -18,3 +18,11 @@ func clearTestRepos() {
     Git().remove("test-dep1")
     Git().remove("test-dep2")
 }
+
+func touchFile(path: String) {
+    try! path.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
+}
+
+func runCommand(command: String) {
+    Git().runCommand(command)
+}

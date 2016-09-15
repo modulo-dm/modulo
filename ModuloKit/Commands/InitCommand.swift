@@ -45,13 +45,15 @@ public class InitCommand: NSObject, Command {
             exit(.AlreadyInitialized)
         }
         
-        let scmResult = scm.addModulesIgnore()
-        if scmResult != .Success {
-            exit(scmResult.errorMessage())
+        if isModule == false {
+            let scmResult = scm.addModulesIgnore()
+            if scmResult != .Success {
+                exit(scmResult.errorMessage())
+            }
         }
         
         let specPath = NSFileManager.workingPath().appendPathComponent(specFilename)
-        let spec = ModuleSpec(name: NSFileManager.directoryName(), module: isModule, dependencies: [], path: specPath)
+        let spec = ModuleSpec(name: NSFileManager.directoryName(), module: isModule, sourcePath: nil, dependencies: [], path: specPath)
         let success = spec.save()
         
         if !success {

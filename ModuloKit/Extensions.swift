@@ -11,19 +11,16 @@ import Foundation
 public extension String {
     public var ns: NSString { return (self as NSString) }
     
-    public mutating func replace(string: String, replacement: String) {
+    /*public mutating func replace(string: String, replacement: String) {
         let range = rangeOfString(string)
         if let range = range {
             replaceRange(range, with: replacement)
         }
-    }
+    }*/
     
     public func replace(string: String, replacement: String) -> String {
-        var str = self
-        let range = str.rangeOfString(string)
-        if let range = range {
-            str.replaceRange(range, with: replacement)
-        }
+        let str = self.stringByReplacingOccurrencesOfString(string, withString: replacement)
+        
         return str
     }
     
@@ -58,6 +55,49 @@ public extension String {
         let result: String = path.stringByDeletingLastPathComponent
         
         return result
+    }
+    
+    func clean() -> String {
+        var cc = characters
+        
+        loop: while true {
+            switch cc.first {
+            case nil:
+                return ""
+            case "\n"?, "\r"?, " "?, "\t"?, "\r\n"?:
+                cc = cc.dropFirst()
+            default:
+                break loop
+            }
+        }
+        
+        loop: while true {
+            switch cc.last {
+            case nil:
+                return ""
+            case "\n"?, "\r"?, " "?, "\t"?, "\r\n"?:
+                cc = cc.dropLast()
+            default:
+                break loop
+            }
+        }
+        
+        return String(cc)
+    }
+    
+    func trim() -> String
+    {
+        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    }
+    
+    func stringByRemovingAll(characters: [Character]) -> String {
+        return String(self.characters.filter({ !characters.contains($0) }))
+    }
+    
+    func stringByRemovingAll(subStrings: [String]) -> String {
+        var resultString = self
+        _ = subStrings.map { resultString = resultString.stringByReplacingOccurrencesOfString($0, withString: "") }
+        return resultString
     }
 }
 
