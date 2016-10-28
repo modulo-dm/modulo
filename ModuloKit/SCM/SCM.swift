@@ -107,6 +107,37 @@ public protocol SCM {
 }
 
 extension SCM {
+    private func shell(command: String) -> (status: Int32, output: String?) {
+        var launchPath = ""
+        var pieces = command.componentsSeparatedByString(" ")
+        
+        switch pieces[0] {
+        case "git":
+            launchPath = "/usr/bin/git"
+        case "rm":
+            launchPath = "/bin/rm"
+        default:
+            return (99, nil)
+        }
+        
+        pieces.removeFirst()
+        
+        let task = NSTask()
+        task.launchPath = launchPath
+        task.arguments = pieces
+        
+        let pipe = NSPipe()
+        task.standardOutput = pipe
+        task.launch()
+        task.waitUntilExit()
+        
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        let output = NSString(data: data, encoding: NSUTF8StringEncoding) as? String
+        
+        let status = task.terminationStatus
+        return (status, output)
+    }
+
     public func runCommand(command: String, completion: SCMCommandParser? = nil) -> Int32 {
         var execute = command
         
@@ -120,17 +151,18 @@ extension SCM {
             execute = "\(execute) &> \(tempFile)"
         }
         
-        let status = system(execute)
+        let result = shell(execute)//system(execute)
         
         if let completion = completion {
-            let output = try? String(contentsOfFile: tempFile)
+            let output = result.output
+            let status = result.status
             completion(status: status, output: output)
             if status != 0 {
                 writeln(.Stderr, output!)
             }
         }
         
-        return status
+        return result.status
     }
     
     public func remove(path: String) -> SCMResult {

@@ -182,6 +182,11 @@ public class Git: SCM {
             return .Success
         }
     }
+    
+    public func tags(path: String) -> [String] {
+        // TODO: this.. duh.
+        return [""]
+    }
 }
 
 // Helper functions
@@ -298,7 +303,7 @@ extension Git {
             let initialWorkingPath = NSFileManager.workingPath()
             NSFileManager.setWorkingPath(path)
             
-            if let currentHash = hashAtPath(path), remoteBranch = remoteTrackingBranch(path) {
+            if let currentHash = hashAtPath(path), let remoteBranch = remoteTrackingBranch(path) {
                 _ = runCommand("git rev-list \(remoteBranch)...\(currentHash)") { (status, output) in
                     result = (output?.characters.count != 0) && (status == 0)
                 }

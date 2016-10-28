@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		655F0C1F1DC3D6CE009DDD72 /* ELFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C761D14942D00411727 /* ELFoundation.framework */; };
+		655F0C241DC3D6D9009DDD72 /* ELCodable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55CAD1D1496A100411727 /* ELCodable.framework */; };
+		65C411E01DC3D6700085365C /* ELCLI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C801D14943300411727 /* ELCLI.framework */; };
 		CA0A3F131D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
 		CA0A3F141D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
 		CA0A3F1D1D5A557A00A7F0BB /* SemverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F1C1D5A557A00A7F0BB /* SemverTests.swift */; };
@@ -81,6 +84,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		655F0C251DC3D6E9009DDD72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C831D14943900411727 /* ELCodable.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CAE55BFD1D13A61900411727;
+			remoteInfo = ELCodable_osx;
+		};
+		655F0C271DC3D6E9009DDD72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C791D14943300411727 /* ELCLI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CAA9770E1B66A10F0068AB25;
+			remoteInfo = ELCLI;
+		};
+		655F0C291DC3D6E9009DDD72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE55C6A1D14942D00411727 /* ELFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CA8CD5591B7A9DCA00DA8BF7;
+			remoteInfo = ELFoundation_osx;
+		};
 		CAAB6E141D18933400F22C48 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CAE55C391D14928B00411727 /* Project object */;
@@ -294,6 +318,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655F0C241DC3D6D9009DDD72 /* ELCodable.framework in Frameworks */,
+				655F0C1F1DC3D6CE009DDD72 /* ELFoundation.framework in Frameworks */,
+				65C411E01DC3D6700085365C /* ELCLI.framework in Frameworks */,
 				CAE55C5A1D1492A500411727 /* ModuloKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,6 +624,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				655F0C261DC3D6E9009DDD72 /* PBXTargetDependency */,
+				655F0C281DC3D6E9009DDD72 /* PBXTargetDependency */,
+				655F0C2A1DC3D6E9009DDD72 /* PBXTargetDependency */,
 				CAE55C5C1D1492A500411727 /* PBXTargetDependency */,
 			);
 			name = ModuloKitTests;
@@ -616,12 +646,15 @@
 				TargetAttributes = {
 					CAE55C401D14928B00411727 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					CAE55C4F1D1492A500411727 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					CAE55C581D1492A500411727 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -838,6 +871,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		655F0C261DC3D6E9009DDD72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ELCodable_osx;
+			targetProxy = 655F0C251DC3D6E9009DDD72 /* PBXContainerItemProxy */;
+		};
+		655F0C281DC3D6E9009DDD72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ELCLI;
+			targetProxy = 655F0C271DC3D6E9009DDD72 /* PBXContainerItemProxy */;
+		};
+		655F0C2A1DC3D6E9009DDD72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ELFoundation_osx;
+			targetProxy = 655F0C291DC3D6E9009DDD72 /* PBXContainerItemProxy */;
+		};
 		CAAB6E151D18933400F22C48 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CAE55C401D14928B00411727 /* modulo */;
@@ -958,6 +1006,7 @@
 			buildSettings = {
 				OTHER_SWIFT_FLAGS = "-DNOFRAMEWORKS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -966,6 +1015,7 @@
 			buildSettings = {
 				OTHER_SWIFT_FLAGS = "-DNOFRAMEWORKS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -987,6 +1037,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1009,6 +1060,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.theholygrail.ModuloKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1025,6 +1077,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ModuloKitTests/ModuloKitTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1038,6 +1091,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.theholygrail.ModuloKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ModuloKitTests/ModuloKitTests-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

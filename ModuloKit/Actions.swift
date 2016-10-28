@@ -47,7 +47,7 @@ public class Actions {
     }
     
     public func removeDependencies(dependencies: [DependencySpec]) -> ErrorCode {
-        var result = ErrorCode.Success
+        let result = ErrorCode.Success
         
         return result
     }
