@@ -1,0 +1,4 @@
+language: objective-c
+osx_image: xcode8
+script:
+   - xcodebuild -project ELFoundation.xcodeproj -scheme ELFoundation -sdk iphonesimulator test -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0' CODE_SIGNING_REQUIRED=NO

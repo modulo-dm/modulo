@@ -14,51 +14,51 @@ import Foundation
 #endif
 
 public enum ErrorCode: Int {
-    case Success = 0
-    case UnknownError = 1
-    case CommandError = 2
-    case SpecNotFound = 3
-    case SpecNotWritable = 4
-    case NoSCMFoundOrInitialized = 5
-    case AlreadyInitialized = 6
-    case NotInitialized = 7
-    case NoMatchingDependencies = 8
-    case DependencyAlreadyExists = 9
-    case DependencyUnclean = 10
+    case success = 0
+    case unknownError = 1
+    case commandError = 2
+    case specNotFound = 3
+    case specNotWritable = 4
+    case noSCMFoundOrInitialized = 5
+    case alreadyInitialized = 6
+    case notInitialized = 7
+    case noMatchingDependencies = 8
+    case dependencyAlreadyExists = 9
+    case dependencyUnclean = 10
     
     var description: String {
         var result: String = ""
         switch self {
-        case .Success:
+        case .success:
             break
-        case .UnknownError:
+        case .unknownError:
             result = "An unknown error occurred."
-        case .CommandError:
+        case .commandError:
             result = "There was an error in the command line used."
-        case .SpecNotFound:
+        case .specNotFound:
             result = ".modulo file not found."
-        case .SpecNotWritable:
+        case .specNotWritable:
             result = ".modulo cannot be written to, check permissions."
-        case .NoSCMFoundOrInitialized:
+        case .noSCMFoundOrInitialized:
             result = "No supported SCM was found to be initialized."
-        case .AlreadyInitialized:
+        case .alreadyInitialized:
             result = "Modulo has already been initialized."
-        case .NotInitialized:
+        case .notInitialized:
             result = "Modulo has not been initialized."
-        case .NoMatchingDependencies:
+        case .noMatchingDependencies:
             result = "No matching dependencies were found."
-        case .DependencyAlreadyExists:
+        case .dependencyAlreadyExists:
             result = "The dependency already exists."
-        case .DependencyUnclean:
+        case .dependencyUnclean:
             result = "The dependency is not clean."
         }
         return result
     }
 }
 
-internal func exit(code: ErrorCode, closure: (() -> Void)? = nil) {
-    if code != .Success {
-        writeln(.Stderr, code.description)
+internal func exit(_ code: ErrorCode, closure: (() -> Void)? = nil) {
+    if code != .success {
+        writeln(.stderr, code.description)
     }
     
     if let closure = closure {

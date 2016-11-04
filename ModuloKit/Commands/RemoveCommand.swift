@@ -12,23 +12,23 @@ import Foundation
     import ELCLI
 #endif
 
-public class RemoveCommand: NSObject, Command {
+open class RemoveCommand: NSObject, Command {
     // Protocol conformance
-    public var name: String { return "remove" }
-    public var shortHelpDescription: String { return "Removes a module from the list of dependencies"  }
-    public var longHelpDescription: String {
+    open var name: String { return "remove" }
+    open var shortHelpDescription: String { return "Removes a module from the list of dependencies"  }
+    open var longHelpDescription: String {
         return "Removes a module from the list of dependencies and performs checking to see if it is used elsewhere.  The filesystem is left intact for you to delete it manually at your convenience."
     }
-    public var failOnUnrecognizedOptions: Bool { return true }
+    open var failOnUnrecognizedOptions: Bool { return true }
     
-    public var verbose: Bool = false
-    public var quiet: Bool = false
+    open var verbose: Bool = false
+    open var quiet: Bool = false
     
-    public func configureOptions() {
+    open func configureOptions() {
         
     }
     
-    public func execute(otherParams: Array<String>?) -> Int {
+    open func execute(_ otherParams: Array<String>?) -> Int {
         let actions = Actions()
         let result = actions.checkDependenciesStatus()
         return result.rawValue

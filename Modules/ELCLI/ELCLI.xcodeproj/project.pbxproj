@@ -1,0 +1,582 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CA7E8CEE1C529DBC00B8E125 /* ELFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA7E8CE21C529D6400B8E125 /* ELFoundation.framework */; };
+		CA8CD5881B7BBF8100DA8BF7 /* CommitCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD5871B7BBF8100DA8BF7 /* CommitCommand.swift */; };
+		CA8CD58A1B7D1A2A00DA8BF7 /* VersionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA977321B66AD330068AB25 /* VersionCommand.swift */; };
+		CA8CD58C1B7D1C1D00DA8BF7 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD58B1B7D1C1D00DA8BF7 /* Output.swift */; };
+		CA8CD58D1B7D3CF900DA8BF7 /* HelpCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA977301B66AD2A0068AB25 /* HelpCommand.swift */; };
+		CA8CD59B1B7D449A00DA8BF7 /* XCTestCase+Exceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD59A1B7D449A00DA8BF7 /* XCTestCase+Exceptions.m */; };
+		CAA977151B66A10F0068AB25 /* ELCLI.h in Headers */ = {isa = PBXBuildFile; fileRef = CAA977141B66A10F0068AB25 /* ELCLI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CAA9771B1B66A10F0068AB25 /* ELCLI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA9770F1B66A10F0068AB25 /* ELCLI.framework */; };
+		CAA977221B66A10F0068AB25 /* ELCLITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA977211B66A10F0068AB25 /* ELCLITests.swift */; };
+		CAA9772C1B66A2B30068AB25 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9772B1B66A2B30068AB25 /* CLI.swift */; };
+		CAA9772E1B66A60D0068AB25 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9772D1B66A60D0068AB25 /* Command.swift */; };
+		CAA977381B66CD900068AB25 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA977371B66CD900068AB25 /* Options.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CA7E8CE11C529D6400B8E125 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA7E8CDA1C529D6400B8E125 /* ELFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CACF2A0A1A9614D20084EFAE;
+			remoteInfo = ELFoundation;
+		};
+		CA7E8CE31C529D6400B8E125 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA7E8CDA1C529D6400B8E125 /* ELFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CACF2A151A9614D20084EFAE;
+			remoteInfo = ELFoundationTests;
+		};
+		CA7E8CE51C529D6400B8E125 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA7E8CDA1C529D6400B8E125 /* ELFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CA8CD55A1B7A9DCA00DA8BF7;
+			remoteInfo = ELFoundation_osx;
+		};
+		CA7E8CE71C529D6400B8E125 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA7E8CDA1C529D6400B8E125 /* ELFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CA8CD5631B7A9DCB00DA8BF7;
+			remoteInfo = ELFoundation_osxTests;
+		};
+		CAA9771C1B66A10F0068AB25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAA977061B66A10F0068AB25 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CAA9770E1B66A10F0068AB25;
+			remoteInfo = ELCLI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CA7E8CDA1C529D6400B8E125 /* ELFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ELFoundation.xcodeproj; path = ../ELFoundation/ELFoundation.xcodeproj; sourceTree = "<group>"; };
+		CA8CD5871B7BBF8100DA8BF7 /* CommitCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitCommand.swift; sourceTree = "<group>"; };
+		CA8CD58B1B7D1C1D00DA8BF7 /* Output.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
+		CA8CD5981B7D449A00DA8BF7 /* ELCLITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ELCLITests-Bridging-Header.h"; sourceTree = "<group>"; };
+		CA8CD5991B7D449A00DA8BF7 /* XCTestCase+Exceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "XCTestCase+Exceptions.h"; path = "../../ELFoundation/ELFoundation/TestExtensions/XCTestCase+Exceptions.h"; sourceTree = "<group>"; };
+		CA8CD59A1B7D449A00DA8BF7 /* XCTestCase+Exceptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "XCTestCase+Exceptions.m"; path = "../../ELFoundation/ELFoundation/TestExtensions/XCTestCase+Exceptions.m"; sourceTree = "<group>"; };
+		CAA9770F1B66A10F0068AB25 /* ELCLI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ELCLI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAA977131B66A10F0068AB25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAA977141B66A10F0068AB25 /* ELCLI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELCLI.h; sourceTree = "<group>"; };
+		CAA9771A1B66A10F0068AB25 /* ELCLITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ELCLITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAA977201B66A10F0068AB25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAA977211B66A10F0068AB25 /* ELCLITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELCLITests.swift; sourceTree = "<group>"; };
+		CAA9772B1B66A2B30068AB25 /* CLI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
+		CAA9772D1B66A60D0068AB25 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		CAA977301B66AD2A0068AB25 /* HelpCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpCommand.swift; sourceTree = "<group>"; };
+		CAA977321B66AD330068AB25 /* VersionCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCommand.swift; sourceTree = "<group>"; };
+		CAA977371B66CD900068AB25 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CAA9770B1B66A10F0068AB25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA7E8CEE1C529DBC00B8E125 /* ELFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAA977171B66A10F0068AB25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAA9771B1B66A10F0068AB25 /* ELCLI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CA7E8CDB1C529D6400B8E125 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CA7E8CE21C529D6400B8E125 /* ELFoundation.framework */,
+				CA7E8CE41C529D6400B8E125 /* ELFoundationTests.xctest */,
+				CA7E8CE61C529D6400B8E125 /* ELFoundation.framework */,
+				CA7E8CE81C529D6400B8E125 /* ELFoundation_osxTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CA8CD52D1B7A98C200DA8BF7 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				CA7E8CDA1C529D6400B8E125 /* ELFoundation.xcodeproj */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		CA8CD5861B7BBF6900DA8BF7 /* TestCommands */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CD5871B7BBF8100DA8BF7 /* CommitCommand.swift */,
+			);
+			name = TestCommands;
+			sourceTree = "<group>";
+		};
+		CAA977051B66A10F0068AB25 = {
+			isa = PBXGroup;
+			children = (
+				CA8CD52D1B7A98C200DA8BF7 /* Modules */,
+				CAA977111B66A10F0068AB25 /* ELCLI */,
+				CAA9771E1B66A10F0068AB25 /* ELCLITests */,
+				CAA977101B66A10F0068AB25 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CAA977101B66A10F0068AB25 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAA9770F1B66A10F0068AB25 /* ELCLI.framework */,
+				CAA9771A1B66A10F0068AB25 /* ELCLITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CAA977111B66A10F0068AB25 /* ELCLI */ = {
+			isa = PBXGroup;
+			children = (
+				CAA977141B66A10F0068AB25 /* ELCLI.h */,
+				CAA9772B1B66A2B30068AB25 /* CLI.swift */,
+				CA8CD58B1B7D1C1D00DA8BF7 /* Output.swift */,
+				CAA9772D1B66A60D0068AB25 /* Command.swift */,
+				CAA977371B66CD900068AB25 /* Options.swift */,
+				CAA9772F1B66AD210068AB25 /* Commands */,
+				CAA977121B66A10F0068AB25 /* Supporting Files */,
+			);
+			path = ELCLI;
+			sourceTree = "<group>";
+		};
+		CAA977121B66A10F0068AB25 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CAA977131B66A10F0068AB25 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CAA9771E1B66A10F0068AB25 /* ELCLITests */ = {
+			isa = PBXGroup;
+			children = (
+				CAA977211B66A10F0068AB25 /* ELCLITests.swift */,
+				CA8CD5991B7D449A00DA8BF7 /* XCTestCase+Exceptions.h */,
+				CA8CD59A1B7D449A00DA8BF7 /* XCTestCase+Exceptions.m */,
+				CA8CD5861B7BBF6900DA8BF7 /* TestCommands */,
+				CAA9771F1B66A10F0068AB25 /* Supporting Files */,
+				CA8CD5981B7D449A00DA8BF7 /* ELCLITests-Bridging-Header.h */,
+			);
+			path = ELCLITests;
+			sourceTree = "<group>";
+		};
+		CAA9771F1B66A10F0068AB25 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CAA977201B66A10F0068AB25 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CAA9772F1B66AD210068AB25 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				CAA977301B66AD2A0068AB25 /* HelpCommand.swift */,
+				CAA977321B66AD330068AB25 /* VersionCommand.swift */,
+			);
+			path = Commands;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		CAA9770C1B66A10F0068AB25 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAA977151B66A10F0068AB25 /* ELCLI.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		CAA9770E1B66A10F0068AB25 /* ELCLI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAA977251B66A10F0068AB25 /* Build configuration list for PBXNativeTarget "ELCLI" */;
+			buildPhases = (
+				CAA9770A1B66A10F0068AB25 /* Sources */,
+				CAA9770B1B66A10F0068AB25 /* Frameworks */,
+				CAA9770C1B66A10F0068AB25 /* Headers */,
+				CAA9770D1B66A10F0068AB25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ELCLI;
+			productName = ELCLI;
+			productReference = CAA9770F1B66A10F0068AB25 /* ELCLI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CAA977191B66A10F0068AB25 /* ELCLITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAA977281B66A10F0068AB25 /* Build configuration list for PBXNativeTarget "ELCLITests" */;
+			buildPhases = (
+				CAA977161B66A10F0068AB25 /* Sources */,
+				CAA977171B66A10F0068AB25 /* Frameworks */,
+				CAA977181B66A10F0068AB25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CAA9771D1B66A10F0068AB25 /* PBXTargetDependency */,
+			);
+			name = ELCLITests;
+			productName = ELCLITests;
+			productReference = CAA9771A1B66A10F0068AB25 /* ELCLITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CAA977061B66A10F0068AB25 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = WalmartLabs;
+				TargetAttributes = {
+					CAA9770E1B66A10F0068AB25 = {
+						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0810;
+					};
+					CAA977191B66A10F0068AB25 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = CAA977091B66A10F0068AB25 /* Build configuration list for PBXProject "ELCLI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CAA977051B66A10F0068AB25;
+			productRefGroup = CAA977101B66A10F0068AB25 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CA7E8CDB1C529D6400B8E125 /* Products */;
+					ProjectRef = CA7E8CDA1C529D6400B8E125 /* ELFoundation.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				CAA9770E1B66A10F0068AB25 /* ELCLI */,
+				CAA977191B66A10F0068AB25 /* ELCLITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CA7E8CE21C529D6400B8E125 /* ELFoundation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ELFoundation.framework;
+			remoteRef = CA7E8CE11C529D6400B8E125 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CA7E8CE41C529D6400B8E125 /* ELFoundationTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ELFoundationTests.xctest;
+			remoteRef = CA7E8CE31C529D6400B8E125 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CA7E8CE61C529D6400B8E125 /* ELFoundation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ELFoundation.framework;
+			remoteRef = CA7E8CE51C529D6400B8E125 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CA7E8CE81C529D6400B8E125 /* ELFoundation_osxTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ELFoundation_osxTests.xctest;
+			remoteRef = CA7E8CE71C529D6400B8E125 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CAA9770D1B66A10F0068AB25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAA977181B66A10F0068AB25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CAA9770A1B66A10F0068AB25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA8CD58D1B7D3CF900DA8BF7 /* HelpCommand.swift in Sources */,
+				CA8CD58C1B7D1C1D00DA8BF7 /* Output.swift in Sources */,
+				CA8CD58A1B7D1A2A00DA8BF7 /* VersionCommand.swift in Sources */,
+				CAA9772C1B66A2B30068AB25 /* CLI.swift in Sources */,
+				CAA977381B66CD900068AB25 /* Options.swift in Sources */,
+				CAA9772E1B66A60D0068AB25 /* Command.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAA977161B66A10F0068AB25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA8CD5881B7BBF8100DA8BF7 /* CommitCommand.swift in Sources */,
+				CA8CD59B1B7D449A00DA8BF7 /* XCTestCase+Exceptions.m in Sources */,
+				CAA977221B66A10F0068AB25 /* ELCLITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CAA9771D1B66A10F0068AB25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CAA9770E1B66A10F0068AB25 /* ELCLI */;
+			targetProxy = CAA9771C1B66A10F0068AB25 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CAA977231B66A10F0068AB25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CAA977241B66A10F0068AB25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		CAA977261B66A10F0068AB25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = ELCLI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.walmartlabs.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		CAA977271B66A10F0068AB25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = ELCLI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.walmartlabs.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		CAA977291B66A10F0068AB25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ELCLITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.walmartlabs.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ELCLITests/ELCLITests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CAA9772A1B66A10F0068AB25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ELCLITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				OTHER_SWIFT_FLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.walmartlabs.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ELCLITests/ELCLITests-Bridging-Header.h";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CAA977091B66A10F0068AB25 /* Build configuration list for PBXProject "ELCLI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAA977231B66A10F0068AB25 /* Debug */,
+				CAA977241B66A10F0068AB25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CAA977251B66A10F0068AB25 /* Build configuration list for PBXNativeTarget "ELCLI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAA977261B66A10F0068AB25 /* Debug */,
+				CAA977271B66A10F0068AB25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CAA977281B66A10F0068AB25 /* Build configuration list for PBXNativeTarget "ELCLITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAA977291B66A10F0068AB25 /* Debug */,
+				CAA9772A1B66A10F0068AB25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CAA977061B66A10F0068AB25 /* Project object */;
+}

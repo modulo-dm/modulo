@@ -1,0 +1,55 @@
+{
+    "data": {
+        "storeId": 2280,
+        "items": [
+                  {
+                  "format": "UPC",
+                  "identifier": "887276062013",
+                  "quantity": 1,
+                  "itemId": 554069138,
+                  "departmentId": 72,
+                  "subCategoryId": 42,
+                  "name": "SAM 55 LED 55J6200",
+                  "normalizedUpc": "88727606201",
+                  "unitPrice": 748,
+                  "upc": "88727606201",
+                  "packagePrice": 748,
+                  "isWeighted": false,
+                  "price": 748,
+                  "isProductFee": false,
+                  "taxRates": {
+                  "tax1": 8.75
+                  },
+                  "tax": 65.45
+                  },
+                  {
+                  "format" : "UPC",
+                  "identifier": "0068113180661",
+                  "quantity": 1,
+                  "itemId": 593908,
+                  "departmentId": 72,
+                  "subCategoryId": 85,
+                  "name": "CA RECYCLE FEE",
+                  "normalizedUpc": "68113180661",
+                  "unitPrice": 5,
+                  "upc": "0068113180661",
+                  "packagePrice": 5,
+                  "isWeighted": false,
+                  "price": 5,
+                  "isProductFee": true,
+                  "taxRates": {
+                  "tax12": 0
+                  },
+                  "tax": 0
+                  }
+                  ],
+        "subtotal": 748,
+        "productFees": 5,
+        "tax": 65.45,
+        "taxAmounts": {
+            "tax1": 65.45,
+            "tax12": 0
+        },
+        "total": 818.45
+    }
+}

@@ -25,7 +25,7 @@ public struct ModuleSpec {
 }
 
 extension ModuleSpec: Decodable {
-    public static func decode(json: JSON?) throws -> ModuleSpec {
+    public static func decode(_ json: JSON?) throws -> ModuleSpec {
         return try ModuleSpec(
             name: json ==> "name",
             module: json ==> "module",
@@ -54,8 +54,8 @@ extension ModuleSpec: Encodable {
 
 extension ModuleSpec {
     public static func exists() -> Bool {
-        let fileManager = NSFileManager.defaultManager()
-        return fileManager.fileExistsAtPath(specFilename)
+        let fileManager = FileManager.default
+        return fileManager.fileExists(atPath: specFilename)
     }
     
     public static func load(contentsOfFile filePath: String) -> ModuleSpec? {
@@ -70,7 +70,7 @@ extension ModuleSpec {
         return result
     }
     
-    public static func load(dep: DependencySpec) -> ModuleSpec? {
+    public static func load(_ dep: DependencySpec) -> ModuleSpec? {
         let depName = dep.repositoryURL.nameFromRemoteURL()
         
         let path = modulePath().appendPathComponent(depName).appendPathComponent(specFilename)
@@ -78,15 +78,15 @@ extension ModuleSpec {
     }
     
     public static func workingSpec() -> ModuleSpec? {
-        let path = NSFileManager.workingPath().appendPathComponent(specFilename)
+        let path = FileManager.workingPath().appendPathComponent(specFilename)
 
         return ModuleSpec.load(contentsOfFile: path)
     }
     
     public static func topLevelSpec() -> ModuleSpec? {
         // accounts for the initial /modules path.  Any deeper module paths will be symlinked.
-        let path = NSFileManager.workingPath().appendPathComponent("../../\(specFilename)").resolvePath()
-        if NSFileManager.fileExists(path) {
+        let path = FileManager.workingPath().appendPathComponent("../../\(specFilename)").resolvePath()
+        if FileManager.fileExists(path) {
             return ModuleSpec.load(contentsOfFile: path)
         } else {
             return workingSpec()
@@ -100,9 +100,9 @@ extension ModuleSpec {
                 cleanedPath = "../"
             } else {
                 // make sure the module path exists.
-                if !NSFileManager.pathExists(cleanedPath) {
+                if !FileManager.pathExists(cleanedPath) {
                     do {
-                        try NSFileManager.defaultManager().createDirectoryAtPath(cleanedPath, withIntermediateDirectories: false, attributes: nil)
+                        try FileManager.default.createDirectory(atPath: cleanedPath, withIntermediateDirectories: false, attributes: nil)
                     } catch {
                         assertionFailure("Unable to create path: \(cleanedPath)")
                     }
@@ -125,7 +125,7 @@ extension ModuleSpec {
         let json = try? encode()
         
         if let _ = json, let data = json?.data() {
-            let success = data.writeToFile(path, atomically: true)
+            let success = (try? data.write(to: URL(fileURLWithPath: path), options: [.atomic])) != nil
             result = success
         }
         
@@ -139,18 +139,18 @@ public extension ModuleSpec {
     public func allDependencies() -> [DependencySpec] {
         var deps = Set<DependencySpec>()
         
-        deps.unionInPlace(dependencies)
+        deps.formUnion(dependencies)
         
         for dep in dependencies {
             if let spec = ModuleSpec.load(dep) {
-                deps.unionInPlace(spec.dependencies)
+                deps.formUnion(spec.dependencies)
             }
         }
         
         return [DependencySpec](deps)
     }
     
-    public func dependencyForURL(repoURL: String) -> DependencySpec? {
+    public func dependencyForURL(_ repoURL: String) -> DependencySpec? {
         let results = dependencies.filter { (dep) -> Bool in
             return dep.repositoryURL == repoURL
         }
@@ -162,9 +162,9 @@ public extension ModuleSpec {
         }
     }
     
-    public func dependencyForName(name: String) -> DependencySpec? {
+    public func dependencyForName(_ name: String) -> DependencySpec? {
         let results = dependencies.filter { (dep) -> Bool in
-            return dep.repositoryURL.nameFromRemoteURL().lowercaseString == name.lowercaseString
+            return dep.repositoryURL.nameFromRemoteURL().lowercased() == name.lowercased()
         }
         
         if results.count > 0 {
@@ -174,7 +174,7 @@ public extension ModuleSpec {
         }
     }
     
-    public func addDependencies(inout toArray: [DependencySpec]) {
+    public func addDependencies(_ toArray: inout [DependencySpec]) {
         for dep in dependencies {
             // is this dep already in the list?
             let existing = toArray.filter{ (arrayDep) -> Bool in

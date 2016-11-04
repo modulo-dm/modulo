@@ -1,0 +1,78 @@
+{
+    "mystring": "hello",
+    "myuint": 1234,
+    "mynumber": 3.14,
+    "myarray1": [
+             "1",
+             "2",
+             "3",
+             "4"
+             ],
+    "myarray2": [
+             "1",
+             "2",
+             "3",
+             "4"
+             ],
+    "myobject": {
+        "mystring": "sub-hello"
+    },
+    "myobjectarray": [
+        {
+            "mystring": "value1",
+        },
+        {
+            "mystring": "value2",
+        },
+        {
+            "mystring": "value3",
+        },
+        {
+            "mystring": "value4",
+        },
+    ],
+    "mydictionary": {
+        "someItem": {
+            "mystring": "someItem"
+        },
+        "someOtherItem": {
+            "mystring": "someOtherItem"
+        }
+    },
+    "null": null,
+    "string": "a string",
+    "stringNumber": "1234",
+    "bool": true,
+    "int": -1234,
+    "int32": -2147483647,
+    "int64": -9223372036854775807,
+    "uint": 4294967295,
+    "uint32": 4294967295,
+    "uint64": 18446744073709551615,
+    "float": 0.08251977,
+    "double": 0.333333333333333314829616256247390992939,
+    "boolString": "yes",
+    "intString": "-1234",
+    "int32String": "-2147483647",
+    "int64String": "-9223372036854775807",
+    "uintString": "1234",
+    "uint32String": "4294967295",
+    "uint64String": "18446744073709551615",
+    "floatString": "0.00000011920928955078125",
+    "doubleString": "0.99999999999999994444444444444444444444333333333333333314829616256247390992939",
+    "decimalNumber": 3402823669209384634633746074317682114550000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
+    "appVersion": {
+        "android": {
+            "minSDK": "5.1",
+            "minVersion": "0.1.4",
+            "url": "https://walmart.com/change-me",
+            "version": "0.1.4"
+        },
+        "iOS": {
+            "minVersion": "0.1.4",
+            "url": "https://walmart.com/change-me",
+            "version": "0.1.4"
+        }
+    },
+    "storeIdWhitelist": [ 5260 ]
+}

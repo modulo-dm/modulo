@@ -18,7 +18,7 @@ class TestStatus: XCTestCase {
     override func setUp() {
         super.setUp()
         clearTestRepos()
-        print("working path = \(NSFileManager.workingPath())")
+        print("working path = \(FileManager.workingPath())")
     }
     
     override func tearDown() {
@@ -29,86 +29,86 @@ class TestStatus: XCTestCase {
     
     func testStatusDepDirty() {
         let status = Git().clone("git@github.com:modulo-dm/test-add.git", path: "test-add")
-        XCTAssertTrue(status == .Success)
+        XCTAssertTrue(status == .success)
         
-        NSFileManager.setWorkingPath("test-add")
+        FileManager.setWorkingPath("test-add")
         
         var error = Modulo.run(["update", "--all", "-v"])
-        XCTAssertTrue(error == .Success)
+        XCTAssertTrue(error == .success)
         
         touchFile("../test-dep1/blah.txt")
         
         error = Modulo.run(["status", "-v"])
-        XCTAssertTrue(error == .DependencyUnclean)
+        XCTAssertTrue(error == .dependencyUnclean)
         
-        NSFileManager.setWorkingPath("..")
+        FileManager.setWorkingPath("..")
         
-        Git().remove("test-add")
+        _ = Git().remove("test-add")
     }
     
     func testStatusMainDirty() {
         let status = Git().clone("git@github.com:modulo-dm/test-add.git", path: "test-add")
-        XCTAssertTrue(status == .Success)
+        XCTAssertTrue(status == .success)
         
-        NSFileManager.setWorkingPath("test-add")
+        FileManager.setWorkingPath("test-add")
         
         var error = Modulo.run(["update", "--all", "-v"])
-        XCTAssertTrue(error == .Success)
+        XCTAssertTrue(error == .success)
         
         touchFile("blah.txt")
         
         error = Modulo.run(["status", "-v"])
-        XCTAssertTrue(error == .DependencyUnclean)
+        XCTAssertTrue(error == .dependencyUnclean)
         
-        NSFileManager.setWorkingPath("..")
+        FileManager.setWorkingPath("..")
         
-        Git().remove("test-add")
+        _ = Git().remove("test-add")
     }
 
     func testStatusMainUnpushed() {
         let status = Git().clone("git@github.com:modulo-dm/test-add.git", path: "test-add")
-        XCTAssertTrue(status == .Success)
+        XCTAssertTrue(status == .success)
         
-        NSFileManager.setWorkingPath("test-add")
+        FileManager.setWorkingPath("test-add")
         
         var error = Modulo.run(["update", "--all", "-v"])
-        XCTAssertTrue(error == .Success)
+        XCTAssertTrue(error == .success)
         
         touchFile("blah.txt")
         runCommand("git add blah.txt")
         runCommand("git commit -m \"test\"")
         
         error = Modulo.run(["status", "-v"])
-        XCTAssertTrue(error == .DependencyUnclean)
+        XCTAssertTrue(error == .dependencyUnclean)
         
-        NSFileManager.setWorkingPath("..")
+        FileManager.setWorkingPath("..")
         
-        Git().remove("test-add")
+        _ = Git().remove("test-add")
     }
 
     func testStatusDepUnpushed() {
         let status = Git().clone("git@github.com:modulo-dm/test-add.git", path: "test-add")
-        XCTAssertTrue(status == .Success)
+        XCTAssertTrue(status == .success)
         
-        NSFileManager.setWorkingPath("test-add")
+        FileManager.setWorkingPath("test-add")
         
         var error = Modulo.run(["update", "--all", "-v"])
-        XCTAssertTrue(error == .Success)
+        XCTAssertTrue(error == .success)
         
-        NSFileManager.setWorkingPath("../test-dep1")
+        FileManager.setWorkingPath("../test-dep1")
         
         touchFile("blah.txt")
         runCommand("git add blah.txt")
         runCommand("git commit -m \"test\"")
         
-        NSFileManager.setWorkingPath("../test-add")
+        FileManager.setWorkingPath("../test-add")
         
         error = Modulo.run(["status", "-v"])
-        XCTAssertTrue(error == .DependencyUnclean)
+        XCTAssertTrue(error == .dependencyUnclean)
         
-        NSFileManager.setWorkingPath("..")
+        FileManager.setWorkingPath("..")
         
-        Git().remove("test-add")
+        _ = Git().remove("test-add")
     }
     
 }

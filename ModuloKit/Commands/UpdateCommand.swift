@@ -13,23 +13,23 @@ import Foundation
     import ELCLI
 #endif
 
-public class UpdateCommand: NSObject, Command {
+open class UpdateCommand: NSObject, Command {
     // internal properties
-    private var updateAll: Bool = false
-    private var dependencyName: String! = nil
+    fileprivate var updateAll: Bool = false
+    fileprivate var dependencyName: String! = nil
     
     // Protocol conformance
-    public var name: String { return "update" }
-    public var shortHelpDescription: String { return "Updates module dependencies"  }
-    public var longHelpDescription: String {
+    open var name: String { return "update" }
+    open var shortHelpDescription: String { return "Updates module dependencies"  }
+    open var longHelpDescription: String {
         return "Updates module dependencies if needed.  This command may clone sub dependencies, update the checked out versions, etc."
     }
-    public var failOnUnrecognizedOptions: Bool { return true }
+    open var failOnUnrecognizedOptions: Bool { return true }
     
-    public var verbose: Bool = false
-    public var quiet: Bool = false
+    open var verbose: Bool = false
+    open var quiet: Bool = false
     
-    public func configureOptions() {
+    open func configureOptions() {
         addOption(["-a", "--all"], usage: "update all dependencies") { (option, value) in
             self.updateAll = true
         }
@@ -39,7 +39,7 @@ public class UpdateCommand: NSObject, Command {
         }
     }
     
-    public func execute(otherParams: Array<String>?) -> Int {
+    open func execute(_ otherParams: Array<String>?) -> Int {
         let actions = Actions()
         
         var deps = [DependencySpec]()
@@ -47,7 +47,7 @@ public class UpdateCommand: NSObject, Command {
             if let workingSpec = ModuleSpec.workingSpec() {
                 deps = workingSpec.dependencies
             } else {
-                return ErrorCode.SpecNotFound.rawValue
+                return ErrorCode.specNotFound.rawValue
             }
         } else if dependencyName != nil {
             if let dep = ModuleSpec.workingSpec()?.dependencyForName(dependencyName) {
@@ -55,14 +55,14 @@ public class UpdateCommand: NSObject, Command {
             }
         } else {
             showHelp()
-            return ErrorCode.CommandError.rawValue
+            return ErrorCode.commandError.rawValue
         }
         
         if deps.count == 0 {
-            return ErrorCode.NoMatchingDependencies.rawValue
+            return ErrorCode.noMatchingDependencies.rawValue
         } else {
-            actions.updateDependencies(deps, explicit: true)
-            return ErrorCode.Success.rawValue
+            _ = actions.updateDependencies(deps, explicit: true)
+            return ErrorCode.success.rawValue
         }
     }
 }

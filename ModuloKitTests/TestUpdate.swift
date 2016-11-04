@@ -18,7 +18,7 @@ class TestUpdate: XCTestCase {
     override func setUp() {
         super.setUp()
         clearTestRepos()
-        print("working path = \(NSFileManager.workingPath())")
+        print("working path = \(FileManager.workingPath())")
     }
     
     override func tearDown() {
@@ -29,44 +29,44 @@ class TestUpdate: XCTestCase {
     
     func testUpdateAll() {
         let status = Git().clone("git@github.com:modulo-dm/test-add.git", path: "test-add")
-        XCTAssertTrue(status == .Success)
+        XCTAssertTrue(status == .success)
         
-        NSFileManager.setWorkingPath("test-add")
+        FileManager.setWorkingPath("test-add")
         
         let error = Modulo.run(["update", "--all", "-v"])
-        XCTAssertTrue(error == .Success)
+        XCTAssertTrue(error == .success)
         
         let spec = ModuleSpec.load(contentsOfFile: specFilename)
         XCTAssertTrue(spec!.dependencies.count > 0)
         XCTAssertTrue(spec!.dependencies[0].repositoryURL == "git@github.com:modulo-dm/test-init.git")
         //XCTAssertTrue(spec!.module == "modules")
         
-        XCTAssertTrue(NSFileManager.pathExists("../test-init"))
-        XCTAssertTrue(NSFileManager.pathExists("../test-dep1"))
-        XCTAssertTrue(NSFileManager.pathExists("../test-dep2"))
+        XCTAssertTrue(FileManager.pathExists("../test-init"))
+        XCTAssertTrue(FileManager.pathExists("../test-dep1"))
+        XCTAssertTrue(FileManager.pathExists("../test-dep2"))
         
-        NSFileManager.setWorkingPath("..")
+        FileManager.setWorkingPath("..")
         
         Git().remove("test-add")
     }
     
     func testUpdateOneModule() {
         let status = Git().clone("git@github.com:modulo-dm/test-add.git", path: "test-add")
-        XCTAssertTrue(status == .Success)
+        XCTAssertTrue(status == .success)
         
-        NSFileManager.setWorkingPath("test-add")
+        FileManager.setWorkingPath("test-add")
         
         let error = Modulo.run(["update", "-v", "test-init"])
-        XCTAssertTrue(error == .Success)
+        XCTAssertTrue(error == .success)
         
         let spec = ModuleSpec.load(contentsOfFile: specFilename)
         XCTAssertTrue(spec!.dependencies.count > 0)
         XCTAssertTrue(spec!.dependencies[0].repositoryURL == "git@github.com:modulo-dm/test-init.git")
         //XCTAssertTrue(spec!.module == "modules")
         
-        XCTAssertTrue(NSFileManager.pathExists("../test-init"))
+        XCTAssertTrue(FileManager.pathExists("../test-init"))
         
-        NSFileManager.setWorkingPath("..")
+        FileManager.setWorkingPath("..")
         
         Git().remove("test-add")
     }

@@ -15,14 +15,14 @@ import Foundation
 #endif
 
 @objc
-public class Modulo: NSObject {
+open class Modulo: NSObject {
     
-    public static func run() {
+    open static func run() {
         let error = run([])
-        exit(error)
+        exit(Int32(error.rawValue))
     }
     
-    public static func run(args: [String]) -> ErrorCode {
+    open static func run(_ args: [String]) -> ErrorCode {
         let cli = CLI(name: "modulo", version: "1.0", description: "A simple dependency manager")
         
         if args.count > 0 {
@@ -32,13 +32,13 @@ public class Modulo: NSObject {
         cli.addCommands([InitCommand(), AddCommand(), UpdateCommand(), StatusCommand()])
         
         if let error = ErrorCode(rawValue: cli.run()) {
-            if error == .Success {
+            if error == .success {
                 State.instance.showFinalInformation()
             }
             
             return error
         }
         
-        return ErrorCode.UnknownError
+        return ErrorCode.unknownError
     }
 }

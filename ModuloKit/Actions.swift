@@ -13,20 +13,20 @@ import Foundation
     import ELFoundation
 #endif
 
-public class Actions {
+open class Actions {
     let scm = currentSCM()
     
     public init() {
         if !ModuleSpec.exists() {
-            exit(.NotInitialized)
+            exit(.notInitialized)
         }
     }
     
-    public func addDependency(url: String, checkout: SCMCheckoutType?) -> ErrorCode {
+    open func addDependency(_ url: String, checkout: SCMCheckoutType?) -> ErrorCode {
         // configure the default branch if we weren't given one.
         var checkoutType: SCMCheckoutType
         if checkout == nil {
-            checkoutType = .Branch(name: scm.defaultCheckout)
+            checkoutType = .branch(name: scm.defaultCheckout)
         } else {
             checkoutType = checkout!
         }
@@ -35,47 +35,47 @@ public class Actions {
         if var workingSpec = ModuleSpec.workingSpec() {
             // does this dep already exist in here??
             if let _ = workingSpec.dependencyForURL(url) {
-                return ErrorCode.DependencyAlreadyExists
+                return ErrorCode.dependencyAlreadyExists
             }
             // nope, keep going.
             workingSpec.dependencies.append(dep)
-            workingSpec.save()
-            return ErrorCode.Success
+            _ = workingSpec.save()
+            return ErrorCode.success
         } else {
-            return ErrorCode.SpecNotFound
+            return ErrorCode.specNotFound
         }
     }
     
-    public func removeDependencies(dependencies: [DependencySpec]) -> ErrorCode {
-        let result = ErrorCode.Success
+    open func removeDependencies(_ dependencies: [DependencySpec]) -> ErrorCode {
+        let result = ErrorCode.success
         
         return result
     }
     
-    public func updateDependencies(dependencies: [DependencySpec], explicit: Bool) -> ErrorCode {
+    open func updateDependencies(_ dependencies: [DependencySpec], explicit: Bool) -> ErrorCode {
         let modulePath = ModuleSpec.modulePath()
         
         for dep in dependencies {
             // figure out what to do, where to go, what's it called, etc.
             let moduleName = scm.nameFromRemoteURL(dep.repositoryURL)
-            writeln(.Stdout, "working on: \(moduleName)...")
+            writeln(.stdout, "working on: \(moduleName)...")
             let clonePath = modulePath.appendPathComponent(moduleName)
             
             // you might think if the path DOES exist, we'd check for version compatibility here.
             // But no... we'll do that in a seperate step.
-            if NSFileManager.pathExists(clonePath) == false {
+            if FileManager.pathExists(clonePath) == false {
                 // try to clone it...
                 let cloneResult = scm.clone(dep.repositoryURL, path: clonePath)
-                if cloneResult != .Success {
+                if cloneResult != .success {
                     // rrrrrrrrrrt!  STOP!  Something is jacked up.
                     exit(cloneResult.errorMessage())
                 }
                 
                 // now check out what they asked for...
-                let checkoutType = SCMCheckoutType.Other(value: dep.checkout)
+                let checkoutType = SCMCheckoutType.other(value: dep.checkout)
                 let checkoutResult = scm.checkout(checkoutType, path: clonePath)
                 
-                if checkoutResult != .Success {
+                if checkoutResult != .success {
                     // rrrrrrrrrrt!  STOP!  Something is jacked up.
                     exit(checkoutResult.errorMessage())
                 }
@@ -91,27 +91,27 @@ public class Actions {
             // now load the module we just worked on and iterate through it's dependencies.
             if let depSpec = ModuleSpec.load(dep) {
                 let error = updateDependencies(depSpec.dependencies, explicit: false)
-                if error != .Success {
+                if error != .success {
                     return error
                 }
             }
 
         }
         
-        return ErrorCode.Success
+        return ErrorCode.success
     }
     
-    public func checkDependenciesStatus() -> ErrorCode {
-        var result: ErrorCode = .Success
+    open func checkDependenciesStatus() -> ErrorCode {
+        var result: ErrorCode = .success
         
         if let workingSpec = ModuleSpec.workingSpec() {
             // need to look at main dir too, not just deps.
             let mainPath = workingSpec.path.removeLastPathComponent()
             let branchName = scm.branchName(mainPath)
             let status = scm.checkStatus(mainPath, assumedCheckout: branchName)
-            if status != .Success {
+            if status != .success {
                 result = ErrorCode(rawValue: Int(status.errorCode()))!
-                writeln(.Stdout, "main project has \(status.errorMessage()).")
+                writeln(.stdout, "main project has \(status.errorMessage()).")
             }
             
             // now check the deps.
@@ -120,13 +120,13 @@ public class Actions {
                 let name = dependency.name()
                 let path = ModuleSpec.modulePath().appendPathComponent(name)
                 let status = scm.checkStatus(path, assumedCheckout: dependency.checkout)
-                if status != .Success {
+                if status != .success {
                     result = ErrorCode(rawValue: Int(status.errorCode()))!
-                    writeln(.Stdout, "\(name) has \(status.errorMessage()).")
+                    writeln(.stdout, "\(name) has \(status.errorMessage()).")
                 }
             }
         } else {
-            result = .SpecNotFound
+            result = .specNotFound
         }
         
         return result

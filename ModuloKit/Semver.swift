@@ -9,28 +9,28 @@
 import Foundation
 
 internal enum SemverPart: Int {
-    case Breaking
-    case Feature
-    case Fix
+    case breaking
+    case feature
+    case fix
     
-    case Major
-    case Minor
-    case Patch
+    case major
+    case minor
+    case patch
     
-    case PrimaryPartial
-    case SecondaryPartial
+    case primaryPartial
+    case secondaryPartial
     
-    case LeftMostNonZero
+    case leftMostNonZero
 }
 
 // MARK: Semver Public interface
 
 public struct Semver {
-    public private(set) var prefix: String? = nil
+    public fileprivate(set) var prefix: String? = nil
     
-    public private(set) var breaking: Int
-    public private(set) var feature: Int
-    public private(set) var fix: Int
+    public fileprivate(set) var breaking: Int
+    public fileprivate(set) var feature: Int
+    public fileprivate(set) var fix: Int
     
     public var major: Int {
         return breaking
@@ -44,10 +44,10 @@ public struct Semver {
         return fix
     }
     
-    public private(set) var preRelease: String? = nil
-    public private(set) var build: String? = nil
+    public fileprivate(set) var preRelease: String? = nil
+    public fileprivate(set) var build: String? = nil
     
-    public private(set) var valid = true
+    public fileprivate(set) var valid = true
     public var partial: Bool {
         return breaking == -1 || feature == -1 || fix == -1
     }
@@ -94,12 +94,12 @@ private let NumberRegex = "([0-9]+)"
 private let VersionXRegex = "([0-9]+|x|x|\\*)"*/
 
 extension String {
-    func matchesForRegex(regex: String) -> [String] {
+    func matchesForRegex(_ regex: String) -> [String] {
         do {
             let regex = try NSRegularExpression(pattern: regex, options: [])
             let nsString = self as NSString
-            let results = regex.matchesInString(self, options: [], range: NSMakeRange(0, nsString.length))
-            return results.map { nsString.substringWithRange($0.range) }
+            let results = regex.matches(in: self, options: [], range: NSMakeRange(0, nsString.length))
+            return results.map { nsString.substring(with: $0.range) }
         } catch let error as NSError {
             print("invalid regex: \(error.localizedDescription)")
             return []
@@ -110,14 +110,14 @@ extension String {
 // MARK: Internal stuff
 
 internal enum SemverComparison {
-    case Equal
-    case GreaterThan
-    case LessThan
-    case Unknown
+    case equal
+    case greaterThan
+    case lessThan
+    case unknown
 }
 
 extension Semver {
-    private mutating func parse(value: String) {
+    fileprivate mutating func parse(_ value: String) {
         
         // it ain't got enough characters, ditch.
         guard value.characters.count > 0 else {
@@ -136,7 +136,7 @@ extension Semver {
         if versionMatches.count > 0 {
             // force unwrap, because our regex wouldn't have matched it if there weren't
             // at least 3 or they weren't all numbers.
-            let versionComponents = versionMatches[0].componentsSeparatedByString(".")
+            let versionComponents = versionMatches[0].components(separatedBy: ".")
             breaking = Int(versionComponents[0]) ?? -1
             feature = Int(versionComponents[1]) ?? -1
             fix = Int(versionComponents[2]) ?? -1
@@ -159,7 +159,7 @@ extension Semver {
         } else {
             // we didn't have any version matches, maybe it's got x-ranges in it.
             if xMatches.count > 0 {
-                for (index, element) in xMatches.enumerate() {
+                for (index, element) in xMatches.enumerated() {
                     let value = Int(element)
                     
                     if index == 0 {
@@ -186,7 +186,7 @@ extension Semver {
         prefix = prefix(original)
     }
     
-    private func prefix(value: String) -> String? {
+    fileprivate func prefix(_ value: String) -> String? {
         let prefix = value.matchesForRegex(PrefixRegex)
         
         if prefix.count == 1 {
@@ -196,7 +196,7 @@ extension Semver {
         return nil
     }
     
-    private func clean(value: String) -> String {
+    fileprivate func clean(_ value: String) -> String {
         let cleanMatches = value.matchesForRegex(CleanRegex)
         
         if cleanMatches.count == 1 {
@@ -206,7 +206,7 @@ extension Semver {
         return ""
     }
     
-    private func elements() -> [Int] {
+    fileprivate func elements() -> [Int] {
         var items = [Int]()
         
         items.append(breaking)
@@ -220,25 +220,25 @@ extension Semver {
         return items
     }
     
-    private func comparison(ver: Semver) -> SemverComparison {
-        var result = SemverComparison.Unknown
+    fileprivate func comparison(_ ver: Semver) -> SemverComparison {
+        var result = SemverComparison.unknown
         
         let this = elements()
         let that = ver.elements()
         
         if this == that {
-            return .Equal
+            return .equal
         }
         
-        for (index, element) in this.enumerate() {
+        for (index, element) in this.enumerated() {
             if index < that.count {
                 let thatElement = that[index]
                 if element > thatElement {
-                    result = .GreaterThan
+                    result = .greaterThan
                     break
                 }
                 if element < thatElement {
-                    result = .LessThan
+                    result = .lessThan
                     break
                 }
             } else {
@@ -265,30 +265,30 @@ extension Semver {
         }
     }
     
-    internal mutating func increment(part: SemverPart) {
+    internal mutating func increment(_ part: SemverPart) {
         switch part {
-        case .Major:
+        case .major:
             fallthrough
-        case .Breaking:
+        case .breaking:
             breaking += 1
             feature = 0
             fix = 0
             
-        case .Minor:
+        case .minor:
             fallthrough
-        case .Feature:
+        case .feature:
             feature += 1
             fix = 0
             
-        case .Patch:
+        case .patch:
             fallthrough
-        case .Fix:
+        case .fix:
             fix += 1
            
         // increment the first partial we come across as if it were the 1st in a range
-        case .PrimaryPartial:
+        case .primaryPartial:
             if breaking == -1 {
-                breaking == 0
+                breaking = 0
                 feature = 0
                 fix = 0
             } else if feature == -1 {
@@ -301,9 +301,9 @@ extension Semver {
             }
 
         // increment the first partial we come across as if it were the 2nd in a range
-        case .SecondaryPartial:
+        case .secondaryPartial:
             if breaking == -1 {
-                breaking == 1
+                breaking = 1
                 feature = 0
                 fix = 0
             } else if feature == -1 {
@@ -317,7 +317,7 @@ extension Semver {
                 return
             }
             
-        case .LeftMostNonZero:
+        case .leftMostNonZero:
             let parts = [breaking, feature, fix]
             var partsOut = [Int]()
             var gotFirst = false
@@ -353,47 +353,47 @@ extension Semver {
 extension Semver: Equatable { }
 
 public func ==(lhs: Semver, rhs: Semver) -> Bool {
-    return lhs.comparison(rhs) == .Equal
+    return lhs.comparison(rhs) == .equal
 }
 
 public func >(lhs: Semver, rhs: Semver) -> Bool {
-    return lhs.comparison(rhs) == .GreaterThan
+    return lhs.comparison(rhs) == .greaterThan
 }
 
 public func <(lhs: Semver, rhs: Semver) -> Bool {
-    return lhs.comparison(rhs) == .LessThan
+    return lhs.comparison(rhs) == .lessThan
 }
 
 public func >=(lhs: Semver, rhs: Semver) -> Bool {
     let result = lhs.comparison(rhs)
-    return result == .Equal || result == .GreaterThan
+    return result == .equal || result == .greaterThan
 }
 
 public func <=(lhs: Semver, rhs: Semver) -> Bool {
     let result = lhs.comparison(rhs)
-    return result == .Equal || result == .LessThan
+    return result == .equal || result == .lessThan
 }
 
 // MARK: SemverComparator enum
 
 internal enum SemverComparator: CustomStringConvertible {
-    case GreaterThan(version: Semver)
-    case LessThan(version: Semver)
-    case GreaterThanOrEqual(version: Semver)
-    case LessThanOrEqual(version: Semver)
+    case greaterThan(version: Semver)
+    case lessThan(version: Semver)
+    case greaterThanOrEqual(version: Semver)
+    case lessThanOrEqual(version: Semver)
     
     var description: String {
         switch self {
-        case .GreaterThan(let version):
+        case .greaterThan(let version):
             return ">\(version.stringValue)"
             
-        case .LessThan(let version):
+        case .lessThan(let version):
             return "<\(version.stringValue)"
             
-        case .GreaterThanOrEqual(let version):
+        case .greaterThanOrEqual(let version):
             return ">=\(version.stringValue)"
             
-        case .LessThanOrEqual(let version):
+        case .lessThanOrEqual(let version):
             return "<=\(version.stringValue)"
         }
     }
@@ -412,7 +412,7 @@ internal enum Token: String {
 }
 
 public struct SemverRange {
-    public private(set) var valid = true
+    public fileprivate(set) var valid = true
     
     internal var comparators = [SemverComparator]()
     
@@ -422,8 +422,8 @@ public struct SemverRange {
         parse()
     }
     
-    private mutating func parse() {
-        let parts = original.componentsSeparatedByString("||")
+    fileprivate mutating func parse() {
+        let parts = original.components(separatedBy: "||")
         let set = parts.map { (section) -> String in
             let result = section.clean()
             print("section = \(result)")
@@ -435,7 +435,7 @@ public struct SemverRange {
         comparators = transmogrify(set)
     }
     
-    private func transmogrify(set: [String]) -> [SemverComparator] {
+    fileprivate func transmogrify(_ set: [String]) -> [SemverComparator] {
         var resultSet = [SemverComparator]()
         
         // don't include dash since we don't strip it.
@@ -451,7 +451,7 @@ public struct SemverRange {
             if item.containsString(Token.Dash.rawValue) {
                 // -
                 // now we need to split it in two.
-                let pieces = item.componentsSeparatedByString(Token.Dash.rawValue).map { (piece) -> String in
+                let pieces = item.components(separatedBy: Token.Dash.rawValue).map { (piece) -> String in
                     return piece.stringByRemovingAll(rangeTokens)
                 }
                 
@@ -461,16 +461,16 @@ public struct SemverRange {
                     
                     // if we have a partial version, bump it accordingly
                     if ver1.partial {
-                        ver1.increment(.PrimaryPartial)
+                        ver1.increment(.primaryPartial)
                     }
                     // we add it the same way, whether it's partial or not.
-                    resultSet.append(.GreaterThanOrEqual(version: ver1))
+                    resultSet.append(.greaterThanOrEqual(version: ver1))
                     
                     if ver2.partial {
-                        ver2.increment(.SecondaryPartial)
-                        resultSet.append(.LessThan(version: ver2))
+                        ver2.increment(.secondaryPartial)
+                        resultSet.append(.lessThan(version: ver2))
                     } else {
-                        resultSet.append(.LessThanOrEqual(version: ver2))
+                        resultSet.append(.lessThanOrEqual(version: ver2))
                     }
                 }
             } else if item.containsString(Token.Tilde.rawValue) {
@@ -482,14 +482,14 @@ public struct SemverRange {
                 if ver1.partial {
                     ver1.normalize()
                 }
-                resultSet.append(.GreaterThanOrEqual(version: ver1))
+                resultSet.append(.greaterThanOrEqual(version: ver1))
                 
                 if ver2.partial {
-                    ver2.increment(.SecondaryPartial)
+                    ver2.increment(.secondaryPartial)
                 } else {
-                    ver2.increment(.Feature)
+                    ver2.increment(.feature)
                 }
-                resultSet.append(.LessThan(version: ver2))
+                resultSet.append(.lessThan(version: ver2))
             } else if item.containsString(Token.Caret.rawValue) {
                 // ^
                 let piece = item.stringByRemovingAll(rangeTokens)
@@ -499,33 +499,33 @@ public struct SemverRange {
                 if ver1.partial {
                     ver1.normalize()
                 }
-                resultSet.append(.GreaterThanOrEqual(version: ver1))
+                resultSet.append(.greaterThanOrEqual(version: ver1))
                 
                 if ver2.partial {
                     ver2.normalize()
                 }
-                ver2.increment(.LeftMostNonZero)
-                resultSet.append(.LessThan(version: ver2))
+                ver2.increment(.leftMostNonZero)
+                resultSet.append(.lessThan(version: ver2))
             } else if item.containsString(Token.LessThanOrEqual.rawValue) {
                 // <=
                 let piece = item.stringByRemovingAll(rangeTokens)
                 let ver1 = Semver(piece)
-                resultSet.append(.LessThanOrEqual(version: ver1))
+                resultSet.append(.lessThanOrEqual(version: ver1))
             } else if item.containsString(Token.GreaterThanOrEqual.rawValue) {
                 // >=
                 let piece = item.stringByRemovingAll(rangeTokens)
                 let ver1 = Semver(piece)
-                resultSet.append(.GreaterThanOrEqual(version: ver1))
+                resultSet.append(.greaterThanOrEqual(version: ver1))
             } else if item.containsString(Token.LessThan.rawValue) {
                 // <
                 let piece = item.stringByRemovingAll(rangeTokens)
                 let ver1 = Semver(piece)
-                resultSet.append(.LessThan(version: ver1))
+                resultSet.append(.lessThan(version: ver1))
             } else if item.containsString(Token.GreaterThan.rawValue) {
                 // >
                 let piece = item.stringByRemovingAll(rangeTokens)
                 let ver1 = Semver(piece)
-                resultSet.append(.GreaterThan(version: ver1))
+                resultSet.append(.greaterThan(version: ver1))
             } else {
                 // *, x, X
                 let piece = item
@@ -535,12 +535,12 @@ public struct SemverRange {
                 if ver1.partial {
                     ver1.normalize()
                 }
-                resultSet.append(.GreaterThanOrEqual(version: ver1))
+                resultSet.append(.greaterThanOrEqual(version: ver1))
                 
                 if ver2.partial {
                     ver2.normalize()
-                    ver2.increment(.LeftMostNonZero)
-                    resultSet.append(.LessThan(version: ver2))
+                    ver2.increment(.leftMostNonZero)
+                    resultSet.append(.lessThan(version: ver2))
                 }
             }
         }
@@ -556,13 +556,13 @@ public struct SemverRange {
 // MARK: Range matching
 
 extension Semver {
-    public func satisfies(range: SemverRange) -> Bool {
+    public func satisfies(_ range: SemverRange) -> Bool {
         return false
     }
 }
 
 extension SemverRange {
-    public func compatible(versions: [Semver]) -> [Semver] {
+    public func compatible(_ versions: [Semver]) -> [Semver] {
         let result = [Semver]()
         
         return result

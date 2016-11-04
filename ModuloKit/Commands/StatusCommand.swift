@@ -13,23 +13,23 @@ import Foundation
     import ELCLI
 #endif
 
-public class StatusCommand: NSObject, Command {
+open class StatusCommand: NSObject, Command {
     // Protocol conformance
-    public var name: String { return "status" }
-    public var shortHelpDescription: String { return "Gathers status about the module tree"  }
-    public var longHelpDescription: String {
+    open var name: String { return "status" }
+    open var shortHelpDescription: String { return "Gathers status about the module tree"  }
+    open var longHelpDescription: String {
         return "Gathers status about the module tree.  Uncommitted, unpushed, branch or tag mismatches, etc."
     }
-    public var failOnUnrecognizedOptions: Bool { return true }
+    open var failOnUnrecognizedOptions: Bool { return true }
     
-    public var verbose: Bool = false
-    public var quiet: Bool = false
+    open var verbose: Bool = false
+    open var quiet: Bool = false
     
-    public func configureOptions() {
+    open func configureOptions() {
         
     }
     
-    public func execute(otherParams: Array<String>?) -> Int {
+    open func execute(_ otherParams: Array<String>?) -> Int {
         let actions = Actions()
         let result = actions.checkDependenciesStatus()
         return result.rawValue

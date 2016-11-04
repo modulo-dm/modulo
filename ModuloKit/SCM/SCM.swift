@@ -13,15 +13,15 @@ import Foundation
     import ELFoundation
 #endif
 
-public typealias SCMCommandParser = (status: Int32, output: String?) -> Void
+public typealias SCMCommandParser = (_ status: Int32, _ output: String?) -> Void
 
 public enum SCMResult {
-    case Success
-    case Error(code: Int32, message: String)
+    case success
+    case error(code: Int32, message: String)
     
     func errorMessage() -> String {
         switch self {
-        case Error(let code, let message) :
+        case .error(let code, let message) :
             return "\(message), (code \(code))"
         default:
             return ""
@@ -30,7 +30,7 @@ public enum SCMResult {
     
     func errorCode() -> Int32 {
         switch self {
-        case Error(let code, _) :
+        case .error(let code, _) :
             return code
         default:
             return 0
@@ -42,17 +42,17 @@ extension SCMResult: Equatable {}
 
 public func == (left: SCMResult, right: SCMResult) -> Bool {
     switch left {
-    case .Success:
+    case .success:
         switch right {
-        case .Success:
+        case .success:
             return true
         default:
             return false
         }
         
-    case .Error(let leftCode, let leftMessage):
+    case .error(let leftCode, let leftMessage):
         switch right {
-        case .Error(let rightCode, let rightMessage):
+        case .error(let rightCode, let rightMessage):
             return leftMessage == rightMessage && leftCode == rightCode
         default:
             return false
@@ -61,24 +61,24 @@ public func == (left: SCMResult, right: SCMResult) -> Bool {
 }
 
 public enum SCMCheckoutType {
-    case Branch(name: String)
-    case Tag(name: String)
-    case Commit(hash: String)
-    case Other(value: String)
+    case branch(name: String)
+    case tag(name: String)
+    case commit(hash: String)
+    case other(value: String)
     
     func value() -> String {
         var result: String
         switch self {
-        case Branch(let name):
+        case .branch(let name):
             result = name
             break
-        case Tag(let name):
+        case .tag(let name):
             result = name
             break
-        case Commit(let hash):
+        case .commit(let hash):
             result = hash
             break
-        case Other(let value):
+        case .other(let value):
             result = value
             break
         }
@@ -93,23 +93,23 @@ public protocol SCM {
     var isInitialized: Bool { get }
     var defaultCheckout: String { get }
     
-    func runCommand(command: String, completion: SCMCommandParser?) -> Int32
+    func runCommand(_ command: String, completion: SCMCommandParser?) -> Int32
     func remoteURL() -> String?
-    func nameFromRemoteURL(url: String) -> String
-    func branchName(path: String) -> String?
-    func clone(url: String, path: String) -> SCMResult
-    func fetch(path: String) -> SCMResult
-    func checkout(type: SCMCheckoutType, path: String) -> SCMResult
-    func remove(path: String) -> SCMResult
+    func nameFromRemoteURL(_ url: String) -> String
+    func branchName(_ path: String) -> String?
+    func clone(_ url: String, path: String) -> SCMResult
+    func fetch(_ path: String) -> SCMResult
+    func checkout(_ type: SCMCheckoutType, path: String) -> SCMResult
+    func remove(_ path: String) -> SCMResult
     func addModulesIgnore() -> SCMResult
-    func checkStatus(path: String, assumedCheckout: String?) -> SCMResult
-    func tags(path: String) -> [String]
+    func checkStatus(_ path: String, assumedCheckout: String?) -> SCMResult
+    func tags(_ path: String) -> [String]
 }
 
 extension SCM {
-    private func shell(command: String) -> (status: Int32, output: String?) {
+    fileprivate func shell(_ command: String) -> (status: Int32, output: String?) {
         var launchPath = ""
-        var pieces = command.componentsSeparatedByString(" ")
+        var pieces = command.components(separatedBy: " ")
         
         switch pieces[0] {
         case "git":
@@ -122,55 +122,47 @@ extension SCM {
         
         pieces.removeFirst()
         
-        let task = NSTask()
+        let task = Process()
         task.launchPath = launchPath
         task.arguments = pieces
         
-        let pipe = NSPipe()
+        let pipe = Pipe()
         task.standardOutput = pipe
         task.launch()
         task.waitUntilExit()
         
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        let output = NSString(data: data, encoding: NSUTF8StringEncoding) as? String
+        let output = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String
         
         let status = task.terminationStatus
         return (status, output)
     }
 
-    public func runCommand(command: String, completion: SCMCommandParser? = nil) -> Int32 {
-        var execute = command
-        
+    public func runCommand(_ command: String, completion: SCMCommandParser? = nil) -> Int32 {
         if verbose {
-            writeln(.Stdout, "Running command: \(command)")
+            writeln(.stdout, "Running command: \(command)")
         }
         
-        let tempFile = NSFileManager.temporaryFile()
-        
-        if completion != nil {
-            execute = "\(execute) &> \(tempFile)"
-        }
-        
-        let result = shell(execute)//system(execute)
+        let result = shell(command)
         
         if let completion = completion {
             let output = result.output
             let status = result.status
-            completion(status: status, output: output)
+            completion(status, output)
             if status != 0 {
-                writeln(.Stderr, output!)
+                writeln(.stderr, output!)
             }
         }
         
         return result.status
     }
     
-    public func remove(path: String) -> SCMResult {
+    public func remove(_ path: String) -> SCMResult {
         let result = runCommand("rm -rf \(path)")
         if result == 0 {
-            return SCMResult.Success
+            return SCMResult.success
         } else {
-            return SCMResult.Error(code: result, message: "Unable to remove \(path).  Check your permissions.")
+            return SCMResult.error(code: result, message: "Unable to remove \(path).  Check your permissions.")
         }
     }
     
@@ -191,7 +183,7 @@ public func currentSCM() -> SCM {
     }
     
     if result == nil {
-        exit(.NoSCMFoundOrInitialized)
+        exit(.noSCMFoundOrInitialized)
     }
     
     return result!

@@ -1,0 +1,33 @@
+{
+  "description" : "Walmart",
+  "iD" : "2280",
+  "hoursOfOperation" : [
+    {
+      "day" : "Sun - Sat",
+      "time" : "07:00AM - 10:00PM"
+    }
+  ],
+  "phone" : "(650) 917-0796",
+  "storeNumber" : "2280",
+  "storeType" : "2",
+  "storeServices" : [
+  ],
+  "longitude" : "-122.10944299",
+  "storeClosedTemporarily" : "false",
+  "latitude" : "37.40088999",
+  "mscoEnabled" : "false",
+  "rxFiltered" : "false",
+  "openDate" : "11\/1\/1995",
+  "address" : {
+    "registry" : "false",
+    "country" : "United States",
+    "state" : "CA",
+    "city" : "Mountain View",
+    "street1" : "600 Showers Dr",
+    "zip" : "94040"
+  },
+  "reOpenDate" : "1\/12\/2016",
+  "localAdAvailable" : "true",
+  "availableForS2S" : "true",
+  "storeOpeningSoon" : "false"
+}

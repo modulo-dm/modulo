@@ -22,7 +22,7 @@ public struct DependencySpec {
 }
 
 extension DependencySpec: Decodable {
-    public static func decode(json: JSON?) throws -> DependencySpec {
+    public static func decode(_ json: JSON?) throws -> DependencySpec {
         return try DependencySpec(
             repositoryURL: json ==> "repositoryURL",
             checkout: json ==> "checkout",

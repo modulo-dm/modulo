@@ -12,23 +12,23 @@ import Foundation
     import ELCLI
 #endif
 
-public class InitCommand: NSObject, Command {
+open class InitCommand: NSObject, Command {
     // Internal properties
-    public var isModule: Bool = true
+    open var isModule: Bool = true
     
     // Protocol conformance
-    public var name: String { return "init" }
-    public var shortHelpDescription: String { return "Initialize modulo"  }
-    public var longHelpDescription: String {
+    open var name: String { return "init" }
+    open var shortHelpDescription: String { return "Initialize modulo"  }
+    open var longHelpDescription: String {
         return "This command initializes modulo and creates a .modulo file\n" +
                "containing module dependency information."
     }
-    public var failOnUnrecognizedOptions: Bool { return true }
+    open var failOnUnrecognizedOptions: Bool { return true }
     
-    public var verbose: Bool = false
-    public var quiet: Bool = false
+    open var verbose: Bool = false
+    open var quiet: Bool = false
     
-    public func configureOptions() {
+    open func configureOptions() {
         addOption(["--app"], usage: "init's the working path as an application") { (option, value) in
             self.isModule = false
         }
@@ -38,30 +38,30 @@ public class InitCommand: NSObject, Command {
         }
     }
     
-    public func execute(otherParams: Array<String>?) -> Int {
+    open func execute(_ otherParams: Array<String>?) -> Int {
         let scm = currentSCM()
         
         if ModuleSpec.exists() {
-            exit(.AlreadyInitialized)
+            exit(.alreadyInitialized)
         }
         
         if isModule == false {
             let scmResult = scm.addModulesIgnore()
-            if scmResult != .Success {
+            if scmResult != .success {
                 exit(scmResult.errorMessage())
             }
         }
         
-        let specPath = NSFileManager.workingPath().appendPathComponent(specFilename)
-        let spec = ModuleSpec(name: NSFileManager.directoryName(), module: isModule, sourcePath: nil, dependencies: [], path: specPath)
+        let specPath = FileManager.workingPath().appendPathComponent(specFilename)
+        let spec = ModuleSpec(name: FileManager.directoryName(), module: isModule, sourcePath: nil, dependencies: [], path: specPath)
         let success = spec.save()
         
         if !success {
-            exit(ErrorCode.SpecNotWritable)
+            exit(ErrorCode.specNotWritable)
         } else {
-            writeln(.Stdout, "Modulo has been initialized.")
+            writeln(.stdout, "Modulo has been initialized.")
         }
         
-        return ErrorCode.Success.rawValue
+        return ErrorCode.success.rawValue
     }
 }

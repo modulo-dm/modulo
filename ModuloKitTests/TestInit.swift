@@ -20,7 +20,7 @@ class TestInit: XCTestCase {
         cli.addCommands([InitCommand()])
 
         clearTestRepos()
-        print("working path = \(NSFileManager.workingPath())")
+        print("working path = \(FileManager.workingPath())")
     }
     
     override func tearDown() {
@@ -32,47 +32,47 @@ class TestInit: XCTestCase {
     func testNoGit() {
         cli.allArgumentsToExecutable = ["init"]
         
-        XCTAssertThrowsSpecific({ () -> Void in
-            self.cli.run()
+        xctAssertThrowsSpecific({ () -> Void in
+            _ = self.cli.run()
         }, ELExceptionFailure, "It should throw because git isn't initialized.")
     }
     
     func testModuleInit() {
         let status = Git().clone("git@github.com:modulo-dm/test-init.git", path: "test-init")
-        XCTAssertTrue(status == .Success)
+        XCTAssertTrue(status == .success)
         
-        NSFileManager.setWorkingPath("test-init")
+        FileManager.setWorkingPath("test-init")
         
         cli.allArgumentsToExecutable = ["init", "-v"]
         
-        cli.run()
+        _ = cli.run()
         
         let spec = ModuleSpec.load(contentsOfFile: specFilename)
         XCTAssertTrue(spec!.module == true)
         XCTAssertTrue(spec!.dependencies.count == 0)
         
-        NSFileManager.setWorkingPath("..")
+        FileManager.setWorkingPath("..")
         
-        Git().remove("test-init")
+        _ = Git().remove("test-init")
     }
     
     func testAppInit() {
         let status = Git().clone("git@github.com:modulo-dm/test-init.git", path: "test-init")
-        XCTAssertTrue(status == .Success)
+        XCTAssertTrue(status == .success)
         
-        NSFileManager.setWorkingPath("test-init")
+        FileManager.setWorkingPath("test-init")
         
         cli.allArgumentsToExecutable = ["init", "--app", "-v"]
         
-        cli.run()
+        _ = cli.run()
         
         let spec = ModuleSpec.load(contentsOfFile: specFilename)
         XCTAssertTrue(spec!.module == false)
         XCTAssertTrue(spec!.dependencies.count == 0)
         
-        NSFileManager.setWorkingPath("..")
+        FileManager.setWorkingPath("..")
         
-        Git().remove("test-init")
+        _ = Git().remove("test-init")
     }
     
 }

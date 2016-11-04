@@ -18,14 +18,14 @@ public extension String {
         }
     }*/
     
-    public func replace(string: String, replacement: String) -> String {
-        let str = self.stringByReplacingOccurrencesOfString(string, withString: replacement)
+    public func replace(_ string: String, replacement: String) -> String {
+        let str = self.replacingOccurrences(of: string, with: replacement)
         
         return str
     }
     
-    func containsString(string: String) -> Bool {
-        let range = rangeOfString(string)
+    func containsString(_ string: String) -> Bool {
+        let range = self.range(of: string)
         if range != nil {
             return true
         } else {
@@ -33,8 +33,8 @@ public extension String {
         }
     }
     
-    func appendPathComponent(string: String) -> String {
-        return ns.stringByAppendingPathComponent(string)
+    func appendPathComponent(_ string: String) -> String {
+        return ns.appendingPathComponent(string)
     }
     
     func nameFromRemoteURL() -> String {
@@ -45,14 +45,14 @@ public extension String {
     }
     
     func resolvePath() -> String {
-        let resolved: NSString = self
-        let result: String = resolved.stringByStandardizingPath
+        let resolved: NSString = self as NSString
+        let result: String = resolved.standardizingPath
         return result
     }
     
     func removeLastPathComponent() -> String {
-        let path: NSString = self
-        let result: String = path.stringByDeletingLastPathComponent
+        let path: NSString = self as NSString
+        let result: String = path.deletingLastPathComponent
         
         return result
     }
@@ -87,95 +87,94 @@ public extension String {
     
     func trim() -> String
     {
-        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        return self.trimmingCharacters(in: CharacterSet.whitespaces)
     }
     
-    func stringByRemovingAll(characters: [Character]) -> String {
+    func stringByRemovingAll(_ characters: [Character]) -> String {
         return String(self.characters.filter({ !characters.contains($0) }))
     }
     
-    func stringByRemovingAll(subStrings: [String]) -> String {
+    func stringByRemovingAll(_ subStrings: [String]) -> String {
         var resultString = self
-        _ = subStrings.map { resultString = resultString.stringByReplacingOccurrencesOfString($0, withString: "") }
+        _ = subStrings.map { resultString = resultString.replacingOccurrences(of: $0, with: "") }
         return resultString
     }
 }
 
-extension NSFileManager {
+extension FileManager {
     public func temporaryFile() -> String {
-        let guid = NSProcessInfo.processInfo().globallyUniqueString
+        let guid = ProcessInfo.processInfo.globallyUniqueString
         let filename = "\(guid)_file.txt"
-        let filepath = NSTemporaryDirectory().ns.stringByAppendingPathComponent(filename)
+        let filepath = NSTemporaryDirectory().ns.appendingPathComponent(filename)
         return filepath
     }
     
     public static func temporaryFile() -> String {
-        return NSFileManager.defaultManager().temporaryFile()
+        return FileManager.default.temporaryFile()
     }
     
     public static func workingPath() -> String {
-        return NSFileManager.defaultManager().currentDirectoryPath
+        return FileManager.default.currentDirectoryPath
     }
     
     public static func directoryName() -> String {
         return workingPath().ns.lastPathComponent
     }
     
-    public static func setWorkingPath(path: String) -> Bool {
-        return NSFileManager.defaultManager().changeCurrentDirectoryPath(path)
+    public static func setWorkingPath(_ path: String) {
+        FileManager.default.changeCurrentDirectoryPath(path)
     }
     
-    public static func fileExists(path: String) -> Bool {
-        return NSFileManager.defaultManager().fileExistsAtPath(path)
+    public static func fileExists(_ path: String) -> Bool {
+        return FileManager.default.fileExists(atPath: path)
     }
 
-    public static func pathExists(path: String) -> Bool {
-        return NSFileManager.defaultManager().fileExistsAtPath(path)
+    public static func pathExists(_ path: String) -> Bool {
+        return FileManager.default.fileExists(atPath: path)
     }
     
-    public static func symlink(path: String, destinationPath: String) -> Bool {
+    public static func symlink(_ path: String, destinationPath: String) -> Bool {
         do {
-            try NSFileManager.defaultManager().createSymbolicLinkAtPath(path, withDestinationPath: destinationPath)
+            try FileManager.default.createSymbolicLink(atPath: path, withDestinationPath: destinationPath)
         } catch {
             return false
         }
         return true
     }
     
-    public static func hardlink(srcPath: String, toPath: String) -> Bool {
+    public static func hardlink(_ srcPath: String, toPath: String) -> Bool {
         do {
-            try NSFileManager.defaultManager().linkItemAtPath(srcPath, toPath: toPath)
+            try FileManager.default.linkItem(atPath: srcPath, toPath: toPath)
         } catch {
             return false
         }
         return true
     }
     
-    public static func isSymlink(path: String) -> Bool {
+    /*public static func isSymlink(_ path: String) -> Bool {
         do {
-            let attrs = try NSFileManager.defaultManager().attributesOfItemAtPath(path)
-            let value = attrs[NSFileTypeSymbolicLink]
-            print(value)
-            return true
+            let attrs = try FileManager.default.attributesOfItem(atPath: path)
+            let value = attrs[FileAttributeType.typeSymbolicLink] as! UInt
+            return value
         } catch {
             return false
         }
-    }
+    }*/
     
-    public static func areHardLinked(path1 path1: String, path2: String) -> Bool {
+    public static func areHardLinked(path1: String, path2: String) -> Bool {
         var result = false
         do {
-            let path1attr = try NSFileManager.defaultManager().attributesOfItemAtPath(path2)
-            let path2attr = try NSFileManager.defaultManager().attributesOfItemAtPath(path1)
+            let path1attr = try FileManager.default.attributesOfItem(atPath: path2)
+            let path2attr = try FileManager.default.attributesOfItem(atPath: path1)
             
             // we're guaranteed to have the NSFile items in the dictionaries, so force unwrap it all.
             
             // file numbers are only unique per volume.
-            let path1num = path1attr[NSFileSystemFileNumber] as! UInt
-            let path2num = path2attr[NSFileSystemFileNumber] as! UInt
+            let path1num = path1attr[FileAttributeKey.systemFileNumber] as! UInt
+            let path2num = path2attr[FileAttributeKey.systemFileNumber] as! UInt
             // so get the volume numbers too.
-            let path1vol = path1attr[NSFileSystemNumber] as! UInt
-            let path2vol = path2attr[NSFileSystemNumber] as! UInt
+            let path1vol = path1attr[FileAttributeKey.systemNumber] as! UInt
+            let path2vol = path2attr[FileAttributeKey.systemNumber] as! UInt
             
             result = (path1num == path2num) && (path1vol == path2vol)
         } catch let error {
@@ -189,13 +188,13 @@ extension NSFileManager {
 }
 
 extension Set {
-    public mutating func insertArray(items: [Element]) {
+    public mutating func insertArray(_ items: [Element]) {
         items.forEach { (item) in
             insert(item)
         }
     }
     
-    public mutating func removeArray(items: [Element]) {
+    public mutating func removeArray(_ items: [Element]) {
         items.forEach { (item) in
             remove(item)
         }

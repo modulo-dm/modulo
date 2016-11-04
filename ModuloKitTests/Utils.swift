@@ -19,10 +19,10 @@ func clearTestRepos() {
     Git().remove("test-dep2")
 }
 
-func touchFile(path: String) {
-    try! path.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
+func touchFile(_ path: String) {
+    try! path.write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
 }
 
-func runCommand(command: String) {
+func runCommand(_ command: String) {
     Git().runCommand(command)
 }

@@ -1,0 +1,22 @@
+{
+    "apiVersion": "v1",
+    "data": {
+        "5260": {
+            "availabilityInStore": 15,
+            "format": "EAN13",
+            "identifier": "0078742079905",
+            "location": {
+                "aisle": "3",
+                "section": "20",
+                "zone": "A"
+            },
+            "name": "GV N-STIR CRMY 26.5Z",
+            "packagePrice": 3.32,
+            "unitPrice": 3.32
+        }
+    },
+    "meta": {
+        "isExtruded": true,
+        "pluginVersion": "v1.0.0"
+    }
+}
