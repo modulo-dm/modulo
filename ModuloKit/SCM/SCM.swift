@@ -103,6 +103,7 @@ public protocol SCM {
     func remove(_ path: String) -> SCMResult
     func addModulesIgnore() -> SCMResult
     func checkStatus(_ path: String, assumedCheckout: String?) -> SCMResult
+    func branches(_ path: String) -> [String]
     func tags(_ path: String) -> [String]
 }
 
@@ -138,6 +139,7 @@ extension SCM {
         return (status, output)
     }
 
+    @discardableResult
     public func runCommand(_ command: String, completion: SCMCommandParser? = nil) -> Int32 {
         if verbose {
             writeln(.stdout, "Running command: \(command)")
@@ -157,6 +159,7 @@ extension SCM {
         return result.status
     }
     
+    @discardableResult
     public func remove(_ path: String) -> SCMResult {
         let result = runCommand("rm -rf \(path)")
         if result == 0 {

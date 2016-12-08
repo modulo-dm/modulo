@@ -23,6 +23,7 @@ open class HelpCommand: Command {
         // do nothing
     }
     
+    @discardableResult
     open func execute(_ otherParams: Array<String>?) -> Int {
         write(.stdout, "usage: ")
         write(.stdout, "\(ProcessInfo.processInfo.processName) ")

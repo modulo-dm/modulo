@@ -78,7 +78,7 @@ open class Git: SCM {
         let initialWorkingPath = FileManager.workingPath()
         FileManager.setWorkingPath(path)
         
-        let updateCommand = "git fetch --tags \(path)"
+        let updateCommand = "git fetch"
         let status = runCommand(updateCommand)
         
         FileManager.setWorkingPath(initialWorkingPath)
@@ -180,10 +180,69 @@ open class Git: SCM {
             return .success
         }
     }
-    
+
+    open func branches(_ path: String) -> [String] {
+        var result = [String]()
+        
+        if !FileManager.fileExists(path) {
+            return result
+        }
+        
+        let initialWorkingPath = FileManager.workingPath()
+        FileManager.setWorkingPath(path)
+        
+        let command = "git branch -a"
+        _ = runCommand(command) { (status, output) -> Void in
+            if status == 0 {
+                if let output = output {
+                    let lines = output.components(separatedBy: "\n")
+                    let branches = lines.map { (item) -> String in
+                        var branch = item
+                        branch = branch.trimmingCharacters(in: CharacterSet.whitespaces)
+                        branch = branch.trimmingCharacters(in: CharacterSet(["* "]))
+                        return branch
+                    }
+                    
+                    result = branches
+                }
+            }
+        }
+        
+        FileManager.setWorkingPath(initialWorkingPath)
+        
+        return result
+    }
+
     open func tags(_ path: String) -> [String] {
-        // TODO: this.. duh.
-        return [""]
+        var result = [String]()
+        
+        if !FileManager.fileExists(path) {
+            return result
+        }
+        
+        let initialWorkingPath = FileManager.workingPath()
+        FileManager.setWorkingPath(path)
+        
+        let command = "git branch -a"
+        _ = runCommand(command) { (status, output) -> Void in
+            if status == 0 {
+                if let output = output {
+                    let lines = output.components(separatedBy: "\n")
+                    let branches = lines.map { (item) -> String in
+                        var branch = item
+                        branch = branch.trimmingCharacters(in: CharacterSet.whitespaces)
+                        branch = branch.trimmingCharacters(in: CharacterSet(["* "]))
+                        return branch
+                    }
+                    
+                    result = branches
+                }
+            }
+        }
+        
+        FileManager.setWorkingPath(initialWorkingPath)
+        
+        return result
     }
 }
 

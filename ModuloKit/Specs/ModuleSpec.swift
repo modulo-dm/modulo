@@ -116,6 +116,7 @@ extension ModuleSpec {
         }
     }
 
+    @discardableResult
     public func save() -> Bool {
         if path.isEmpty {
             assertionFailure("This module has no path set!")
@@ -150,6 +151,7 @@ public extension ModuleSpec {
         return [DependencySpec](deps)
     }
     
+    @discardableResult
     public func dependencyForURL(_ repoURL: String) -> DependencySpec? {
         let results = dependencies.filter { (dep) -> Bool in
             return dep.repositoryURL == repoURL

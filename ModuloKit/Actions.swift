@@ -52,6 +52,7 @@ open class Actions {
         return result
     }
     
+    @discardableResult
     open func updateDependencies(_ dependencies: [DependencySpec], explicit: Bool) -> ErrorCode {
         let modulePath = ModuleSpec.modulePath()
         

@@ -35,6 +35,7 @@ open class CLI {
         }
     }
     
+    @discardableResult
     open func run() -> Int {
         if let allArgumentsToExecutable = allArgumentsToExecutable {
             if let command = identifyCommand(allArgumentsToExecutable) {

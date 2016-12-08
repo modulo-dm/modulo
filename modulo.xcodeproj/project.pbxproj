@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		468A8B171DF3F8B10060D93C /* TestGit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468A8B161DF3F8B10060D93C /* TestGit.swift */; };
 		655F0C1F1DC3D6CE009DDD72 /* ELFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C761D14942D00411727 /* ELFoundation.framework */; };
 		655F0C241DC3D6D9009DDD72 /* ELCodable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55CAD1D1496A100411727 /* ELCodable.framework */; };
 		65C411E01DC3D6700085365C /* ELCLI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C801D14943300411727 /* ELCLI.framework */; };
@@ -233,6 +234,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		468A8B161DF3F8B10060D93C /* TestGit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestGit.swift; sourceTree = "<group>"; };
 		CA0A3F121D5A3D7700A7F0BB /* Semver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semver.swift; sourceTree = "<group>"; };
 		CA0A3F1C1D5A557A00A7F0BB /* SemverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemverTests.swift; sourceTree = "<group>"; };
 		CA3354441D15C91000ACD91C /* TestAdd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAdd.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				CA3354451D15C91000ACD91C /* TestInit.swift */,
 				CAE93D101D21A7BD00C00811 /* TestUpdate.swift */,
 				CACB212C1D3D45B300ACA574 /* TestStatus.swift */,
+				468A8B161DF3F8B10060D93C /* TestGit.swift */,
 				CA3354491D15CA3600ACD91C /* XCTestCase+Exceptions.m */,
 				CA33544B1D15CA4800ACD91C /* XCTestCase+Exceptions.h */,
 				CAE55C601D1492A500411727 /* Info.plist */,
@@ -861,6 +864,7 @@
 				CA0A3F1D1D5A557A00A7F0BB /* SemverTests.swift in Sources */,
 				CAE55C5F1D1492A500411727 /* ModuloKitTests.swift in Sources */,
 				CA3354471D15C91000ACD91C /* TestInit.swift in Sources */,
+				468A8B171DF3F8B10060D93C /* TestGit.swift in Sources */,
 				CA33544A1D15CA3600ACD91C /* XCTestCase+Exceptions.m in Sources */,
 				CAE93D111D21A7BD00C00811 /* TestUpdate.swift in Sources */,
 				CA3354461D15C91000ACD91C /* TestAdd.swift in Sources */,
