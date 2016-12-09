@@ -199,7 +199,7 @@ open class Git: SCM {
                     let branches = lines.map { (item) -> String in
                         var branch = item
                         branch = branch.trimmingCharacters(in: CharacterSet.whitespaces)
-                        branch = branch.trimmingCharacters(in: CharacterSet(["* "]))
+                        branch = branch.trimmingCharacters(in: CharacterSet(["*"," "]))
                         return branch
                     }
                     
@@ -231,7 +231,7 @@ open class Git: SCM {
                     let branches = lines.map { (item) -> String in
                         var branch = item
                         branch = branch.trimmingCharacters(in: CharacterSet.whitespaces)
-                        branch = branch.trimmingCharacters(in: CharacterSet(["* "]))
+                        branch = branch.trimmingCharacters(in: CharacterSet(["*"," "]))
                         return branch
                     }
                     

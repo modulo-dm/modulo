@@ -11,6 +11,8 @@ import Foundation
 #if NOFRAMEWORKS
 #else
 import ELFoundation
+#endif
+
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
 // Consider refactoring the code to use the non-optional operators.
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -34,8 +36,6 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     return rhs < lhs
   }
 }
-
-#endif
 
 public enum Output {
     case stdin
