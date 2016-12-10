@@ -10,6 +10,7 @@
 		468A8B171DF3F8B10060D93C /* TestGit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468A8B161DF3F8B10060D93C /* TestGit.swift */; };
 		655F0C1F1DC3D6CE009DDD72 /* ELFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C761D14942D00411727 /* ELFoundation.framework */; };
 		655F0C241DC3D6D9009DDD72 /* ELCodable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55CAD1D1496A100411727 /* ELCodable.framework */; };
+		65BB0DC81DFB835500D99A25 /* modulo in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAE55C411D14928B00411727 /* modulo */; };
 		65C411E01DC3D6700085365C /* ELCLI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C801D14943300411727 /* ELCLI.framework */; };
 		CA0A3F131D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
 		CA0A3F141D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
@@ -69,7 +70,6 @@
 		CAE55CF41D149C0B00411727 /* VersionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CEC1D149C0B00411727 /* VersionCommand.swift */; };
 		CAE55CF51D149C0B00411727 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CEF1D149C0B00411727 /* Options.swift */; };
 		CAE55CF61D149C0B00411727 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CF01D149C0B00411727 /* Output.swift */; };
-		CAE55D111D14A12600411727 /* modulo in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAE55C411D14928B00411727 /* modulo */; };
 		CAE55D121D14C9EE00411727 /* Modulo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C991D1494B200411727 /* Modulo.swift */; };
 		CAE55D131D14C9EE00411727 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55CA01D1494B200411727 /* State.swift */; };
 		CAE55D141D14C9EE00411727 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C971D1494B200411727 /* ErrorCode.swift */; };
@@ -224,10 +224,10 @@
 		CAE55C3F1D14928B00411727 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
-			dstPath = "~";
+			dstPath = /tmp;
 			dstSubfolderSpec = 0;
 			files = (
-				CAE55D111D14A12600411727 /* modulo in CopyFiles */,
+				65BB0DC81DFB835500D99A25 /* modulo in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
