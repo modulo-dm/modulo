@@ -98,7 +98,7 @@ public func exit(_ data: String, closure: (() -> Void)? = nil) {
 }
 
 public func printOption(_ option: Option) {
-    if option.flags == nil || option.valueSignatures!.count > 1 {
+    if option.flags == nil || option.valueSignatures?.count > 1 {
         return
     }
     
