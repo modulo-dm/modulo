@@ -105,6 +105,8 @@ open class Actions {
     open func checkDependenciesStatus() -> ErrorCode {
         var result: ErrorCode = .success
         
+        writeln(.stdout, "status:")
+        
         if let workingSpec = ModuleSpec.workingSpec() {
             // need to look at main dir too, not just deps.
             let mainPath = workingSpec.path.removeLastPathComponent()
@@ -112,7 +114,7 @@ open class Actions {
             let status = scm.checkStatus(mainPath, assumedCheckout: branchName)
             if status != .success {
                 result = ErrorCode(rawValue: Int(status.errorCode()))!
-                writeln(.stdout, "main project has \(status.errorMessage()).")
+                writeln(.stdout, "  main project has \(status.errorMessage()).")
             }
             
             // now check the deps.
@@ -123,7 +125,7 @@ open class Actions {
                 let status = scm.checkStatus(path, assumedCheckout: dependency.checkout)
                 if status != .success {
                     result = ErrorCode(rawValue: Int(status.errorCode()))!
-                    writeln(.stdout, "\(name) has \(status.errorMessage()).")
+                    writeln(.stdout, "  \(name) has \(status.errorMessage()).")
                 }
             }
         } else {

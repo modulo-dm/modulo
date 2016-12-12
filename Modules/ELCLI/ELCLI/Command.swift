@@ -122,6 +122,10 @@ public extension Command {
         addOption(["-v", "--verbose"], usage: "be verbose") { (option, value) -> Void in
             self.verbose = true
         }
+        
+        /*addOption(["--working"], usage: "specify the working path") { (option, value) -> Void in
+         
+        }*/
     }
 }
 

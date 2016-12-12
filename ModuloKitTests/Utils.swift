@@ -12,6 +12,8 @@ import ELFoundation
 @testable import ModuloKit
 
 func clearTestRepos() {
+    FileManager.setWorkingPath("/private/tmp")
+    Git().remove("test-dummy")
     Git().remove("test-add")
     Git().remove("test-init")
     Git().remove("test-add-update")

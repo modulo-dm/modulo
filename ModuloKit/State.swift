@@ -21,9 +21,11 @@ public struct State {
     var removedDependencies = [DependencySpec]()
     
     public func showFinalInformation() {
+        writeln(.stdout, "")
+        
         // look at what happened and print out some info
         if explicitDependencies.count > 0 {
-            writeln(.stdout, "\nThe following dependencies were added:\n\n")
+            writeln(.stdout, "\nThe following dependencies were added:\n")
             explicitDependencies.forEach { (dep) in
                 let repoName = dep.repositoryURL.nameFromRemoteURL()
                 var repoPath = ModuleSpec.modulePath().appendPathComponent(repoName)
@@ -32,13 +34,13 @@ public struct State {
                         repoPath = repoPath.appendPathComponent(sourcePath)
                     }
                 }
-                writeln(.stdout, "  \(repoName) in \(repoPath))\n")
+                writeln(.stdout, "  \(repoName) in \(repoPath)")
             }
-            writeln(.stdout, "\n")
+            //writeln(.stdout, "\n")
         }
         
         if implictDependencies.count > 0 {
-            writeln(.stdout, "\nThe following dependencies were implicitly added by another module:\n\n")
+            writeln(.stdout, "\nThe following dependencies were implicitly added by another module:\n")
             implictDependencies.forEach { (dep) in
                 let repoName = dep.repositoryURL.nameFromRemoteURL()
                 var repoPath = ModuleSpec.modulePath().appendPathComponent(repoName)
@@ -47,14 +49,14 @@ public struct State {
                         repoPath = repoPath.appendPathComponent(sourcePath)
                     }
                 }
-                writeln(.stdout, "  \(repoName) in \(repoPath))\n")
+                writeln(.stdout, "  \(repoName) in \(repoPath)")
             }
-            writeln(.stdout, "\n")
+            //writeln(.stdout, "\n")
         }
         
         // we only want to show this if anything was added, implicit or explicit.
         if implictDependencies.count > 0 || explicitDependencies.count > 0 {
-            writeln(.stdout, "\nDepending on your development toolchain, you may need to do some final steps to integrate the above dependencies in your project.\n\n")
+            writeln(.stdout, "\nDepending on your development toolchain, you may need to do some final steps to integrate the above dependencies in your project.\n")
         }
         
         // were any removed?
@@ -69,13 +71,13 @@ public struct State {
                 }
                 
                 if reallyRemovedDeps.count > 0 {
-                    writeln(.stdout, "The following dependencies have been removed, and no others use them:\n\n")
+                    writeln(.stdout, "The following dependencies have been removed, and no others use them:\n")
                     reallyRemovedDeps.forEach { (dep) in
                         let repoName = dep.repositoryURL.nameFromRemoteURL()
                         let repoPath = ModuleSpec.modulePath().appendPathComponent(repoName)
-                        writeln(.stdout, "  \(repoName) in \(repoPath))\n")
+                        writeln(.stdout, "  \(repoName) in \(repoPath)")
                     }
-                    writeln(.stdout, "\nTheir directories still remain, be sure you don't actually want them before deleting them yourself.\n\n")
+                    writeln(.stdout, "\nTheir directories still remain, be sure you don't actually want them before deleting them yourself.\n")
                 }
             }
         }

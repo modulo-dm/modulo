@@ -12,6 +12,7 @@
 		655F0C241DC3D6D9009DDD72 /* ELCodable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55CAD1D1496A100411727 /* ELCodable.framework */; };
 		65BB0DC81DFB835500D99A25 /* modulo in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAE55C411D14928B00411727 /* modulo */; };
 		65C411E01DC3D6700085365C /* ELCLI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C801D14943300411727 /* ELCLI.framework */; };
+		65E60AE81DFF4FE000DAE913 /* TestDummyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E60AE71DFF4FE000DAE913 /* TestDummyApp.swift */; };
 		CA0A3F131D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
 		CA0A3F141D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
 		CA0A3F1D1D5A557A00A7F0BB /* SemverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F1C1D5A557A00A7F0BB /* SemverTests.swift */; };
@@ -105,13 +106,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = CA8CD5591B7A9DCA00DA8BF7;
 			remoteInfo = ELFoundation_osx;
-		};
-		CAAB6E141D18933400F22C48 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CAE55C391D14928B00411727 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CAE55C401D14928B00411727;
-			remoteInfo = modulo;
 		};
 		CAE55C5B1D1492A500411727 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -235,6 +229,7 @@
 
 /* Begin PBXFileReference section */
 		468A8B161DF3F8B10060D93C /* TestGit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestGit.swift; sourceTree = "<group>"; };
+		65E60AE71DFF4FE000DAE913 /* TestDummyApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDummyApp.swift; sourceTree = "<group>"; };
 		CA0A3F121D5A3D7700A7F0BB /* Semver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semver.swift; sourceTree = "<group>"; };
 		CA0A3F1C1D5A557A00A7F0BB /* SemverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemverTests.swift; sourceTree = "<group>"; };
 		CA3354441D15C91000ACD91C /* TestAdd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAdd.swift; sourceTree = "<group>"; };
@@ -384,6 +379,7 @@
 				CAE55C5E1D1492A500411727 /* ModuloKitTests.swift */,
 				CA0A3F1C1D5A557A00A7F0BB /* SemverTests.swift */,
 				CACB20B91D341A9200ACA574 /* Utils.swift */,
+				65E60AE71DFF4FE000DAE913 /* TestDummyApp.swift */,
 				CA3354441D15C91000ACD91C /* TestAdd.swift */,
 				CA3354451D15C91000ACD91C /* TestInit.swift */,
 				CAE93D101D21A7BD00C00811 /* TestUpdate.swift */,
@@ -606,7 +602,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				CAAB6E151D18933400F22C48 /* PBXTargetDependency */,
 				CAE55CB21D1496B400411727 /* PBXTargetDependency */,
 				CAE55C921D14945400411727 /* PBXTargetDependency */,
 				CAE55C941D14945400411727 /* PBXTargetDependency */,
@@ -862,6 +857,7 @@
 			files = (
 				CACB212D1D3D45B300ACA574 /* TestStatus.swift in Sources */,
 				CA0A3F1D1D5A557A00A7F0BB /* SemverTests.swift in Sources */,
+				65E60AE81DFF4FE000DAE913 /* TestDummyApp.swift in Sources */,
 				CAE55C5F1D1492A500411727 /* ModuloKitTests.swift in Sources */,
 				CA3354471D15C91000ACD91C /* TestInit.swift in Sources */,
 				468A8B171DF3F8B10060D93C /* TestGit.swift in Sources */,
@@ -889,11 +885,6 @@
 			isa = PBXTargetDependency;
 			name = ELFoundation_osx;
 			targetProxy = 655F0C291DC3D6E9009DDD72 /* PBXContainerItemProxy */;
-		};
-		CAAB6E151D18933400F22C48 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CAE55C401D14928B00411727 /* modulo */;
-			targetProxy = CAAB6E141D18933400F22C48 /* PBXContainerItemProxy */;
 		};
 		CAE55C5C1D1492A500411727 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

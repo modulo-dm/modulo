@@ -23,7 +23,7 @@ open class AddCommand: NSObject, Command {
     open var name: String { return "add" }
     open var shortHelpDescription: String { return "Adds a module dependency"  }
     open var longHelpDescription: String {
-        return "Add the given repository as a module to the current project and clone it" +
+        return "Add the given repository as a module to the current project and clone it " +
             "into the project itself or a higher level container project.\n\n" +
             "In the instance no tag, branch, or commit is specified, 'master' is used."
     }

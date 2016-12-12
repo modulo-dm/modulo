@@ -94,9 +94,9 @@ extension ModuleSpec {
     }
 
     public static func modulePath() -> String {
-        if let workSpec = workingSpec(), let topSpec = topLevelSpec() {
+        if let workSpec = workingSpec()/*, let topSpec = topLevelSpec()*/ {
             var cleanedPath = workSpec.path.removeLastPathComponent().appendPathComponent("modules")
-            if workSpec.path == topSpec.path {
+            if workSpec.module == true {
                 cleanedPath = "../"
             } else {
                 // make sure the module path exists.

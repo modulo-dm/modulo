@@ -44,6 +44,11 @@ public extension String {
         return result
     }
     
+    func relativePath() -> String {
+        let thisPath = self
+        return thisPath.replace(FileManager.workingPath(), replacement: "")
+    }
+    
     func resolvePath() -> String {
         let resolved: NSString = self as NSString
         let result: String = resolved.standardizingPath

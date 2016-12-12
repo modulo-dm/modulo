@@ -117,6 +117,8 @@ extension SCM {
             launchPath = "/usr/bin/git"
         case "rm":
             launchPath = "/bin/rm"
+        case "mkdir":
+            launchPath = "/bin/mkdir"
         default:
             return (99, nil)
         }
