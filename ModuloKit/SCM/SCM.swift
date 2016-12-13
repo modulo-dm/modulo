@@ -108,37 +108,26 @@ public protocol SCM {
 }
 
 extension SCM {
-    fileprivate func shell(_ command: String) -> (status: Int32, output: String?) {
-        var launchPath = ""
-        var pieces = command.components(separatedBy: " ")
-        
-        switch pieces[0] {
-        case "git":
-            launchPath = "/usr/bin/git"
-        case "rm":
-            launchPath = "/bin/rm"
-        case "mkdir":
-            launchPath = "/bin/mkdir"
-        default:
-            return (99, nil)
-        }
-        
-        pieces.removeFirst()
-        
+    /*fileprivate func shell(_ command: String) -> (status: Int32, output: String?, error: String?) {
         let task = Process()
-        task.launchPath = launchPath
-        task.arguments = pieces
+        task.launchPath = "/bin/sh"
+        task.arguments = ["-c", command]
         
-        let pipe = Pipe()
-        task.standardOutput = pipe
+        let outputPipe = Pipe()
+        let errorPipe = Pipe()
+        task.standardOutput = outputPipe
+        task.standardError = errorPipe
         task.launch()
         task.waitUntilExit()
         
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        let output = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String
+        let outputData = outputPipe.fileHandleForReading.readDataToEndOfFile()
+        let output = NSString(data: outputData, encoding: String.Encoding.utf8.rawValue) as? String
+        
+        let errorData = errorPipe.fileHandleForReading.readDataToEndOfFile()
+        let error = NSString(data: errorData, encoding: String.Encoding.utf8.rawValue) as? String
         
         let status = task.terminationStatus
-        return (status, output)
+        return (status, output, error)
     }
 
     @discardableResult
@@ -151,14 +140,71 @@ extension SCM {
         
         if let completion = completion {
             let output = result.output
+            let error = result.error
             let status = result.status
-            completion(status, output)
+            completion(status, output, error)
             if status != 0 {
-                writeln(.stderr, output!)
+                if let output = output {
+                    writeln(.stderr, output)
+                }
+                if let error = error {
+                    writeln(.stderr, error)
+                }
             }
         }
         
         return result.status
+    }*/
+    
+    func shell(_ command: String) -> Int32 {
+        let task = Process()
+        task.launchPath = "/bin/sh"
+        task.arguments = ["-c", command]
+        
+        task.launch()
+        task.waitUntilExit()
+        
+        let status = task.terminationStatus
+        return status
+    }
+    
+    @discardableResult
+    public func runCommand(_ command: String, completion: SCMCommandParser? = nil) -> Int32 {
+        var execute = command
+        
+        if verbose {
+            writeln(.stdout, "Running command: \(command)")
+        }
+        
+        let tempFile = FileManager.temporaryFile()
+        
+        /*if completion != nil {
+            execute = "\(execute) &> \(tempFile)"
+        }
+        
+        let status = shell(command)*/
+        
+        let task = Process()
+        task.launchPath = "/bin/bash"
+        task.arguments = ["-c", command, "&>", tempFile]
+        
+        task.launch()
+        task.waitUntilExit()
+        
+        let status = task.terminationStatus
+        //return status
+
+        
+        if let completion = completion {
+            let output = try? String(contentsOfFile: tempFile)
+            
+            completion(status, output)
+            if status != 0, let output = output {
+                writeln(.stderr, output)
+            }
+        }
+        
+        return status
     }
     
     @discardableResult

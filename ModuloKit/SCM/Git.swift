@@ -283,13 +283,12 @@ extension Git {
     }
     
     internal func remoteTrackingBranch(_ path: String) -> String? {
-        // git rev-parse --abbrev-ref HEAD
         var result: String? = nil
         
         let initialWorkingPath = FileManager.workingPath()
         FileManager.setWorkingPath(path)
         
-        _ = runCommand("git rev-parse --abbrev-ref HEAD") { (status, output) in
+        _ = runCommand("git rev-parse --abbrev-ref --symbolic-full-name @{u}") { (status, output) in
             if let output = output {
                 result = output.replacingOccurrences(of: "\n", with: "")
             }
@@ -301,13 +300,12 @@ extension Git {
     }
     
     internal func hashAtPath(_ path: String) -> String? {
-        // git rev-parse --abbrev-ref --symbolic-full-name @{u}
         var result: String? = nil
         
         let initialWorkingPath = FileManager.workingPath()
         FileManager.setWorkingPath(path)
         
-        _ = runCommand("git rev-parse --abbrev-ref --symbolic-full-name @{u}") { (status, output) in
+        _ = runCommand("git rev-parse HEAD") { (status, output) in
             if let output = output {
                 result = output.replacingOccurrences(of: "\n", with: "")
             }
@@ -361,7 +359,8 @@ extension Git {
             FileManager.setWorkingPath(path)
             
             if let currentHash = hashAtPath(path), let remoteBranch = remoteTrackingBranch(path) {
-                _ = runCommand("git rev-list \(remoteBranch)...\(currentHash)") { (status, output) in
+                let command = "git rev-list \(remoteBranch)...\(currentHash)"
+                _ = runCommand(command) { (status, output) in
                     result = (output?.characters.count != 0) && (status == 0)
                 }
             }
