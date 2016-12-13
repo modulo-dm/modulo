@@ -16,4 +16,4 @@ FOUNDATION_EXPORT const unsigned char ModuloKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <ModuloKit/PublicHeader.h>
 
-
+#import <ModuloKit/System.h>

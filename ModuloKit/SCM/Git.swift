@@ -288,9 +288,14 @@ extension Git {
         let initialWorkingPath = FileManager.workingPath()
         FileManager.setWorkingPath(path)
         
-        _ = runCommand("git rev-parse --abbrev-ref --symbolic-full-name @{u}") { (status, output) in
+        _ = runCommand("git rev-parse --abbrev-ref --symbolic-full-name @{u}", silence: true) { (status, output) in
             if let output = output {
-                result = output.replacingOccurrences(of: "\n", with: "")
+                if output.contains("fatal:") {
+                    // the branch or commit doesn't exist on any remotes.
+                    result = nil
+                } else {
+                    result = output.replacingOccurrences(of: "\n", with: "")
+                }
             }
         }
         
@@ -351,7 +356,7 @@ extension Git {
     }
     
     internal func hasOutstandingPushes(assumedCheckout checkout: String?, path: String) -> Bool {
-        var result = false
+        var result = true
         
         // they're on a branch, we don't care too much, but we need to know.
         if checkout != nil {

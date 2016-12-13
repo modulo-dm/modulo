@@ -93,7 +93,6 @@ public protocol SCM {
     var isInitialized: Bool { get }
     var defaultCheckout: String { get }
     
-    func runCommand(_ command: String, completion: SCMCommandParser?) -> Int32
     func remoteURL() -> String?
     func nameFromRemoteURL(_ url: String) -> String
     func branchName(_ path: String) -> String?
@@ -156,20 +155,8 @@ extension SCM {
         return result.status
     }*/
     
-    func shell(_ command: String) -> Int32 {
-        let task = Process()
-        task.launchPath = "/bin/sh"
-        task.arguments = ["-c", command]
-        
-        task.launch()
-        task.waitUntilExit()
-        
-        let status = task.terminationStatus
-        return status
-    }
-    
     @discardableResult
-    public func runCommand(_ command: String, completion: SCMCommandParser? = nil) -> Int32 {
+    public func runCommand(_ command: String, silence: Bool = false, completion: SCMCommandParser? = nil) -> Int32 {
         var execute = command
         
         if verbose {
@@ -178,28 +165,17 @@ extension SCM {
         
         let tempFile = FileManager.temporaryFile()
         
-        /*if completion != nil {
+        if completion != nil {
             execute = "\(execute) &> \(tempFile)"
         }
         
-        let status = shell(command)*/
-        
-        let task = Process()
-        task.launchPath = "/bin/bash"
-        task.arguments = ["-c", command, "&>", tempFile]
-        
-        task.launch()
-        task.waitUntilExit()
-        
-        let status = task.terminationStatus
-        //return status
-
+        let status = Int32(modulo_system(execute))
         
         if let completion = completion {
             let output = try? String(contentsOfFile: tempFile)
             
             completion(status, output)
-            if status != 0, let output = output {
+            if status != 0 && silence == false, let output = output {
                 writeln(.stderr, output)
             }
         }

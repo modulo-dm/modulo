@@ -13,6 +13,9 @@
 		65BB0DC81DFB835500D99A25 /* modulo in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAE55C411D14928B00411727 /* modulo */; };
 		65C411E01DC3D6700085365C /* ELCLI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C801D14943300411727 /* ELCLI.framework */; };
 		65E60AE81DFF4FE000DAE913 /* TestDummyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E60AE71DFF4FE000DAE913 /* TestDummyApp.swift */; };
+		65F7356F1E008A320091D3A0 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 65F7356D1E008A320091D3A0 /* System.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		65F735701E008A320091D3A0 /* System.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7356E1E008A320091D3A0 /* System.m */; };
+		65F735751E008E400091D3A0 /* System.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7356E1E008A320091D3A0 /* System.m */; };
 		CA0A3F131D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
 		CA0A3F141D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
 		CA0A3F1D1D5A557A00A7F0BB /* SemverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F1C1D5A557A00A7F0BB /* SemverTests.swift */; };
@@ -230,6 +233,9 @@
 /* Begin PBXFileReference section */
 		468A8B161DF3F8B10060D93C /* TestGit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestGit.swift; sourceTree = "<group>"; };
 		65E60AE71DFF4FE000DAE913 /* TestDummyApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDummyApp.swift; sourceTree = "<group>"; };
+		65F7356D1E008A320091D3A0 /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = System.h; path = System/System.h; sourceTree = "<group>"; };
+		65F7356E1E008A320091D3A0 /* System.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = System.m; path = System/System.m; sourceTree = "<group>"; };
+		65F735711E008B680091D3A0 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BridgingHeader.h; path = System/BridgingHeader.h; sourceTree = "<group>"; };
 		CA0A3F121D5A3D7700A7F0BB /* Semver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semver.swift; sourceTree = "<group>"; };
 		CA0A3F1C1D5A557A00A7F0BB /* SemverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemverTests.swift; sourceTree = "<group>"; };
 		CA3354441D15C91000ACD91C /* TestAdd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAdd.swift; sourceTree = "<group>"; };
@@ -328,6 +334,9 @@
 		65F7356C1E0089D40091D3A0 /* System */ = {
 			isa = PBXGroup;
 			children = (
+				65F7356D1E008A320091D3A0 /* System.h */,
+				65F7356E1E008A320091D3A0 /* System.m */,
+				65F735711E008B680091D3A0 /* BridgingHeader.h */,
 			);
 			name = System;
 			sourceTree = "<group>";
@@ -574,6 +583,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAE55C531D1492A500411727 /* ModuloKit.h in Headers */,
+				65F7356F1E008A320091D3A0 /* System.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,6 +808,7 @@
 				CAE55CCC1D1497A200411727 /* NSURL.swift in Sources */,
 				CAE55CE31D149BD800411727 /* Encodable.swift in Sources */,
 				CAE55D141D14C9EE00411727 /* ErrorCode.swift in Sources */,
+				65F735751E008E400091D3A0 /* System.m in Sources */,
 				CAE55CCB1D1497A200411727 /* NSThread.swift in Sources */,
 				CAAB6E1E1D19BD3B00F22C48 /* UpdateCommand.swift in Sources */,
 				CA3354591D185C7A00ACD91C /* Actions.swift in Sources */,
@@ -849,6 +860,7 @@
 				CAE55CA41D1494B200411727 /* Modulo.swift in Sources */,
 				CA0A3F141D5A3D7700A7F0BB /* Semver.swift in Sources */,
 				CA3354511D185C7600ACD91C /* Actions.swift in Sources */,
+				65F735701E008A320091D3A0 /* System.m in Sources */,
 				CACB213F1D3D8D7B00ACA574 /* RemoveCommand.swift in Sources */,
 				CACB20C31D3457A100ACA574 /* StatusCommand.swift in Sources */,
 				CAE55D1D1D14CA1800411727 /* AddCommand.swift in Sources */,
@@ -1014,6 +1026,7 @@
 			buildSettings = {
 				OTHER_SWIFT_FLAGS = "-DNOFRAMEWORKS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = ModuloKit/System/BridgingHeader.h;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1023,6 +1036,7 @@
 			buildSettings = {
 				OTHER_SWIFT_FLAGS = "-DNOFRAMEWORKS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = ModuloKit/System/BridgingHeader.h;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
