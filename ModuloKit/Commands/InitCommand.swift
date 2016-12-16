@@ -14,7 +14,7 @@ import Foundation
 
 open class InitCommand: NSObject, Command {
     // Internal properties
-    open var isModule: Bool = true
+    open var isModule: Bool = false
     
     // Protocol conformance
     open var name: String { return "init" }
@@ -29,11 +29,11 @@ open class InitCommand: NSObject, Command {
     open var quiet: Bool = false
     
     open func configureOptions() {
-        addOption(["--app"], usage: "init's the working path as an application") { (option, value) in
+        addOption(["--app"], usage: "init's the working path as an application (default)") { (option, value) in
             self.isModule = false
         }
         
-        addOption(["--module"], usage: "init's the working path as a module (default)") { (option, value) in
+        addOption(["--module"], usage: "init's the working path as a module") { (option, value) in
             self.isModule = true
         }
     }

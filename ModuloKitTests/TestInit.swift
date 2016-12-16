@@ -48,7 +48,7 @@ class TestInit: XCTestCase {
         _ = cli.run()
         
         let spec = ModuleSpec.load(contentsOfFile: specFilename)
-        XCTAssertTrue(spec!.module == true)
+        XCTAssertTrue(spec!.module == false)
         XCTAssertTrue(spec!.dependencies.count == 0)
         
         FileManager.setWorkingPath("..")
