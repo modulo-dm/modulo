@@ -37,7 +37,84 @@ class TestInit: XCTestCase {
         }, ELExceptionFailure, "It should throw because git isn't initialized.")
     }
     
-    func testModuleInit() {
+    func testExplicitModuleInit() {
+        let status = Git().clone("git@github.com:modulo-dm/test-init.git", path: "test-init")
+        XCTAssertTrue(status == .success)
+        
+        FileManager.setWorkingPath("test-init")
+        
+        cli.allArgumentsToExecutable = ["init", "--module", "-v"]
+        
+        _ = cli.run()
+        
+        let spec = ModuleSpec.load(contentsOfFile: specFilename)
+        XCTAssertTrue(spec!.module == true)
+        XCTAssertTrue(spec!.dependencies.count == 0)
+        
+        FileManager.setWorkingPath("..")
+        
+        _ = Git().remove("test-init")
+    }
+
+    func testDefaultModuleInit() {
+        // create a modules directory to test init inside of
+        let workingPath = FileManager.workingPath()
+        let modulesPath = workingPath.appendPathComponent(InitCommand().modulesDirectoryName)
+
+        do {
+            try FileManager.default.createDirectory(atPath: modulesPath, withIntermediateDirectories: true, attributes: nil)
+        } catch let error as NSError {
+            print("Error creating directory at \(modulesPath)")
+            return
+        }
+      
+        FileManager.setWorkingPath(modulesPath)
+      
+        let status = Git().clone("git@github.com:modulo-dm/test-init.git", path: "test-init")
+        XCTAssertTrue(status == .success)
+        
+        FileManager.setWorkingPath("test-init")
+        
+        cli.allArgumentsToExecutable = ["init", "-v"]
+        
+        _ = cli.run()
+        
+        let spec = ModuleSpec.load(contentsOfFile: specFilename)
+        XCTAssertTrue(spec!.module == true)
+        XCTAssertTrue(spec!.dependencies.count == 0)
+        
+        FileManager.setWorkingPath(workingPath)
+      
+        do {
+            try FileManager.default.removeItem(atPath: modulesPath)
+        } catch let error as NSError {
+            print("Error removing directory at \(modulesPath)")
+            return
+        }
+
+    }
+
+  
+    func testExplicitAppInit() {
+        let status = Git().clone("git@github.com:modulo-dm/test-init.git", path: "test-init")
+        XCTAssertTrue(status == .success)
+        
+        FileManager.setWorkingPath("test-init")
+        
+        cli.allArgumentsToExecutable = ["init", "--app", "-v"]
+        
+        _ = cli.run()
+        
+        let spec = ModuleSpec.load(contentsOfFile: specFilename)
+        XCTAssertTrue(spec!.module == false)
+        XCTAssertTrue(spec!.dependencies.count == 0)
+        
+        FileManager.setWorkingPath("..")
+        
+        _ = Git().remove("test-init")
+    }
+  
+    func testDefaultAppInit() {
         let status = Git().clone("git@github.com:modulo-dm/test-init.git", path: "test-init")
         XCTAssertTrue(status == .success)
         
@@ -55,24 +132,15 @@ class TestInit: XCTestCase {
         
         _ = Git().remove("test-init")
     }
-    
-    func testAppInit() {
-        let status = Git().clone("git@github.com:modulo-dm/test-init.git", path: "test-init")
-        XCTAssertTrue(status == .success)
-        
-        FileManager.setWorkingPath("test-init")
-        
-        cli.allArgumentsToExecutable = ["init", "--app", "-v"]
-        
-        _ = cli.run()
-        
-        let spec = ModuleSpec.load(contentsOfFile: specFilename)
-        XCTAssertTrue(spec!.module == false)
-        XCTAssertTrue(spec!.dependencies.count == 0)
-        
-        FileManager.setWorkingPath("..")
-        
-        _ = Git().remove("test-init")
+  
+    func testIsValidModuleDirectory() {
+        let workingPath = FileManager.workingPath()
+        let appPath = workingPath.appending("/app-directory")
+        let moduleHomePath = appPath.appending("/Modules") // TODO: pull this out of where this constant lives
+        let testModulePath = moduleHomePath.appending("/example-module")
+      
+        XCTAssertTrue(InitCommand().isValidModuleDirectory(path: testModulePath))
+        XCTAssertFalse(InitCommand().isValidModuleDirectory(path: appPath))
     }
     
 }
