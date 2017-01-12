@@ -14,8 +14,9 @@ import Foundation
 
 open class InitCommand: NSObject, Command {
     // Internal properties
-    open var isModule: Bool = true
-    
+    open var isModule: Bool = false
+    open var modulesDirectoryName: String = "Modules" // TODO: better place for this?
+  
     // Protocol conformance
     open var name: String { return "init" }
     open var shortHelpDescription: String { return "Initialize modulo"  }
@@ -29,22 +30,29 @@ open class InitCommand: NSObject, Command {
     open var quiet: Bool = false
     
     open func configureOptions() {
-        addOption(["--app"], usage: "init's the working path as an application") { (option, value) in
+        addOption(["--app"], usage: "init's the working path as an application (default)") { (option, value) in
             self.isModule = false
         }
         
-        addOption(["--module"], usage: "init's the working path as a module (default)") { (option, value) in
+        addOption(["--module"], usage: "init's the working path as a module") { (option, value) in
             self.isModule = true
         }
     }
     
     open func execute(_ otherParams: Array<String>?) -> Int {
         let scm = currentSCM()
-        
+        let workingPath = FileManager.workingPath()
+
+        // Already nested in a Modules/ directory? Init as a module.
+        if isValidModuleDirectory(path: workingPath) {
+            isModule = true
+            print("Initializing as a module, since you're already in the Modules directory ...")
+        }
+
         if ModuleSpec.exists() {
             exit(.alreadyInitialized)
         }
-        
+      
         if isModule == false {
             let scmResult = scm.addModulesIgnore()
             if scmResult != .success {
@@ -52,7 +60,7 @@ open class InitCommand: NSObject, Command {
             }
         }
         
-        let specPath = FileManager.workingPath().appendPathComponent(specFilename)
+        let specPath = workingPath.appendPathComponent(specFilename)
         let spec = ModuleSpec(name: FileManager.directoryName(), module: isModule, sourcePath: nil, dependencies: [], path: specPath)
         let success = spec.save()
         
@@ -63,5 +71,13 @@ open class InitCommand: NSObject, Command {
         }
         
         return ErrorCode.success.rawValue
+    }
+  
+    open func isValidModuleDirectory(path: String) -> Bool {
+      let relativeParentPath = path.appendPathComponent("..")
+      let absolutePath = NSString(string: relativeParentPath).standardizingPath // normalizes relative path segments
+      let parentDirectoryName = NSString(string: absolutePath).lastPathComponent
+      
+      return parentDirectoryName == modulesDirectoryName
     }
 }
