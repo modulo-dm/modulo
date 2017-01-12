@@ -21,6 +21,7 @@ internal enum SemverPart: Int {
     case secondaryPartial
     
     case leftMostNonZero
+    case rightMostNonZero
 }
 
 // MARK: Semver Public interface
@@ -64,7 +65,7 @@ public struct Semver {
     
     public var stringValue: String {
         if let pre = preRelease {
-            return "\(breaking).\(feature).\(fix)-\(pre)"
+            return "\(breaking).\(feature).\(fix)-\(pre).\(preReleaseVersionData.map(String.init).joined(separator: "."))"
         } else {
             return "\(breaking).\(feature).\(fix)"
         }
@@ -84,14 +85,6 @@ private let PreReleaseRegex = "(?:-((?:[0-9]+|\\d*[a-zA-Z-][a-zA-Z0-9-]*)(?:\\.(
 private let BuildRegex = "(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-])*))"
 private let NumberRegex = "([0-9]+)"
 private let VersionXRegex = "([0-9]+|x|x|\\*)"
-
-/*private let CleanRegex = "([0-9]|x|\\*+)\\.([0-9]|x|\\*+)\\.([0-9]|x|\\*+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-\\.]+)?"
-private let PrefixRegex = "^[^[0-9]*]*"
-private let VersionRegex = "(0|[1-9]|[X,x,\\*]\\d*)\\.(0|[1-9]|[X,x,\\*]\\d*)\\.(0|[1-9]|[X,x,\\*]\\d*)"
-private let PreReleaseRegex = "(?:-((?:[0-9]+|\\d*[a-zA-Z-][a-zA-Z0-9-]*)(?:\\.(?:[0-9]+|\\d*[a-zA-Z-][a-zA-Z0-9-]*))*))"
-private let BuildRegex = "(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-])*))"
-private let NumberRegex = "([0-9]+)"
-private let VersionXRegex = "([0-9]+|x|x|\\*)"*/
 
 extension String {
     func matchesForRegex(_ regex: String) -> [String] {
@@ -148,6 +141,10 @@ extension Semver {
                 let preReleaseVersionMatches = preRelease!.matchesForRegex(NumberRegex)
                 preReleaseVersionMatches.forEach { (number) in
                     preReleaseVersionData.append(Int(number)!)
+                }
+                // now remove any versions after the prerelease tag.
+                if let firstDot = preRelease!.characters.index(of: ".") {
+                    preRelease = preRelease!.substring(to: firstDot)
                 }
             }
             
@@ -245,7 +242,7 @@ extension Semver {
                 break
             }
         }
-
+        
         return result
     }
 }
@@ -328,9 +325,40 @@ extension Semver {
                     partsOut.append(part + 1)
                     gotFirst = true
                 } else {
+                    partsOut.append(0)
+                }
+            }
+            
+            breaking = partsOut[0]
+            feature = partsOut[1]
+            fix = partsOut[2]
+            
+            // everything was zero's, so increment feature.
+            if gotFirst == false {
+                feature += 1
+            }
+            
+        case .rightMostNonZero:
+            var parts = [breaking, feature, fix]
+            var partsOut = [Int]()
+            var gotFirst = false
+            
+            // we're doing right-most
+            parts = parts.reversed()
+            
+            for part in parts {
+                if part == 0 {
+                    partsOut.append(part)
+                } else if gotFirst == false {
+                    partsOut.append(part + 1)
+                    gotFirst = true
+                } else {
                     partsOut.append(part)
                 }
             }
+            
+            // flip the output back around
+            partsOut = partsOut.reversed()
             
             breaking = partsOut[0]
             feature = partsOut[1]
@@ -346,6 +374,7 @@ extension Semver {
         preRelease = nil
         build = nil
     }
+
 }
 
 // MARK: Comparison operators
@@ -376,11 +405,12 @@ public func <=(lhs: Semver, rhs: Semver) -> Bool {
 
 // MARK: SemverComparator enum
 
-internal enum SemverComparator: CustomStringConvertible {
+internal enum SemverComparator: CustomStringConvertible, Equatable, Hashable {
     case greaterThan(version: Semver)
     case lessThan(version: Semver)
     case greaterThanOrEqual(version: Semver)
     case lessThanOrEqual(version: Semver)
+    case logicalOr
     
     var description: String {
         switch self {
@@ -395,7 +425,37 @@ internal enum SemverComparator: CustomStringConvertible {
             
         case .lessThanOrEqual(let version):
             return "<=\(version.stringValue)"
+            
+        case .logicalOr:
+            return "||"
         }
+    }
+    
+    var version: Semver? {
+        switch self {
+        case .greaterThan(let version):
+            return version
+            
+        case .lessThan(let version):
+            return version
+            
+        case .greaterThanOrEqual(let version):
+            return version
+            
+        case .lessThanOrEqual(let version):
+            return version
+            
+        case .logicalOr:
+            return nil
+        }
+    }
+    
+    var hashValue: Int {
+        return description.hashValue
+    }
+    
+    static func ==(lhs: SemverComparator, rhs: SemverComparator) -> Bool {
+        return lhs.hashValue == rhs.hashValue
     }
 }
 
@@ -426,11 +486,8 @@ public struct SemverRange {
         let parts = original.components(separatedBy: "||")
         let set = parts.map { (section) -> String in
             let result = section.clean()
-            print("section = \(result)")
             return result
         }
-        
-        print(set)
         
         comparators = transmogrify(set)
     }
@@ -509,22 +566,34 @@ public struct SemverRange {
             } else if item.containsString(Token.LessThanOrEqual.rawValue) {
                 // <=
                 let piece = item.stringByRemovingAll(rangeTokens)
-                let ver1 = Semver(piece)
+                var ver1 = Semver(piece)
+                if ver1.partial {
+                    ver1.normalize()
+                }
                 resultSet.append(.lessThanOrEqual(version: ver1))
             } else if item.containsString(Token.GreaterThanOrEqual.rawValue) {
                 // >=
                 let piece = item.stringByRemovingAll(rangeTokens)
-                let ver1 = Semver(piece)
+                var ver1 = Semver(piece)
+                if ver1.partial {
+                    ver1.normalize()
+                }
                 resultSet.append(.greaterThanOrEqual(version: ver1))
             } else if item.containsString(Token.LessThan.rawValue) {
                 // <
                 let piece = item.stringByRemovingAll(rangeTokens)
-                let ver1 = Semver(piece)
+                var ver1 = Semver(piece)
+                if ver1.partial {
+                    ver1.normalize()
+                }
                 resultSet.append(.lessThan(version: ver1))
             } else if item.containsString(Token.GreaterThan.rawValue) {
                 // >
                 let piece = item.stringByRemovingAll(rangeTokens)
-                let ver1 = Semver(piece)
+                var ver1 = Semver(piece)
+                if ver1.partial {
+                    ver1.normalize()
+                }
                 resultSet.append(.greaterThan(version: ver1))
             } else {
                 // *, x, X
@@ -543,7 +612,16 @@ public struct SemverRange {
                     resultSet.append(.lessThan(version: ver2))
                 }
             }
+            
+            resultSet.append(.logicalOr)
         }
+        
+        // if we ended up with a || at the end, that's useless, so ditch it.
+        /*if let last = resultSet.last {
+            if last.description == SemverComparator.logicalOr.description {
+                resultSet.removeLast()
+            }
+        }*/
         
         return resultSet
     }
@@ -556,9 +634,90 @@ public struct SemverRange {
 // MARK: Range matching
 
 extension Semver {
+    
     public func satisfies(_ range: SemverRange) -> Bool {
-        return false
+        var overallResult = false
+        
+        // we can only ever have a maximum of 2 comparators, but as little as 1.
+        var firstResult: Bool? = nil
+        var secondResult: Bool? = nil
+        
+        let comps = range.comparators
+        print(comps)
+        for ver in comps {
+            print("\(self.stringValue) == \(ver)?")
+            
+            var verResult = false
+            
+            switch ver {
+            case .greaterThan(let version):
+                verResult = self > version
+                
+            case .lessThan(let version):
+                verResult = self < version
+                
+            case .greaterThanOrEqual(let version):
+                verResult = self >= version
+                
+            case .lessThanOrEqual(let version):
+                verResult = self <= version
+                
+            case .logicalOr:
+                break
+            }
+            
+            if ver == SemverComparator.logicalOr {
+                overallResult = (firstResult! == true) && (secondResult != nil ? secondResult! : true)
+            }
+            
+            if verResult {
+                let preMatch = comparePreReleaseOnly(comparator: ver)
+                if preMatch {
+                    firstResult = true
+                    secondResult = true
+                    overallResult = true
+                    break
+                } else {
+                    if preRelease != nil {
+                        verResult = false
+                    }
+                }
+            }
+            
+            if overallResult == true {
+                break
+            }
+
+            if firstResult == nil {
+                firstResult = verResult
+            } else {
+                secondResult = verResult
+            }
+        }
+        
+        return overallResult
     }
+    
+    private func comparePreReleaseOnly(comparator: SemverComparator) -> Bool {
+        var result = false
+        guard let version = comparator.version else { return result }
+        
+        if version.preRelease == nil || preRelease == nil {
+            return result
+        } else {
+            let versionMatch = (version.breaking == breaking && version.feature == feature && version.fix == fix)
+            let preMatch = (version.preRelease != nil && preRelease != nil && version.preRelease == preRelease)
+
+            if versionMatch && preMatch {
+                result = true
+            } else {
+                result = false
+            }
+        }
+        
+        return result
+    }
+    
 }
 
 extension SemverRange {

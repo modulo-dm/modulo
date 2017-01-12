@@ -50,7 +50,7 @@ class SemverTests: XCTestCase {
         semver = Semver("=v1.2.3-alpha.0.1.22+abcdef.1.2")
         
         XCTAssertTrue(semver.breaking == 1 && semver.feature == 2 && semver.fix == 3)
-        XCTAssertTrue(semver.preRelease == "alpha.0.1.22")
+        XCTAssertTrue(semver.preRelease == "alpha")
         XCTAssertTrue(semver.preReleaseVersionData[0] == 0)
         XCTAssertTrue(semver.preReleaseVersionData[1] == 1)
         XCTAssertTrue(semver.preReleaseVersionData[2] == 22)
@@ -117,9 +117,12 @@ class SemverTests: XCTestCase {
         
         XCTAssertTrue(range.comparators[0].description == ">=1.0.0")
         XCTAssertTrue(range.comparators[1].description == "<2.0.0")
-        XCTAssertTrue(range.comparators[2].description == ">=2.5.0")
-        XCTAssertTrue(range.comparators[3].description == ">=5.0.0")
-        XCTAssertTrue(range.comparators[4].description == "<=7.2.3")
+        XCTAssertTrue(range.comparators[2].description == "||")
+        XCTAssertTrue(range.comparators[3].description == ">=2.5.0")
+        XCTAssertTrue(range.comparators[4].description == "||")
+        XCTAssertTrue(range.comparators[5].description == ">=5.0.0")
+        XCTAssertTrue(range.comparators[6].description == "<=7.2.3")
+        XCTAssertTrue(range.comparators[7].description == "||")
 
         range = SemverRange("~0")
         print(range.comparators)
@@ -133,11 +136,85 @@ class SemverTests: XCTestCase {
         XCTAssertTrue(range.comparators[0].description == ">=0.0.0")
         XCTAssertTrue(range.comparators[1].description == "<0.1.0")
         
+        range = SemverRange("^1.2.3")
+        print(range.comparators)
+        
+        XCTAssertTrue(range.comparators[0].description == ">=1.2.3")
+        XCTAssertTrue(range.comparators[1].description == "<2.0.0")
+        
         range = SemverRange("~1.2.3-beta.2")
         print(range.comparators)
         
         XCTAssertTrue(range.comparators[0].description == ">=1.2.3-beta.2")
         XCTAssertTrue(range.comparators[1].description == "<1.3.0")
+    }
+    
+    func testNonPreReleaseRangeSatisfaction() {
+        let range = SemverRange("5.0.0 - 7.2.3")
+        
+        var ver = Semver("7.2.1")
+        XCTAssertTrue(ver.satisfies(range))
+        
+        ver = Semver("7.2.1-rc.1")
+        XCTAssertFalse(ver.satisfies(range))
+    }
+    
+    func testPreReleaseRangeSatisfaction() {
+        var range = SemverRange("5.0.0 - 7.2.1-rc.2")
+        
+        var ver = Semver("7.2.1-rc.1")
+        XCTAssertTrue(ver.satisfies(range))
+        ver = Semver("7.2.0")
+        XCTAssertTrue(ver.satisfies(range))
+        
+        ver = Semver("7.2.0-rc.1")
+        XCTAssertFalse(ver.satisfies(range))
+        ver = Semver("7.2.1-pre.1")
+        XCTAssertFalse(ver.satisfies(range))
+        
+        range = SemverRange("~1.2.3-beta.2")
+        
+        ver = Semver("1.2.3-beta.3")
+        XCTAssertTrue(ver.satisfies(range))
+        ver = Semver("1.2.9")
+        XCTAssertTrue(ver.satisfies(range))
+        ver = Semver("1.2.4-beta.2")
+        XCTAssertFalse(ver.satisfies(range))
+        ver = Semver("1.3.0")
+        XCTAssertFalse(ver.satisfies(range))
+
+        range = SemverRange("^1.2.3-beta.2")
+        
+        ver = Semver("1.2.3-beta.3")
+        XCTAssertTrue(ver.satisfies(range))
+        ver = Semver("1.2.9")
+        XCTAssertTrue(ver.satisfies(range))
+        ver = Semver("1.2.4-beta.2")
+        XCTAssertFalse(ver.satisfies(range))
+        ver = Semver("1.3.0")
+        XCTAssertTrue(ver.satisfies(range))
+        ver = Semver("2.0.0")
+        XCTAssertFalse(ver.satisfies(range))
+    }
+    
+    func testBasicSatisfaction() {
+        var range = SemverRange("1.x || >=2.5.0")
+        
+        var ver = Semver("0.1.2")
+        XCTAssertFalse(ver.satisfies(range))
+        ver = Semver("1.1")
+        XCTAssertTrue(ver.satisfies(range))
+        ver = Semver("2.4.0")
+        XCTAssertFalse(ver.satisfies(range))
+        ver = Semver("2.5.1")
+        XCTAssertTrue(ver.satisfies(range))
+        
+        range = SemverRange("~0")
+        
+        ver = Semver("0.0.9")
+        XCTAssertTrue(ver.satisfies(range))
+        ver = Semver("1.1.0")
+        XCTAssertFalse(ver.satisfies(range))
     }
 }
 
