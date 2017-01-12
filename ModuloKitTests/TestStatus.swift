@@ -17,12 +17,11 @@ class TestStatus: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        clearTestRepos()
+        moduloReset()
         print("working path = \(FileManager.workingPath())")
     }
     
     override func tearDown() {
-        clearTestRepos()
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }

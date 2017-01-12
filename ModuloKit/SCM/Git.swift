@@ -128,8 +128,7 @@ open class Git: SCM {
     }
     
     open func addModulesIgnore() -> SCMResult {
-        // TODO: get this from the state or something and don't hardcode it.
-        let localModulesPath = "modules"
+        let localModulesPath = State.instance.modulePathName
         
         if FileManager.fileExists(".gitignore") {
             var ignoreFile = try! String(contentsOfFile: ".gitignore")

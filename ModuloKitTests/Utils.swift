@@ -11,7 +11,7 @@ import ELCLI
 import ELFoundation
 @testable import ModuloKit
 
-func clearTestRepos() {
+func moduloReset() {
     FileManager.setWorkingPath("/private/tmp")
     Git().remove("test-dummy")
     Git().remove("test-add")
@@ -19,6 +19,8 @@ func clearTestRepos() {
     Git().remove("test-add-update")
     Git().remove("test-dep1")
     Git().remove("test-dep2")
+    
+    State.instance.clear()
 }
 
 func touchFile(_ path: String) {

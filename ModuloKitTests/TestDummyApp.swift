@@ -13,12 +13,11 @@ class TestDummyApp: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        clearTestRepos()
+        moduloReset()
         print("working path = \(FileManager.workingPath())")
     }
     
     override func tearDown() {
-        clearTestRepos()
         super.tearDown()
     }
     

@@ -17,12 +17,11 @@ class TestUpdate: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        clearTestRepos()
+        moduloReset()
         print("working path = \(FileManager.workingPath())")
     }
     
     override func tearDown() {
-        clearTestRepos()
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
@@ -39,7 +38,6 @@ class TestUpdate: XCTestCase {
         let spec = ModuleSpec.load(contentsOfFile: specFilename)
         XCTAssertTrue(spec!.dependencies.count > 0)
         XCTAssertTrue(spec!.dependencies[0].repositoryURL == "git@github.com:modulo-dm/test-init.git")
-        //XCTAssertTrue(spec!.module == "modules")
         
         XCTAssertTrue(FileManager.pathExists("../test-init"))
         XCTAssertTrue(FileManager.pathExists("../test-dep1"))
@@ -62,7 +60,6 @@ class TestUpdate: XCTestCase {
         let spec = ModuleSpec.load(contentsOfFile: specFilename)
         XCTAssertTrue(spec!.dependencies.count > 0)
         XCTAssertTrue(spec!.dependencies[0].repositoryURL == "git@github.com:modulo-dm/test-init.git")
-        //XCTAssertTrue(spec!.module == "modules")
         
         XCTAssertTrue(FileManager.pathExists("../test-init"))
         

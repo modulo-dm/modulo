@@ -16,6 +16,8 @@ import Foundation
 public struct State {
     public static var instance = State()
     
+    public var modulePathName = "modules"
+    
     var implictDependencies = [DependencySpec]()
     var explicitDependencies = [DependencySpec]()
     var removedDependencies = [DependencySpec]()
@@ -82,6 +84,12 @@ public struct State {
             }
         }
         // and we're all done.
+    }
+    
+    internal mutating func clear() {
+        implictDependencies.removeAll()
+        explicitDependencies.removeAll()
+        removedDependencies.removeAll()
     }
     
 }

@@ -15,7 +15,6 @@ import Foundation
 open class InitCommand: NSObject, Command {
     // Internal properties
     open var isModule: Bool = false
-    open var modulesDirectoryName: String = "Modules" // TODO: better place for this?
   
     // Protocol conformance
     open var name: String { return "init" }
@@ -78,6 +77,6 @@ open class InitCommand: NSObject, Command {
       let absolutePath = NSString(string: relativeParentPath).standardizingPath // normalizes relative path segments
       let parentDirectoryName = NSString(string: absolutePath).lastPathComponent
       
-      return parentDirectoryName == modulesDirectoryName
+      return parentDirectoryName == State.instance.modulePathName
     }
 }

@@ -19,12 +19,11 @@ class TestInit: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         cli.addCommands([InitCommand()])
 
-        clearTestRepos()
+        moduloReset()
         print("working path = \(FileManager.workingPath())")
     }
     
     override func tearDown() {
-        clearTestRepos()
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
@@ -59,12 +58,12 @@ class TestInit: XCTestCase {
     func testDefaultModuleInit() {
         // create a modules directory to test init inside of
         let workingPath = FileManager.workingPath()
-        let modulesPath = workingPath.appendPathComponent(InitCommand().modulesDirectoryName)
+        let modulesPath = workingPath.appendPathComponent(State.instance.modulePathName)
 
         do {
             try FileManager.default.createDirectory(atPath: modulesPath, withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
-            print("Error creating directory at \(modulesPath)")
+            print("Error creating directory at \(modulesPath), error: \(error)")
             return
         }
       
@@ -88,7 +87,7 @@ class TestInit: XCTestCase {
         do {
             try FileManager.default.removeItem(atPath: modulesPath)
         } catch let error as NSError {
-            print("Error removing directory at \(modulesPath)")
+            print("Error removing directory at \(modulesPath), error: \(error)")
             return
         }
 
@@ -135,9 +134,9 @@ class TestInit: XCTestCase {
   
     func testIsValidModuleDirectory() {
         let workingPath = FileManager.workingPath()
-        let appPath = workingPath.appending("/app-directory")
-        let moduleHomePath = appPath.appending("/Modules") // TODO: pull this out of where this constant lives
-        let testModulePath = moduleHomePath.appending("/example-module")
+        let appPath = workingPath.appendPathComponent("app-directory")
+        let moduleHomePath = appPath.appendPathComponent(State.instance.modulePathName)
+        let testModulePath = moduleHomePath.appendPathComponent("example-module")
       
         XCTAssertTrue(InitCommand().isValidModuleDirectory(path: testModulePath))
         XCTAssertFalse(InitCommand().isValidModuleDirectory(path: appPath))
