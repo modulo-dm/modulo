@@ -379,7 +379,7 @@ extension Semver {
 
 // MARK: Comparison operators
 
-extension Semver: Equatable { }
+extension Semver: Equatable, Comparable { }
 
 public func ==(lhs: Semver, rhs: Semver) -> Bool {
     return lhs.comparison(rhs) == .equal
@@ -720,11 +720,28 @@ extension Semver {
     
 }
 
+
 extension SemverRange {
-    public func compatible(_ versions: [Semver]) -> [Semver] {
-        let result = [Semver]()
+    public func compatible(versions: [Semver]) -> [Semver] {
+        var result = [Semver]()
+        
+        for ver in versions {
+            if ver.satisfies(self) {
+                result.append(ver)
+            }
+        }
         
         return result
+    }
+    
+    public func mostUpToDate(versions: [Semver]) -> Semver? {
+        let compat = compatible(versions: versions)
+        
+        if compat.count == 0 {
+            return nil
+        }
+        
+        return compat.max()
     }
 }
 
