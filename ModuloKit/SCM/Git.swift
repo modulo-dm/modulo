@@ -108,7 +108,10 @@ open class Git: SCM {
         case .tag(let name):
             let existingTags = tags(".")
             let range = SemverRange(name)
-            if let checkoutTag = range.mostUpToDate(versions: existingTags) {
+            if range.valid == false {
+                // treat it like an exact tag, not a range
+                checkoutCommand = "git checkout \(name)"
+            } else if let checkoutTag = range.mostUpToDate(versions: existingTags) {
                 checkoutCommand = "git checkout \(checkoutTag.stringValue)"
             } else {
                 return .error(code: SCMDefaultError, message: "No tags exist, unable to checkout \(name).")
@@ -264,21 +267,15 @@ extension Git {
         return .success
     }
     
-    internal func tagAtPath(_ path: String) -> String? {
-        var result: String? = nil
+    internal func headTagsAtPath(_ path: String) -> [String] {
+        var result = [String]()
         
         let initialWorkingPath = FileManager.workingPath()
         FileManager.setWorkingPath(path)
         
-        _ = runCommand("git describe --exact-match --tags") { (status, output) in
+        _ = runCommand("git tag --points-at HEAD") { (status, output) in
             if let output = output {
-                if output.contains("fatal:") {
-                    // the branch or commit doesn't exist on any remotes.
-                    result = nil
-                } else {
-                    // just take the first one.
-                    result = output.components(separatedBy: "\n")[0]
-                }
+                result = output.components(separatedBy: "\n")
             }
         }
         

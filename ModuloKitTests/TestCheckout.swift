@@ -56,7 +56,8 @@ class TestCheckout: XCTestCase {
         
         XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
         
-        XCTAssertTrue(Git().tagAtPath("modules/test-checkout") == "v2.0.0")
+        let tags = Git().headTagsAtPath("modules/test-checkout")
+        XCTAssertTrue(tags.contains("v2.0.0"))
     }
     
     func testTagRangeCheckout() {
@@ -69,14 +70,34 @@ class TestCheckout: XCTestCase {
         var error = Modulo.run(["init", "--app"])
         XCTAssertTrue(error == .success)
         
-        error = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--tag", "v2.0.0", "-u", "-v"])
+        error = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--tag", ">0.0.2 <=2.0.1", "-u", "-v"])
         XCTAssertTrue(error == .success)
         
         XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
         
-        XCTAssertTrue(Git().tagAtPath("modules/test-checkout") == "v2.0.0")
+        let tags = Git().headTagsAtPath("modules/test-checkout")
+        XCTAssertTrue(tags.contains("v2.0.1"))
     }
 
+    func testTagNonSemverCheckout() {
+        runCommand("mkdir checkout-test")
+        
+        FileManager.setWorkingPath("checkout-test")
+        
+        runCommand("git init")
+        
+        var error = Modulo.run(["init", "--app"])
+        XCTAssertTrue(error == .success)
+        
+        error = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--tag", "nosemver", "-u", "-v"])
+        XCTAssertTrue(error == .success)
+        
+        XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
+        
+        let tags = Git().headTagsAtPath("modules/test-checkout")
+        XCTAssertTrue(tags.contains("nosemver"))
+    }
+    
     func testCommitCheckoutShort() {
         runCommand("mkdir checkout-test")
         
