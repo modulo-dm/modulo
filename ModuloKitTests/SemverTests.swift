@@ -215,6 +215,11 @@ class SemverTests: XCTestCase {
         XCTAssertTrue(ver.satisfies(range))
         ver = Semver("1.1.0")
         XCTAssertFalse(ver.satisfies(range))
+        
+        range = SemverRange(">0.0.1 <=2.0.0")
+        
+        ver = Semver("1.1")
+        XCTAssertTrue(ver.satisfies(range))
     }
 }
 

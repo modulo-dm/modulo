@@ -412,6 +412,28 @@ internal enum SemverComparator: CustomStringConvertible, Equatable, Hashable {
     case lessThanOrEqual(version: Semver)
     case logicalOr
     
+    static func basicComparator(string: String) -> SemverComparator {
+        let rangeTokens = [Token.LessThan.rawValue,
+                           Token.GreaterThan.rawValue,
+                           Token.LessThanOrEqual.rawValue,
+                           Token.GreaterThanOrEqual.rawValue]
+        
+        var v = Semver(string.stringByRemovingAll(rangeTokens))
+        v.normalize()
+
+        if string.contains(">=") {
+            return .greaterThanOrEqual(version: v)
+        } else if string.contains(">") {
+            return .greaterThan(version: v)
+        } else if string.contains("<=") {
+            return .lessThanOrEqual(version: v)
+        } else if string.contains("<") {
+            return .lessThan(version: v)
+        }
+        
+        return .logicalOr
+    }
+    
     var description: String {
         switch self {
         case .greaterThan(let version):
@@ -469,6 +491,7 @@ internal enum Token: String {
     case Caret = "^"
     case Tilde = "~"
     case Dash = " - "
+    case Space = " "
 }
 
 public struct SemverRange {
@@ -483,6 +506,9 @@ public struct SemverRange {
     }
     
     fileprivate mutating func parse() {
+        // remove the spaces around the dash to prevent conflicts
+        //let trimmedOriginal = original.replace(" - ", replacement: "-")
+        
         let parts = original.components(separatedBy: "||")
         let set = parts.map { (section) -> String in
             let result = section.clean()
@@ -492,16 +518,17 @@ public struct SemverRange {
         comparators = transmogrify(set)
     }
     
-    fileprivate func transmogrify(_ set: [String]) -> [SemverComparator] {
+    fileprivate mutating func transmogrify(_ set: [String]) -> [SemverComparator] {
         var resultSet = [SemverComparator]()
         
-        // don't include dash since we don't strip it.
-        let rangeTokens = [Token.LessThan.rawValue,
-                           Token.GreaterThan.rawValue,
-                           Token.LessThanOrEqual.rawValue,
+        let rangeTokens = [Token.LessThanOrEqual.rawValue,
                            Token.GreaterThanOrEqual.rawValue,
+                           Token.LessThan.rawValue,
+                           Token.GreaterThan.rawValue,
                            Token.Caret.rawValue,
-                           Token.Tilde.rawValue]
+                           Token.Tilde.rawValue,
+                           Token.Dash.rawValue,
+                           Token.Space.rawValue]
         
         // look for the range marker ' - '
         for item in set {
@@ -530,7 +557,15 @@ public struct SemverRange {
                         resultSet.append(.lessThanOrEqual(version: ver2))
                     }
                 }
-            } else if item.containsString(Token.Tilde.rawValue) {
+            } else if item.containsString(Token.Space.rawValue) {
+                // space
+                // now we need to split it in two.
+                let pieces = item.components(separatedBy: Token.Space.rawValue)
+                if pieces.count == 2 {
+                    resultSet.append(SemverComparator.basicComparator(string: pieces[0]))
+                    resultSet.append(SemverComparator.basicComparator(string: pieces[1]))
+                }
+            }  else if item.containsString(Token.Tilde.rawValue) {
                 // ~
                 let piece = item.stringByRemovingAll(rangeTokens)
                 var ver1 = Semver(piece)
@@ -595,7 +630,7 @@ public struct SemverRange {
                     ver1.normalize()
                 }
                 resultSet.append(.greaterThan(version: ver1))
-            } else {
+            } else if item.contains("*") || item.contains("x") || item.contains("X") {
                 // *, x, X
                 let piece = item
                 var ver1 = Semver(piece)
@@ -611,17 +646,14 @@ public struct SemverRange {
                     ver2.increment(.leftMostNonZero)
                     resultSet.append(.lessThan(version: ver2))
                 }
+            } else {
+                // it doesn't match anything.
+                valid = false
+                break
             }
             
             resultSet.append(.logicalOr)
         }
-        
-        // if we ended up with a || at the end, that's useless, so ditch it.
-        /*if let last = resultSet.last {
-            if last.description == SemverComparator.logicalOr.description {
-                resultSet.removeLast()
-            }
-        }*/
         
         return resultSet
     }
