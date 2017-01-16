@@ -15,6 +15,8 @@ import Foundation
 
 public typealias SCMCommandParser = (_ status: Int32, _ output: String?) -> Void
 
+public let SCMDefaultError: Int32 = 9999
+
 public enum SCMResult {
     case success
     case error(code: Int32, message: String)
@@ -84,6 +86,53 @@ public enum SCMCheckoutType {
         }
         return result
     }
+    
+    func checkoutValue() -> String {
+        var result: String
+        switch self {
+        case .branch(let name):
+            result = "branch:\(name)"
+            break
+        case .tag(let name):
+            result = "tag:\(name)"
+            break
+        case .commit(let hash):
+            result = "hash:\(hash)"
+            break
+        case .other(let value):
+            result = value
+            break
+        }
+        return result
+    }
+    
+    static func from(checkout: String) -> SCMCheckoutType {
+        var result: SCMCheckoutType = .other(value: "")
+        
+        let parts = checkout.components(separatedBy: ":")
+        if parts.count == 2 {
+            let type = parts[0]
+            let value = parts[1]
+            switch type {
+            case "branch":
+                result = .branch(name: value)
+                
+            case "tag":
+                result = .tag(name: value)
+                
+            case "hash":
+                result = .commit(hash: value)
+                
+            default:
+                result = .other(value: value)
+            }
+        } else {
+            exit("\(checkout) is not a valid checkout value.")
+        }
+        
+        return result
+    }
+    
 }
 
 
@@ -103,7 +152,7 @@ public protocol SCM {
     func addModulesIgnore() -> SCMResult
     func checkStatus(_ path: String, assumedCheckout: String?) -> SCMResult
     func branches(_ path: String) -> [String]
-    func tags(_ path: String) -> [String]
+    func tags(_ path: String) -> [Semver]
 }
 
 extension SCM {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		468A8B171DF3F8B10060D93C /* TestGit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468A8B161DF3F8B10060D93C /* TestGit.swift */; };
+		653A1E5A1E2CA3BB00F24E70 /* TestCheckout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A1E591E2CA3BB00F24E70 /* TestCheckout.swift */; };
 		655F0C1F1DC3D6CE009DDD72 /* ELFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C761D14942D00411727 /* ELFoundation.framework */; };
 		655F0C241DC3D6D9009DDD72 /* ELCodable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55CAD1D1496A100411727 /* ELCodable.framework */; };
 		65BB0DC81DFB835500D99A25 /* modulo in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAE55C411D14928B00411727 /* modulo */; };
@@ -232,6 +233,7 @@
 
 /* Begin PBXFileReference section */
 		468A8B161DF3F8B10060D93C /* TestGit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestGit.swift; sourceTree = "<group>"; };
+		653A1E591E2CA3BB00F24E70 /* TestCheckout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCheckout.swift; sourceTree = "<group>"; };
 		65E60AE71DFF4FE000DAE913 /* TestDummyApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDummyApp.swift; sourceTree = "<group>"; };
 		65F7356D1E008A320091D3A0 /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = System.h; path = System/System.h; sourceTree = "<group>"; };
 		65F7356E1E008A320091D3A0 /* System.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = System.m; path = System/System.m; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				CAE93D101D21A7BD00C00811 /* TestUpdate.swift */,
 				CACB212C1D3D45B300ACA574 /* TestStatus.swift */,
 				468A8B161DF3F8B10060D93C /* TestGit.swift */,
+				653A1E591E2CA3BB00F24E70 /* TestCheckout.swift */,
 				CA3354491D15CA3600ACD91C /* XCTestCase+Exceptions.m */,
 				CA33544B1D15CA4800ACD91C /* XCTestCase+Exceptions.h */,
 				CAE55C601D1492A500411727 /* Info.plist */,
@@ -875,6 +878,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				653A1E5A1E2CA3BB00F24E70 /* TestCheckout.swift in Sources */,
 				CACB212D1D3D45B300ACA574 /* TestStatus.swift in Sources */,
 				CA0A3F1D1D5A557A00A7F0BB /* SemverTests.swift in Sources */,
 				65E60AE81DFF4FE000DAE913 /* TestDummyApp.swift in Sources */,

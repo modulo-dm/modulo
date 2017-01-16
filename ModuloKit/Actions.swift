@@ -31,7 +31,7 @@ open class Actions {
             checkoutType = checkout!
         }
         
-        let dep = DependencySpec(repositoryURL: url, checkout: checkoutType.value(), redirectURL: nil)
+        let dep = DependencySpec(repositoryURL: url, checkout: checkoutType.checkoutValue(), redirectURL: nil)
         if var workingSpec = ModuleSpec.workingSpec() {
             // does this dep already exist in here??
             if let _ = workingSpec.dependencyForURL(url) {
@@ -73,7 +73,7 @@ open class Actions {
                 }
                 
                 // now check out what they asked for...
-                let checkoutType = SCMCheckoutType.other(value: dep.checkout)
+                let checkoutType = SCMCheckoutType.from(checkout: dep.checkout)
                 let checkoutResult = scm.checkout(checkoutType, path: clonePath)
                 
                 if checkoutResult != .success {

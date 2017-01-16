@@ -19,6 +19,8 @@ func moduloReset() {
     Git().remove("test-add-update")
     Git().remove("test-dep1")
     Git().remove("test-dep2")
+    Git().remove("test-checkout")
+    Git().remove("checkout-test")
     
     State.instance.clear()
 }

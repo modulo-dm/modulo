@@ -95,28 +95,34 @@ open class Git: SCM {
             return .error(code: 1, message: "Module path '\(path)' does not exist.")
         }
         
+        var checkoutCommand = ""
+        
         let initialWorkingPath = FileManager.workingPath()
         FileManager.setWorkingPath(path)
         
-        var value = "master" // default to the master branch.
         switch type {
         case .branch(let name):
-            value = name
+            checkoutCommand = "git checkout --no-track \(name)"
         case .commit(let hash):
-            value = hash
+            checkoutCommand = "git checkout \(hash)"
         case .tag(let name):
-            value = name
+            let existingTags = tags(".")
+            let range = SemverRange(name)
+            if let checkoutTag = range.mostUpToDate(versions: existingTags) {
+                checkoutCommand = "git checkout \(checkoutTag.stringValue)"
+            } else {
+                return .error(code: SCMDefaultError, message: "No tags exist, unable to checkout \(name).")
+            }
         case .other(let other):
-            value = other
+            checkoutCommand = "git checkout \(other)"
         }
         
-        let updateCommand = "git checkout \(value)"
-        let status = runCommand(updateCommand)
+        let status = runCommand(checkoutCommand)
         
         FileManager.setWorkingPath(initialWorkingPath)
         
         if status != 0 {
-            return .error(code: status, message: "Unable to checkout '\(value)'.")
+            return .error(code: status, message: "Unable to checkout '\(type.value)'.")
         }
         
         let submodulesResult = collectAnySubmodules()
@@ -212,8 +218,8 @@ open class Git: SCM {
         return result
     }
 
-    open func tags(_ path: String) -> [String] {
-        var result = [String]()
+    open func tags(_ path: String) -> [Semver] {
+        var result = [Semver]()
         
         if !FileManager.fileExists(path) {
             return result
@@ -222,19 +228,14 @@ open class Git: SCM {
         let initialWorkingPath = FileManager.workingPath()
         FileManager.setWorkingPath(path)
         
-        let command = "git branch -a"
+        let command = "git tag"
         _ = runCommand(command) { (status, output) -> Void in
             if status == 0 {
                 if let output = output {
-                    let lines = output.components(separatedBy: "\n")
-                    let branches = lines.map { (item) -> String in
-                        var branch = item
-                        branch = branch.trimmingCharacters(in: CharacterSet.whitespaces)
-                        branch = branch.trimmingCharacters(in: CharacterSet(["*"," "]))
-                        return branch
+                    let tags = output.components(separatedBy: "\n")
+                    for tag in tags {
+                        result.append(Semver(tag))
                     }
-                    
-                    result = branches
                 }
             }
         }
@@ -261,6 +262,29 @@ extension Git {
         }
         
         return .success
+    }
+    
+    internal func tagAtPath(_ path: String) -> String? {
+        var result: String? = nil
+        
+        let initialWorkingPath = FileManager.workingPath()
+        FileManager.setWorkingPath(path)
+        
+        _ = runCommand("git describe --exact-match --tags") { (status, output) in
+            if let output = output {
+                if output.contains("fatal:") {
+                    // the branch or commit doesn't exist on any remotes.
+                    result = nil
+                } else {
+                    // just take the first one.
+                    result = output.components(separatedBy: "\n")[0]
+                }
+            }
+        }
+        
+        FileManager.setWorkingPath(initialWorkingPath)
+        
+        return result
     }
     
     internal func branchAtPath(_ path: String) -> String? {
@@ -318,6 +342,13 @@ extension Git {
         FileManager.setWorkingPath(initialWorkingPath)
         
         return result
+    }
+    
+    internal func hashesMatch(_ hash1: String, _ hash2: String) -> Bool {
+        let hashMin = min(hash1, hash2)
+        let hashMax = max(hash1, hash2)
+        
+        return hashMax.contains(hashMin)
     }
     
     internal func hasStashes(_ path: String) -> Bool {

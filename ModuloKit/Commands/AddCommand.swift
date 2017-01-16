@@ -35,11 +35,7 @@ open class AddCommand: NSObject, Command {
     open func configureOptions() {
         addOptionValue(["--tag"], usage: "specify the version tag to use", valueSignature: "<tag>") { (option, value) -> Void in
             if let value = value {
-                var tagValue = value
-                if !value.containsString("tags/") {
-                    tagValue = "tags/\(value)"
-                }
-                self.checkoutType = .tag(name: tagValue)
+                self.checkoutType = .tag(name: value)
             }
         }
         

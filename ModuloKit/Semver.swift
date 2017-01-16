@@ -65,9 +65,9 @@ public struct Semver {
     
     public var stringValue: String {
         if let pre = preRelease {
-            return "\(breaking).\(feature).\(fix)-\(pre).\(preReleaseVersionData.map(String.init).joined(separator: "."))"
+            return "\(prefix ?? "")\(breaking).\(feature).\(fix)-\(pre).\(preReleaseVersionData.map(String.init).joined(separator: "."))"
         } else {
-            return "\(breaking).\(feature).\(fix)"
+            return "\(prefix ?? "")\(breaking).\(feature).\(fix)"
         }
     }
     
@@ -741,7 +741,8 @@ extension SemverRange {
             return nil
         }
         
-        return compat.max()
+        let result = compat.max()
+        return result
     }
 }
 

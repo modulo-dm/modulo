@@ -55,6 +55,13 @@ public extension String {
         return result
     }
     
+    func lastPathComponent() -> String {
+        let path: NSString = self as NSString
+        let result: String = path.lastPathComponent
+        
+        return result
+    }
+    
     func removeLastPathComponent() -> String {
         let path: NSString = self as NSString
         let result: String = path.deletingLastPathComponent
