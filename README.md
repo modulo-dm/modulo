@@ -8,7 +8,7 @@ Modulo manages collections of dependent, versioned repositories. It leaves build
 
 ## How is it different from Carthage and CocoaPods?
 
-Modulo doesn't try to build the world for you.  It focuses solely on managing your dependencies at a file system level.  No need to worry about new tools coming out and breaking your build because it's not supported by the dependency manager yet.
+Modulo doesn't try to build the world for you.  It focuses solely on managing your dependencies at a file system level.  No need to worry about your dependency manager supporting the latest version of your build tools.
 
 Modulo also makes it really easy and painless to contribute back to a dependency.  Since it's not building anything, and your dependencies are simply clones of what you specified, the workflow is fast and simple.  If you've ever tried this with Carthage and CocoaPods, it can be very frustrating, not to mention training an entire team of individuals to do it.
 
