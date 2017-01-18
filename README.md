@@ -16,7 +16,7 @@ Modulo is more flexible.  It doesn't explicitly need support from the dependency
 
 Modulo is more informative.  With the --verbose option, it informs you of exactly what it's doing underneath.  It lets you know whether dependencies were pulled in implicitly vs. explicitly.  During updates or other changes, it checks the status of your project and any dependencies and lets you know if things are awry, such as unpushed changes, uncommitted changes, etc. It will let you know of these things and stop before causing problems.
 
-Errors are much easier to recover from.  Following the happy path, CocoaPods and Carthage work very well.  When things get out of whack (in any number of possible ways), it's often very difficult to recover from.  Those other tools don't inform
+Errors and edge cases are much easier to recover from.  Following the happy path, CocoaPods and Carthage work very well.  When things get out of whack (in any number of possible ways), it's often very difficult to recover from.
 
 ## Relationships
 
