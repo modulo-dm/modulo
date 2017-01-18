@@ -102,7 +102,7 @@ open class Git: SCM {
         
         switch type {
         case .branch(let name):
-            checkoutCommand = "git checkout --no-track \(name)"
+            checkoutCommand = "git checkout --detach \(name)"
         case .commit(let hash):
             checkoutCommand = "git checkout \(hash)"
         case .tag(let name):
@@ -285,15 +285,29 @@ extension Git {
     }
     
     internal func branchAtPath(_ path: String) -> String? {
-        // git rev-parse --abbrev-ref HEAD
+        var result = detachedBranchAtPath(path)
+        if result == nil {
+            result = remoteTrackingBranch(path)
+        }
+        return result?.trim()
+    }
+    
+    internal func detachedBranchAtPath(_ path: String) -> String? {
         var result: String? = nil
         
         let initialWorkingPath = FileManager.workingPath()
         FileManager.setWorkingPath(path)
         
-        _ = runCommand("git rev-parse --abbrev-ref HEAD") { (status, output) in
+        _ = runCommand("git branch") { (status, output) in
             if let output = output {
-                result = output.replacingOccurrences(of: "\n", with: "")
+                let lines = output.components(separatedBy: "\n")
+                for line in lines {
+                    if line.contains("* (HEAD detached at") {
+                        var value = line.replace("* (HEAD detached at", replacement: "")
+                        value = value.replace(")", replacement: "")
+                        result = value
+                    }
+                }
             }
         }
         

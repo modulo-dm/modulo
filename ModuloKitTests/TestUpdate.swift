@@ -32,8 +32,8 @@ class TestUpdate: XCTestCase {
         
         FileManager.setWorkingPath("test-add")
         
-        let error = Modulo.run(["update", "--all", "-v"])
-        XCTAssertTrue(error == .success)
+        let result = Modulo.run(["update", "--all", "-v"])
+        XCTAssertTrue(result == .success)
         
         let spec = ModuleSpec.load(contentsOfFile: specFilename)
         XCTAssertTrue(spec!.dependencies.count > 0)
@@ -54,8 +54,8 @@ class TestUpdate: XCTestCase {
         
         FileManager.setWorkingPath("test-add")
         
-        let error = Modulo.run(["update", "-v", "test-init"])
-        XCTAssertTrue(error == .success)
+        let result = Modulo.run(["update", "-v", "test-init"])
+        XCTAssertTrue(result == .success)
         
         let spec = ModuleSpec.load(contentsOfFile: specFilename)
         XCTAssertTrue(spec!.dependencies.count > 0)

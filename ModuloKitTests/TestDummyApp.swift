@@ -28,11 +28,11 @@ class TestDummyApp: XCTestCase {
         
         runCommand("git init")
         
-        var error = Modulo.run(["init", "--app"])
-        XCTAssertTrue(error == .success)
+        var result = Modulo.run(["init", "--app"])
+        XCTAssertTrue(result == .success)
         
-        error = Modulo.run(["add", "git@github.com:modulo-dm/test-add-update.git", "-u", "-v"])
-        XCTAssertTrue(error == .success)
+        result = Modulo.run(["add", "git@github.com:modulo-dm/test-add-update.git", "-u", "-v"])
+        XCTAssertTrue(result == .success)
         
         let spec = ModuleSpec.load(contentsOfFile: specFilename)
         XCTAssertTrue(spec!.module == false)
@@ -51,8 +51,8 @@ class TestDummyApp: XCTestCase {
         
         FileManager.setWorkingPath("test-dummy")
         
-        let error = Modulo.run(["update", "--all", "-v"])
-        XCTAssertTrue(error == .success)
+        let result = Modulo.run(["update", "--all", "-v"])
+        XCTAssertTrue(result == .success)
         
         let spec = ModuleSpec.load(contentsOfFile: specFilename)
         XCTAssertTrue(spec!.module == false)

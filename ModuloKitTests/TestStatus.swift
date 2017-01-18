@@ -32,13 +32,13 @@ class TestStatus: XCTestCase {
         
         FileManager.setWorkingPath("test-add")
         
-        var error = Modulo.run(["update", "--all", "-v"])
-        XCTAssertTrue(error == .success)
+        var result = Modulo.run(["update", "--all", "-v"])
+        XCTAssertTrue(result == .success)
         
         touchFile("../test-dep1/blah.txt")
         
-        error = Modulo.run(["status", "-v"])
-        XCTAssertTrue(error == .dependencyUnclean)
+        result = Modulo.run(["status", "-v"])
+        XCTAssertTrue(result == .dependencyUnclean)
         
         FileManager.setWorkingPath("..")
         
@@ -51,13 +51,13 @@ class TestStatus: XCTestCase {
         
         FileManager.setWorkingPath("test-add")
         
-        var error = Modulo.run(["update", "--all", "-v"])
-        XCTAssertTrue(error == .success)
+        var result = Modulo.run(["update", "--all", "-v"])
+        XCTAssertTrue(result == .success)
         
         touchFile("blah.txt")
         
-        error = Modulo.run(["status", "-v"])
-        XCTAssertTrue(error == .dependencyUnclean)
+        result = Modulo.run(["status", "-v"])
+        XCTAssertTrue(result == .dependencyUnclean)
         
         FileManager.setWorkingPath("..")
         
@@ -70,15 +70,15 @@ class TestStatus: XCTestCase {
         
         FileManager.setWorkingPath("test-add")
         
-        var error = Modulo.run(["update", "--all", "-v"])
-        XCTAssertTrue(error == .success)
+        var result = Modulo.run(["update", "--all", "-v"])
+        XCTAssertTrue(result == .success)
         
         touchFile("blah.txt")
         runCommand("git add blah.txt")
         runCommand("git commit -m \"test\"")
         
-        error = Modulo.run(["status", "-v"])
-        XCTAssertTrue(error == .dependencyUnclean)
+        result = Modulo.run(["status", "-v"])
+        XCTAssertTrue(result == .dependencyUnclean)
         
         FileManager.setWorkingPath("..")
         
@@ -91,8 +91,8 @@ class TestStatus: XCTestCase {
         
         FileManager.setWorkingPath("test-add")
         
-        var error = Modulo.run(["update", "--all", "-v"])
-        XCTAssertTrue(error == .success)
+        var result = Modulo.run(["update", "--all", "-v"])
+        XCTAssertTrue(result == .success)
         
         FileManager.setWorkingPath("../test-dep1")
         
@@ -102,8 +102,8 @@ class TestStatus: XCTestCase {
         
         FileManager.setWorkingPath("../test-add")
         
-        error = Modulo.run(["status", "-v"])
-        XCTAssertTrue(error == .dependencyUnclean)
+        result = Modulo.run(["status", "-v"])
+        XCTAssertTrue(result == .dependencyUnclean)
         
         FileManager.setWorkingPath("..")
         

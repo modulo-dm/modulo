@@ -127,7 +127,14 @@ public enum SCMCheckoutType {
                 result = .other(value: value)
             }
         } else {
-            exit("\(checkout) is not a valid checkout value.")
+            // they just specified the branch, not the remote.  assume 'origin'.
+            if checkout.contains("/") {
+                // maybe they edited the file by hand, and just put "origin/branch" in there.
+                result = .branch(name: checkout)
+            } else {
+                // maybe they didn't and just put 'master'.
+                result = .branch(name: "origin/\(checkout)")
+            }
         }
         
         return result

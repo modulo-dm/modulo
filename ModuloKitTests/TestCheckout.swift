@@ -30,15 +30,16 @@ class TestCheckout: XCTestCase {
         
         runCommand("git init")
         
-        var error = Modulo.run(["init", "--app"])
-        XCTAssertTrue(error == .success)
+        var result = Modulo.run(["init", "--app"])
+        XCTAssertTrue(result == .success)
         
-        error = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--branch", "origin/v2-branch", "-u", "-v"])
-        XCTAssertTrue(error == .success)
+        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--branch", "origin/v2-branch", "-u", "-v"])
+        XCTAssertTrue(result == .success)
         
         XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
         
-        XCTAssertTrue(Git().branchAtPath("modules/test-checkout") == "v2-branch")
+        let branch = Git().branchAtPath("modules/test-checkout")
+        XCTAssertTrue(branch == "origin/v2-branch")
     }
     
     func testTagCheckout() {
@@ -48,11 +49,11 @@ class TestCheckout: XCTestCase {
         
         runCommand("git init")
         
-        var error = Modulo.run(["init", "--app"])
-        XCTAssertTrue(error == .success)
+        var result = Modulo.run(["init", "--app"])
+        XCTAssertTrue(result == .success)
         
-        error = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--tag", "v2.0.0", "-u", "-v"])
-        XCTAssertTrue(error == .success)
+        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--tag", "v2.0.0", "-u", "-v"])
+        XCTAssertTrue(result == .success)
         
         XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
         
@@ -67,11 +68,11 @@ class TestCheckout: XCTestCase {
         
         runCommand("git init")
         
-        var error = Modulo.run(["init", "--app"])
-        XCTAssertTrue(error == .success)
+        var result = Modulo.run(["init", "--app"])
+        XCTAssertTrue(result == .success)
         
-        error = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--tag", ">0.0.2 <=2.0.1", "-u", "-v"])
-        XCTAssertTrue(error == .success)
+        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--tag", ">0.0.2 <=2.0.1", "-u", "-v"])
+        XCTAssertTrue(result == .success)
         
         XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
         
@@ -86,11 +87,11 @@ class TestCheckout: XCTestCase {
         
         runCommand("git init")
         
-        var error = Modulo.run(["init", "--app"])
-        XCTAssertTrue(error == .success)
+        var result = Modulo.run(["init", "--app"])
+        XCTAssertTrue(result == .success)
         
-        error = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--tag", "nosemver", "-u", "-v"])
-        XCTAssertTrue(error == .success)
+        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--tag", "nosemver", "-u", "-v"])
+        XCTAssertTrue(result == .success)
         
         XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
         
@@ -105,11 +106,11 @@ class TestCheckout: XCTestCase {
         
         runCommand("git init")
         
-        var error = Modulo.run(["init", "--app"])
-        XCTAssertTrue(error == .success)
+        var result = Modulo.run(["init", "--app"])
+        XCTAssertTrue(result == .success)
         
-        error = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--commit", "c4d6208", "-u", "-v"])
-        XCTAssertTrue(error == .success)
+        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--commit", "c4d6208", "-u", "-v"])
+        XCTAssertTrue(result == .success)
         
         XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
         
@@ -124,11 +125,11 @@ class TestCheckout: XCTestCase {
         
         runCommand("git init")
         
-        var error = Modulo.run(["init", "--app"])
-        XCTAssertTrue(error == .success)
+        var result = Modulo.run(["init", "--app"])
+        XCTAssertTrue(result == .success)
         
-        error = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--commit", "c4d62082ab93002e39295f6bde6659a9b68d3c59", "-u", "-v"])
-        XCTAssertTrue(error == .success)
+        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--commit", "c4d62082ab93002e39295f6bde6659a9b68d3c59", "-u", "-v"])
+        XCTAssertTrue(result == .success)
         
         XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
         
