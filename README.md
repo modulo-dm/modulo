@@ -1,6 +1,6 @@
 # modulo
 
-Modulo's goal is to orchestrate repositories and filesystem assets for large, modular projects. For example, collections of services or libraries or components that have versioned dependencies between themselves.
+Modulo is a source-only dependency manager.  Its primary goal is to orchestrate repositories and filesystem assets for large, modular projects. For example, collections of services or libraries or components that have versioned dependencies between themselves.
 
 Modulo manages collections of dependent, versioned repositories. It leaves build concerns to build systems (eg: Xcode, Xcodebuild, Maven, make, etc), and is designed to be agnostic about source code management systems (eg: Git, Subversion\*).
 
