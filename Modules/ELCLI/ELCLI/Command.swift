@@ -13,12 +13,16 @@ import Foundation
 import ELFoundation
 #endif
 
+@objc
 public protocol Command: AnyObject {
     // descriptive properties
     var name: String { get }
     var shortHelpDescription: String { get }
     var longHelpDescription: String { get }
     var failOnUnrecognizedOptions: Bool { get }
+    
+    @objc
+    optional var customUsage: String { get }
     
     // global command properties
     var verbose: Bool { get set }
@@ -56,23 +60,27 @@ public extension Command {
     }
     
     public func showHelp() {
-        write(.stdout, "usage: ")
-        write(.stdout, "\(ProcessInfo.processInfo.processName) ")
-        write(.stdout, "\(name) [options] ")
-        
         let options = self.options
         
-        // find any flagless value signature so we can display them since they're non-optional.
-        var flagless = options.filter { (option) -> Bool in
-            if option.flags == nil && option.valueSignatures != nil {
-                return true
+        write(.stdout, "usage: ")
+        write(.stdout, "\(ProcessInfo.processInfo.processName) ")
+        if let usage = customUsage {
+            write(.stdout, "\(name) \(usage)")
+        } else {
+            write(.stdout, "\(name) [options] ")
+            
+            // find any flagless value signature so we can display them since they're non-optional.
+            var flagless = options.filter { (option) -> Bool in
+                if option.flags == nil && option.valueSignatures != nil {
+                    return true
+                }
+                return false
             }
-            return false
-        }
-        
-        if flagless.count > 0, let signatures = flagless[0].valueSignatures {
-            for index in 0..<signatures.count {
-                write(.stdout, signatures[index] + " ")
+            
+            if flagless.count > 0, let signatures = flagless[0].valueSignatures {
+                for index in 0..<signatures.count {
+                    write(.stdout, signatures[index] + " ")
+                }
             }
         }
         

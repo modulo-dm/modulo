@@ -47,7 +47,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "~/temp/test-dummy"
+      customWorkingDirectory = "~/work/test-add"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
@@ -64,7 +64,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "status"
+            argument = "set test-dep1 --tag &quot;1.x&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

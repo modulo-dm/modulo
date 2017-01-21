@@ -14,9 +14,9 @@ import Foundation
 
 public struct DependencySpec {
     // repository url to fetch the dep from
-    let repositoryURL: String
+    var repositoryURL: String
     // can be a branch, commit, or tag
-    let checkout: String
+    var checkout: String
     // if this has a value, don't allow updates
     let redirectURL: String?
 }
@@ -46,7 +46,7 @@ extension DependencySpec: Encodable {
 }
 
 extension DependencySpec {
-    func name() -> String {
+    public func name() -> String {
         return repositoryURL.nameFromRemoteURL()
     }
 }

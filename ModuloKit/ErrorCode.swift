@@ -25,6 +25,7 @@ public enum ErrorCode: Int {
     case noMatchingDependencies = 8
     case dependencyAlreadyExists = 9
     case dependencyUnclean = 10
+    case dependencyUnknown = 11
     
     var description: String {
         var result: String = ""
@@ -51,6 +52,8 @@ public enum ErrorCode: Int {
             result = "The dependency already exists."
         case .dependencyUnclean:
             result = "The dependency is not clean."
+        case .dependencyUnknown:
+            result = "The specified dependency is unknown."
         }
         return result
     }

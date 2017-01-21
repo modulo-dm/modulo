@@ -189,5 +189,11 @@ public extension ModuleSpec {
             }
         }
     }
+    
+    public mutating func removeDependency(_ dep: DependencySpec) {
+        dependencies = dependencies.filter { (item) in
+            return dep.name() != item.name()
+        }
+    }
 }
 
