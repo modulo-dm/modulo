@@ -219,4 +219,4 @@ Dependencies for `test-add`:
            used by : test-dep2
 ```
 
-As you can see here, test-init is used twice within the tree.  Once by `test-add` itself, and yet again by `test-dep2`.  This also shows explicit vs. implicit dependencies.  Explicit being that `test-add` specifically requires `test-dep1` directly, whereas `test-dep2` is only present because of that.
+As you can see here, test-init is used twice within the tree.  Once by `test-add` itself, and yet again by `test-dep2`.  This also shows explicit vs. implicit dependencies.  Explicit being that `test-add` specifically requires `test-dep1` directly, whereas `test-dep2` is only present because `test-dep1` needs it.
