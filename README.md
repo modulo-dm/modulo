@@ -164,6 +164,8 @@ In the example above, 'MyProject' depends on the other 3 dependencies, and all l
 
 ### Adding dependencies
 
+Use the `add` command:
+
 ```bash
 $ modulo add git@github.com:modulo-dm/test-init.git
 
@@ -181,3 +183,40 @@ Added git@github.com:modulo-dm/test-checkout.git.  Run the `update` command to c
 You'll notice here that a semver range was used in place of the tag.  That means that `modulo update` will get the latest tag that satisfies the specified range.  You can combine this process into a single step by specifying `--update` on the command line.
 
 ### Updating dependencies
+
+Use the `update` command.  In instances where the dependency doesn't exist on the filesystem yet, Modulo will clone it to either `.\modules` or `..\` depending on whether you're working on an application or a module.  If the dependency does exist on the filesystem, a fetch will be performed.  Once either of those complete, it will checkout the tag/branch/commit necessary.
+
+```bash
+$ modulo update --all
+
+working on: test-init...
+working on: test-dep1...
+working on: test-dep2...
+working on: test-init...
+```
+
+### Mapping the Dependency Tree
+
+By using the `map` command, Modulo can help provide you with a visual view of your dependency tree.
+
+```bash
+$ modulo map
+Dependencies for `test-add`:
+  │
+  ├─ name    : test-init
+  │  explicit: true
+  │  used by : test-dep2
+  │
+  └─ name    : test-dep1
+     explicit: true
+     │
+     └─ name    : test-dep2
+        explicit: false
+        used by : test-dep1
+        │
+        └─ name    : test-init
+           explicit: true
+           used by : test-dep2
+```
+
+As you can see here, test-init is used twice within the tree.  Once by `test-add` itself, and yet again by `test-dep2`.  This also shows explicit vs. implicit dependencies.  Explicit being that `test-add` specifically requires `test-dep1` directly, whereas `test-dep2` is only present because of that.
