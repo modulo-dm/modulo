@@ -90,6 +90,42 @@ This will leave the modulo binary in `/tmp/modulo`
 
 ## Usage
 
+### Getting Help
+
+Modulo's command line interface is very much like Git.
+
+```bash
+$ modulo --help
+usage: modulo <command> [<args>]
+
+The most commonly used modulo commands are:
+   init           Initialize modulo
+   add            Adds a module dependency
+   update         Updates module dependencies
+   status         Gathers status about the module tree
+   map            Displays information about dependencies
+   set            Sets dependency values
+```
+
+Each command has more specific help associated with it:
+
+```bash
+$ modulo add --help
+usage: modulo add [options] <repo url>
+
+Add the given repository as a module to the current project and clone it into the project itself or a higher level container project.
+
+In the instance no tag, branch, or commit is specified, 'master' is used.
+
+     --tag <tag>           specify the version tag to use
+     --branch <branch>     specify the branch to use
+     --commit <hash>       specify the commit to use
+     -u, --update          performs the update command after adding a module
+     --help                show help for this command
+     -v, --verbose         be verbose
+
+```
+
 ### Create an application
 
 Modulo has two modes of operation, App and Module.  Whichever you happen to be doing, it is only necessary to specify on \`init\`.
@@ -125,5 +161,23 @@ work\
 ```
 
 In the example above, 'MyProject' depends on the other 3 dependencies, and all live as peers on the filesystem.  This ensures that when they are used in an Application, that they are all still peers in the filesystem.
+
+### Adding dependencies
+
+```bash
+$ modulo add git@github.com:modulo-dm/test-init.git
+
+Added git@github.com:modulo-dm/test-init.git.  Run the `update` command to complete the process.
+```
+
+When no branch/tag/commit is specified, a branch, "origin/master" is assumed.  You can get more specific as to what your dependency is by using the --commit, --branch, --tag flags, like so:
+
+```bash
+$ modulo add git@github.com/modulo-dm/test-checkout.git --tag ">0.0.2 <=2.0.1"
+
+Added git@github.com:modulo-dm/test-checkout.git.  Run the `update` command to complete the process.
+```
+
+You'll notice here that a semver range was used in place of the tag.  That means that `modulo update` will get the latest tag that satisfies the specified range.  You can combine this process into a single step by specifying `--update` on the command line.
 
 ### Updating dependencies
