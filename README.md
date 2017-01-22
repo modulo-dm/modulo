@@ -69,7 +69,9 @@ Utilities/
 
 ### With `homebrew`
 
-Homebrew will download and build `modulo` from source, so you'll need Xcode 8.1 for this to work.
+Coming Soon!
+
+~~Homebrew will download and build `modulo` from source, so you'll need Xcode 8.1 for this to work.~~
 
 ```bash
 $ brew install modulo
