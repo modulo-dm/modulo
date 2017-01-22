@@ -49,7 +49,7 @@ open class MapCommand: NSObject, Command {
             }
         } else {
             for (index, dep) in spec.dependencies.enumerated() {
-                printMapReadable(mainSpec: spec, depth: 0, index: index, count: spec.dependencies.count, dep: dep, allDependencies: deps)
+                printMapVisualAccuracy(mainSpec: spec, depth: 0, index: index, count: spec.dependencies.count, dep: dep, allDependencies: deps)
             }
         }
         
