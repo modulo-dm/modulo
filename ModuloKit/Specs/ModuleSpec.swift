@@ -197,3 +197,13 @@ public extension ModuleSpec {
     }
 }
 
+public func whatDependsOn(_ dep: DependencySpec, outOf dependencies: [DependencySpec]) -> [DependencySpec] {
+    return dependencies.filter{ (item) -> Bool in
+        if let itemSpec = ModuleSpec.load(item) {
+            let match = itemSpec.dependencyForName(dep.name())
+            return match != nil
+        }
+        return false
+    }
+}
+

@@ -147,27 +147,3 @@ public func printCommand(_ command: Command) {
     
     writeln(.stdout, commandData)
 }
-
-extension String {
-    func padFront(_ maxLength: Int) -> String {
-        var spaces = ""
-        if maxLength > self.characters.count {
-            for _ in 0..<(maxLength - self.characters.count) {
-                spaces += " "
-            }
-        }
-        
-        return "\(spaces)\(self)"
-    }
-    
-    func padBack(_ maxLength: Int) -> String {
-        var spaces = ""
-        if maxLength > self.characters.count {
-            for _ in 0..<(maxLength - self.characters.count) {
-                spaces += " "
-            }
-        }
-        
-        return "\(self)\(spaces)"
-    }
-}

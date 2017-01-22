@@ -64,7 +64,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "set test-dep1 --tag &quot;1.x&quot;"
+            argument = "map --verbose"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

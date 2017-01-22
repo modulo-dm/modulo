@@ -73,13 +73,13 @@ open class SetCommand: NSObject, Command {
         }
         
         if view {
-            writeln(.stdout, "Explicit Dependencies:")
+            writeln(.stdout, "Explicit Dependencies for `\(spec.name)`:")
             let deps = spec.dependencies
             
             for dep in deps {
-                writeln(.stdout, "  name     : \(dep.name())")
-                writeln(.stdout, "  SCM url  : \(dep.repositoryURL)")
-                writeln(.stdout, "  checkout : \(dep.checkout)\n")
+                writeln(.stdout, "  name    : \(dep.name())")
+                writeln(.stdout, "  SCM url : \(dep.repositoryURL)")
+                writeln(.stdout, "  checkout: \(dep.checkout)\n")
             }
         } else {
             guard let depName = depName else {
