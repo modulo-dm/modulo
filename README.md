@@ -92,8 +92,38 @@ This will leave the modulo binary in `/tmp/modulo`
 
 ### Create an application
 
+Modulo has two modes of operation, App and Module.  Whichever you happen to be doing, it is only necessary to specify on \`init\`.
 
+```bash
+$ modulo init --app
+```
+This will initialize your project for Modulo.  You can now \`add\` and \`update\` any dependencies you may need.  In Application mode, all dependencies will live in a subfolder called 'modules'.  When you have done this, your file system will look something like this:
+
+```
+MyApplication\
+    modules\
+        mydependency1\
+        mydependency2\
+        someGitRepo\
+```
 
 ### Create a module
+
+When creating a module for others to use, you'll want to initialize your project in module mode.
+
+```bash
+$ modulo init --module
+```
+Any dependencies you add will be cloned one level up the filesystem.  Here's an example of how it might look were your project named 'MyProject':
+
+```
+work\
+    MyProject\
+    mydependency1\
+    mydependency2\
+    someGitRepo\
+```
+
+In the example above, 'MyProject' depends on the other 3 dependencies, and all live as peers on the filesystem.  This ensures that when they are used in an Application, that they are all still peers in the filesystem.
 
 ### Updating dependencies
