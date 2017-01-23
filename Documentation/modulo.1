@@ -1,0 +1,71 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "MODULO" "1" "January 2017" "Modulo" "Modulo manual"
+.
+.SH "NAME"
+\fBmodulo\fR \- A source\-only dependency manager
+.
+.SH "SYNOPSIS"
+\fBmodulo\fR [\-\-version] [\-\-help]
+.
+.SH "DESCRIPTION"
+Modulo is a source\-only dependency manager\. Its primary goal is to orchestrate repositories and filesystem assets for large, modular projects\. For example, collections of services or libraries or components that have versioned dependencies between themselves\.
+.
+.P
+Modulo manages collections of dependent, versioned repositories\. It leaves build concerns to build systems (eg: Xcode, Xcodebuild, Maven, make, etc), and is designed to be agnostic about source code management systems (eg: Git, Subversion*)\.
+.
+.P
+A formatted and hyperlinked copy of the latest Modulo documentation can be viewed at https://github\.com/modulo\-dm/modulo
+.
+.P
+* only git is currently supported at the moment, others to follow
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-\-version\fR
+Prints the Modulo version number\.
+.
+.TP
+\fB\-h, \-\-help\fR
+Prints the synopsis and a list of the most commonly used commands\.
+.
+.SH "MODULO COMMANDS"
+We divide modulo into high level commands, each with their own \fB\-\-help\fR information\.
+.
+.TP
+\fBmodulo\-init(1)\fR
+Initialize Modulo for a given project\.
+.
+.TP
+\fBmodulo\-add(1)\fR
+Add a dependency to a given project\.
+.
+.TP
+\fBmodulo\-update(1)\fR
+Update dependencies on a given project\.
+.
+.TP
+\fBmodulo\-remove(1)\fR
+Remove dependency from a given project\.
+.
+.TP
+\fBmodulo\-status(1)\fR
+Shows the overall status of a project and it\'s dependencies\.
+.
+.TP
+\fBmodulo\-map(1)\fR
+Display a map of the dependency tree for a given project\.
+.
+.SH "FILE/DIRECTORY STRUCTURE"
+Please see \fBmodulo\-layout(1)\fR
+.
+.SH "REPORTING BUGS"
+Report bugs to the Github Project located at https://github\.com/modulo\-dm/modulo/\. You\'ll be able to see the status and track any issues you create\.
+.
+.SH "AUTHORS"
+Brandon Sneed \fIbrandon@redf\.net\fR
+.
+.br
+Peat Bakke \fIpeat@peat\.org\fR
