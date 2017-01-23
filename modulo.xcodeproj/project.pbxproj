@@ -246,6 +246,11 @@
 		659D68AB1E3572A7008750C2 /* building.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = building.md; sourceTree = "<group>"; };
 		659D68AD1E35798D008750C2 /* modulo.1.ronn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = modulo.1.ronn; sourceTree = "<group>"; };
 		659D68AF1E35C52F008750C2 /* auth_man_pages.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = auth_man_pages.md; sourceTree = "<group>"; };
+		659D68B11E35CBB2008750C2 /* modulo-layout.1.ronn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "modulo-layout.1.ronn"; sourceTree = "<group>"; };
+		659D68B21E35D0D0008750C2 /* modulo-init.1.ronn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "modulo-init.1.ronn"; sourceTree = "<group>"; };
+		659D68B31E35D585008750C2 /* modulo-add.1.ronn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "modulo-add.1.ronn"; sourceTree = "<group>"; };
+		659D68B41E35DD70008750C2 /* build-man.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "build-man.sh"; sourceTree = "<group>"; };
+		659D68B51E35DD70008750C2 /* install-man.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "install-man.sh"; sourceTree = "<group>"; };
 		65E60AE71DFF4FE000DAE913 /* TestDummyApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDummyApp.swift; sourceTree = "<group>"; };
 		65F7356D1E008A320091D3A0 /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = System.h; path = System/System.h; sourceTree = "<group>"; };
 		65F7356E1E008A320091D3A0 /* System.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = System.m; path = System/System.m; sourceTree = "<group>"; };
@@ -348,9 +353,14 @@
 		659D68AA1E357286008750C2 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
+				659D68B41E35DD70008750C2 /* build-man.sh */,
+				659D68B51E35DD70008750C2 /* install-man.sh */,
 				659D68AB1E3572A7008750C2 /* building.md */,
 				659D68AF1E35C52F008750C2 /* auth_man_pages.md */,
 				659D68AD1E35798D008750C2 /* modulo.1.ronn */,
+				659D68B11E35CBB2008750C2 /* modulo-layout.1.ronn */,
+				659D68B21E35D0D0008750C2 /* modulo-init.1.ronn */,
+				659D68B31E35D585008750C2 /* modulo-add.1.ronn */,
 			);
 			path = Documentation;
 			sourceTree = SOURCE_ROOT;

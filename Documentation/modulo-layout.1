@@ -1,0 +1,95 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "MODULO\-LAYOUT" "1" "January 2017" "Modulo" "Modulo manual"
+.
+.SH "NAME"
+\fBmodulo\-layout\fR \- Explains the file system layout
+.
+.SH "RELATIONSHIPS"
+Modulo understands relationships between \fImodules\fR and \fIapplications\fR\. Modules may be dependent as peers, whereas an application depends on a set of modules:
+.
+.IP "" 4
+.
+.nf
+
+Module \-> [Module, Module, \.\.\.]
+Application \-> [Module, Module, \.\.\.]
+.
+.fi
+.
+.IP "" 0
+.
+.P
+(Note: nothing can be dependent on an application)
+.
+.P
+As an example, let\'s consider an application named "Fancy App" that depends on some shared components and media assets\. To make it a little more complicated, one of the shared components also depends on a utility library\.
+.
+.P
+In other words, there are two sets of dependencies to be managed:
+.
+.IP "" 4
+.
+.nf
+
+Fancy App \-> [Component A, Component B, Assets]
+Component A \-> [Utilities]
+.
+.fi
+.
+.IP "" 0
+.
+.P
+These dependencies will get arranged directory structure as such:
+.
+.IP "" 4
+.
+.nf
+
+Fancy App/
+modules/
+Component A/
+Component B/
+Utilities/
+Assets/
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Note that "Fancy App" is the root, and that all of the modules are checked out into the \fBmodules/\fR directory, including the \fBUtilities\fR dependency\.
+.
+.P
+To put a twist on this scenario, if you\'re developing on \fBComponent A\fR in isolation, and you only want to check it out with it\'s dependencies, you would end up with a directory structure like this:
+.
+.IP "" 4
+.
+.nf
+
+Component A/
+Utilities/
+.
+.fi
+.
+.IP "" 0
+.
+.P
+\&\.\.\. Where \fBComponent A\fR and \fBUtilities\fR are peers in the file system\.
+.
+.SH "SEE ALSO"
+modulo(1), modulo\-init(1), modulo\-update(1)
+.
+.SH "REPORTING BUGS"
+Report bugs to the Github Project located at https://github\.com/modulo\-dm/modulo/\. You\'ll be able to see the status and track any issues you create\.
+.
+.SH "AUTHORS"
+.
+.nf
+
+Brandon Sneed <brandon@redf\.net>
+Peat Bakke <peat@peat\.org>
+.
+.fi
+

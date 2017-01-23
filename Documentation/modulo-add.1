@@ -1,0 +1,109 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "MODULO\-ADD" "1" "January 2017" "Modulo" "Modulo manual"
+.
+.SH "NAME"
+\fBmodulo\-add\fR \- Initialize a project for use with Modulo\.
+.
+.SH "SYNOPSIS"
+\fBmodulo add\fR [\-u] \fIrepo_url\fR
+.
+.br
+\fBmodulo add\fR \-\-tag [\-u] \fIsemver\fR \fIrepo_url\fR
+.
+.br
+\fBmodulo add\fR \-\-branch [\-u] \fIbranch\fR \fIrepo_url\fR
+.
+.br
+\fBmodulo add\fR \-\-commit [\-u] \fIcommit\fR \fIrepo_url\fR
+.
+.br
+.
+.SH "DESCRIPTION"
+This command adds a dependency to the current project\. When no tag/branch/commit is specified, \fBorigin/master\fR is assumed\.
+.
+.P
+No cloning of dependencies, etc\. takes place here unless \fB\-\-update\fR is specified\.
+.
+.P
+Any dependencies that are cloned (even branches) are in a detached\-head state\. This forces the same workflow to be used regardless of the checkout type\.
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-\-tag\fR \fIsemver\fR
+This option specifies that a semver tag or range should be checked out\. Modulo treats semver as \fBbreaking\.feature\.fix\fR since that is more meaningful to most\.
+.
+.IP
+Modulo\'s semver implementation follows the \fBnpm\fR implementation very closely\. To read more, visit:
+.
+.IP
+https://docs\.npmjs\.com/getting\-started/semantic\-versioning
+.
+.TP
+\fB\-\-branch\fR \fIbranch\fR
+Specify the branch desired on checkedout\. It\'s preferrable to specify the remote, ie: \fBorigin/mybranch\fR\. If omitted, \fBorigin\fR will be the assumed remote\.\'
+.
+.TP
+\fB\-\-commit\fR \fIcommit\fR
+Specify the commit hash to be used on checkout\. This accepts both short and long hashes\.
+.
+.TP
+\fB\-u, \-\-update\fR
+Immediately perform an \fBupdate\fR after adding the dependency\. This will clone if necessary, as well as perform any dependency compatibility checks\.
+.
+.TP
+\fB\-v, \-\-verbose\fR
+Prints verbose output\. Use this to see what underlying SCM commands are being used and any other important information\.
+.
+.TP
+\fB\-h, \-\-help\fR
+Prints the help for this command\.
+.
+.SH "EXAMPLES"
+\fBmodulo add \-\-tag ">=1\.1 < 2\.0\.0" \-\-update git@github\.com/something/yadda\.git\fR
+.
+.P
+This will do the following
+.
+.br
+* Add yadda\.git as a dependency\.
+.
+.br
+* Clone yadda\.git, because \-\-update was specified\.
+.
+.br
+* Checkout the latest tag that is greater than or equal to 1\.1\.0, but less than 2\.0\.0
+.
+.br
+.
+.P
+\fBmodulo add \-\-branch master git@github\.com/something/yadda\.git\fR
+.
+.P
+This will
+.
+.br
+* Add yadda\.git as a dependency\.
+.
+.br
+* Record that when performing update, the branch \fBorigin/master\fR is to be checked out\.
+.
+.br
+.
+.SH "SEE ALSO"
+modulo\-layout(1), modulo\-update(1), modulo\-remove(1)
+.
+.SH "REPORTING BUGS"
+Report bugs to the Github Project located at https://github\.com/modulo\-dm/modulo/\. You\'ll be able to see the status and track any issues you create\.
+.
+.SH "AUTHORS"
+.
+.nf
+
+Brandon Sneed <brandon@redf\.net>
+Peat Bakke <peat@peat\.org>
+.
+.fi
+
