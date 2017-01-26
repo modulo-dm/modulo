@@ -15,7 +15,6 @@
 		659D68A41E33E753008750C2 /* SetCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659D689B1E33E748008750C2 /* SetCommand.swift */; };
 		659D68A61E340516008750C2 /* MapCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659D68A51E340516008750C2 /* MapCommand.swift */; };
 		659D68A71E340516008750C2 /* MapCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659D68A51E340516008750C2 /* MapCommand.swift */; };
-		659D68AE1E35798D008750C2 /* modulo.1.ronn in Sources */ = {isa = PBXBuildFile; fileRef = 659D68AD1E35798D008750C2 /* modulo.1.ronn */; };
 		65BB0DC81DFB835500D99A25 /* modulo in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAE55C411D14928B00411727 /* modulo */; };
 		65C411E01DC3D6700085365C /* ELCLI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C801D14943300411727 /* ELCLI.framework */; };
 		65E60AE81DFF4FE000DAE913 /* TestDummyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E60AE71DFF4FE000DAE913 /* TestDummyApp.swift */; };
@@ -213,13 +212,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = CAE55BFD1D13A61900411727;
 			remoteInfo = ELCodable_osx;
-		};
-		CAE55D0F1D149F1B00411727 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CAE55C391D14928B00411727 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CAE55C4F1D1492A500411727;
-			remoteInfo = ModuloKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -649,7 +641,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				CAE55D101D149F1B00411727 /* PBXTargetDependency */,
 			);
 			name = modulo;
 			productName = modulo;
@@ -868,7 +859,6 @@
 				CAE55CE51D149BD800411727 /* EncodeOperators.swift in Sources */,
 				CAE55CE01D149BD800411727 /* Decodable.swift in Sources */,
 				CA0A3F131D5A3D7700A7F0BB /* Semver.swift in Sources */,
-				659D68AE1E35798D008750C2 /* modulo.1.ronn in Sources */,
 				CAE55CC81D1497A200411727 /* NSBundle.swift in Sources */,
 				CAE55D191D14CA0200411727 /* SCM.swift in Sources */,
 				CAE55D171D14C9FB00411727 /* ModuleSpec.swift in Sources */,
@@ -979,11 +969,6 @@
 			isa = PBXTargetDependency;
 			name = ELCodable_osx;
 			targetProxy = CAE55CB11D1496B400411727 /* PBXContainerItemProxy */;
-		};
-		CAE55D101D149F1B00411727 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CAE55C4F1D1492A500411727 /* ModuloKit */;
-			targetProxy = CAE55D0F1D149F1B00411727 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
