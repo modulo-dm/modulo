@@ -5,8 +5,8 @@ modulo-add(1) -- Initialize a project for use with Modulo.
 
 `modulo add` [-u] <repo_url><br />
 `modulo add` --tag [-u] <semver> <repo_url><br />
-`modulo add` --branch [-u] <branch> <repo_url><br />
-`modulo add` --commit [-u] <commit> <repo_url><br />
+`modulo add` --branch [-u] <branchname> <repo_url><br />
+`modulo add` --commit [-u] <commithash> <repo_url><br />
 
 ## DESCRIPTION
 
@@ -25,11 +25,11 @@ Any dependencies that are cloned (even branches) are in a detached-head state.  
 
     https://docs.npmjs.com/getting-started/semantic-versioning
 
-* `--branch` <branch>:
+* `--branch` <branchname>:
     Specify the branch desired on  checkedout.
     It's preferrable to specify the remote, ie: `origin/mybranch`.  If omitted, `origin` will be the assumed remote.'
 
-* `--commit` <commit>:
+* `--commit` <commithash>:
     Specify the commit hash to be used on checkout.  This accepts both short and long hashes.
 
 * `-u, --update`:

@@ -13,10 +13,10 @@
 \fBmodulo add\fR \-\-tag [\-u] \fIsemver\fR \fIrepo_url\fR
 .
 .br
-\fBmodulo add\fR \-\-branch [\-u] \fIbranch\fR \fIrepo_url\fR
+\fBmodulo add\fR \-\-branch [\-u] \fIbranchname\fR \fIrepo_url\fR
 .
 .br
-\fBmodulo add\fR \-\-commit [\-u] \fIcommit\fR \fIrepo_url\fR
+\fBmodulo add\fR \-\-commit [\-u] \fIcommithash\fR \fIrepo_url\fR
 .
 .br
 .
@@ -42,11 +42,11 @@ Modulo\'s semver implementation follows the \fBnpm\fR implementation very closel
 https://docs\.npmjs\.com/getting\-started/semantic\-versioning
 .
 .TP
-\fB\-\-branch\fR \fIbranch\fR
+\fB\-\-branch\fR \fIbranchname\fR
 Specify the branch desired on checkedout\. It\'s preferrable to specify the remote, ie: \fBorigin/mybranch\fR\. If omitted, \fBorigin\fR will be the assumed remote\.\'
 .
 .TP
-\fB\-\-commit\fR \fIcommit\fR
+\fB\-\-commit\fR \fIcommithash\fR
 Specify the commit hash to be used on checkout\. This accepts both short and long hashes\.
 .
 .TP

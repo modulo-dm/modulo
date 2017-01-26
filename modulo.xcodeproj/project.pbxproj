@@ -15,9 +15,7 @@
 		659D68A41E33E753008750C2 /* SetCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659D689B1E33E748008750C2 /* SetCommand.swift */; };
 		659D68A61E340516008750C2 /* MapCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659D68A51E340516008750C2 /* MapCommand.swift */; };
 		659D68A71E340516008750C2 /* MapCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659D68A51E340516008750C2 /* MapCommand.swift */; };
-		659D68AC1E3572A7008750C2 /* building.md in Sources */ = {isa = PBXBuildFile; fileRef = 659D68AB1E3572A7008750C2 /* building.md */; };
 		659D68AE1E35798D008750C2 /* modulo.1.ronn in Sources */ = {isa = PBXBuildFile; fileRef = 659D68AD1E35798D008750C2 /* modulo.1.ronn */; };
-		659D68B01E35C52F008750C2 /* auth_man_pages.md in Sources */ = {isa = PBXBuildFile; fileRef = 659D68AF1E35C52F008750C2 /* auth_man_pages.md */; };
 		65BB0DC81DFB835500D99A25 /* modulo in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAE55C411D14928B00411727 /* modulo */; };
 		65C411E01DC3D6700085365C /* ELCLI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C801D14943300411727 /* ELCLI.framework */; };
 		65E60AE81DFF4FE000DAE913 /* TestDummyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E60AE71DFF4FE000DAE913 /* TestDummyApp.swift */; };
@@ -251,6 +249,8 @@
 		659D68B31E35D585008750C2 /* modulo-add.1.ronn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "modulo-add.1.ronn"; sourceTree = "<group>"; };
 		659D68B41E35DD70008750C2 /* build-man.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "build-man.sh"; sourceTree = "<group>"; };
 		659D68B51E35DD70008750C2 /* install-man.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "install-man.sh"; sourceTree = "<group>"; };
+		659D68B61E36B089008750C2 /* modulo-update.1.ronn */ = {isa = PBXFileReference; lastKnownFileType = text; path = "modulo-update.1.ronn"; sourceTree = "<group>"; };
+		65BAAC8E1E3A6FCA00A24C45 /* modulo.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = modulo.rb; sourceTree = "<group>"; };
 		65E60AE71DFF4FE000DAE913 /* TestDummyApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDummyApp.swift; sourceTree = "<group>"; };
 		65F7356D1E008A320091D3A0 /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = System.h; path = System/System.h; sourceTree = "<group>"; };
 		65F7356E1E008A320091D3A0 /* System.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = System.m; path = System/System.m; sourceTree = "<group>"; };
@@ -361,8 +361,17 @@
 				659D68B11E35CBB2008750C2 /* modulo-layout.1.ronn */,
 				659D68B21E35D0D0008750C2 /* modulo-init.1.ronn */,
 				659D68B31E35D585008750C2 /* modulo-add.1.ronn */,
+				659D68B61E36B089008750C2 /* modulo-update.1.ronn */,
 			);
 			path = Documentation;
+			sourceTree = SOURCE_ROOT;
+		};
+		65BAAC8D1E3A6FCA00A24C45 /* Formula */ = {
+			isa = PBXGroup;
+			children = (
+				65BAAC8E1E3A6FCA00A24C45 /* modulo.rb */,
+			);
+			path = Formula;
 			sourceTree = SOURCE_ROOT;
 		};
 		65F7356C1E0089D40091D3A0 /* System */ = {
@@ -399,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				CAE55C441D14928B00411727 /* main.swift */,
+				65BAAC8D1E3A6FCA00A24C45 /* Formula */,
 				659D68AA1E357286008750C2 /* Documentation */,
 				CAE55CB41D14976300411727 /* Modules - Source */,
 			);
@@ -859,7 +869,6 @@
 				CAE55CE01D149BD800411727 /* Decodable.swift in Sources */,
 				CA0A3F131D5A3D7700A7F0BB /* Semver.swift in Sources */,
 				659D68AE1E35798D008750C2 /* modulo.1.ronn in Sources */,
-				659D68AC1E3572A7008750C2 /* building.md in Sources */,
 				CAE55CC81D1497A200411727 /* NSBundle.swift in Sources */,
 				CAE55D191D14CA0200411727 /* SCM.swift in Sources */,
 				CAE55D171D14C9FB00411727 /* ModuleSpec.swift in Sources */,
@@ -884,7 +893,6 @@
 				CAE55CF21D149C0B00411727 /* Command.swift in Sources */,
 				CAE55CC91D1497A200411727 /* NSError.swift in Sources */,
 				CAE55D181D14CA0200411727 /* Git.swift in Sources */,
-				659D68B01E35C52F008750C2 /* auth_man_pages.md in Sources */,
 				CAE55CD01D1497A200411727 /* Exceptions.swift in Sources */,
 				CAE55CDF1D149BD800411727 /* Decimal.swift in Sources */,
 				CAE55D131D14C9EE00411727 /* State.swift in Sources */,
