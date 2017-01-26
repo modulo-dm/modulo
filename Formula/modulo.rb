@@ -1,8 +1,8 @@
 class Modulo < Formula
-  desc "A source-only dependency manager"
+  desc "source-only dependency manager"
   homepage "https://github.com/modulo-dm/modulo"
-  url "https://github.com/modulo-dm/modulo/archive/modulo-v0.0.5.tar.gz"
-  sha256 "71435ae1aa403eb9cb3a5598c8d8df5d2bd8d579eb637168a5307c77435719ef"
+  url "https://github.com/modulo-dm/modulo/archive/v0.0.5.tar.gz"
+  sha256 "2bd92bad3deedef8b3c399e13e531dd57256315526ff679aa9560d04487e0b7a"
 
   bottle do
     cellar :any_skip_relocation
@@ -23,6 +23,6 @@ class Modulo < Formula
   end
 
   test do
-    system "${bin}/modulo", "--help"
+    system "#{bin}/modulo", "--help"
   end
 end
