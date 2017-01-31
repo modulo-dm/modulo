@@ -34,6 +34,9 @@ open class UpdateCommand: NSObject, Command {
             self.updateAll = true
         }
         
+        addOption(["--meh"], usage: "return success if modulo isn't being used or is uninitialized") { (option, value) in
+        }
+        
         addFlaglessOptionValues(["<dependency name>"]) { (option, value) -> Void in
             self.dependencyName = value
         }

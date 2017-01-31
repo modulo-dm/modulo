@@ -23,6 +23,9 @@ This will iterate through all dependencies and perform an update.
 * <dependencyname>:
 Instructs Modulo to just perform an update on the specified dependency.  See `map` for a list of dependencies.
 
+* `--meh`:
+Update will perform a no-op if modulo isn't being used on this project.  Useful for build system integration.
+
 * `-v, --verbose`:
 Prints verbose output.  Use this to see what underlying SCM commands are being used and any other important information.
 

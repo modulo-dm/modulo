@@ -1,0 +1,9 @@
+- Build latest documentation via build-man.sh, commit.
+- Make a new tagged modulo release.
+- "curl -O <the tar.gz on github>"
+- update the sha256
+- "brew tests" -- make sure tests are installed.
+- "brew install --build-from-source <formula>"
+- "brew test <formula>"
+- "brew audit --strict <formula>"
+- PR changes to formula to homebrew-core.
