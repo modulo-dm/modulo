@@ -259,14 +259,18 @@ public func currentSCM() -> SCM {
         let installed = scm.isInstalled
         let initialized = scm.isInitialized
         
+        if !installed {
+            exit(.scmNotFound)
+        }
+        
+        if !initialized {
+            exit(.scmNotInitialized)
+        }
+        
         if installed && initialized {
             result = scm
             break
         }
-    }
-    
-    if result == nil {
-        exit(.noSCMFoundOrInitialized)
     }
     
     return result!

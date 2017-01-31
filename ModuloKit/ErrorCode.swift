@@ -15,17 +15,18 @@ import Foundation
 
 public enum ErrorCode: Int {
     case success = 0
-    case unknownError = 1
-    case commandError = 2
-    case specNotFound = 3
-    case specNotWritable = 4
-    case noSCMFoundOrInitialized = 5
-    case alreadyInitialized = 6
-    case notInitialized = 7
-    case noMatchingDependencies = 8
-    case dependencyAlreadyExists = 9
-    case dependencyUnclean = 10
-    case dependencyUnknown = 11
+    case unknownError
+    case commandError
+    case specNotFound
+    case specNotWritable
+    case scmNotFound
+    case scmNotInitialized
+    case alreadyInitialized
+    case notInitialized
+    case noMatchingDependencies
+    case dependencyAlreadyExists
+    case dependencyUnclean
+    case dependencyUnknown
     
     var description: String {
         var result: String = ""
@@ -40,8 +41,10 @@ public enum ErrorCode: Int {
             result = ".modulo file not found."
         case .specNotWritable:
             result = ".modulo cannot be written to, check permissions."
-        case .noSCMFoundOrInitialized:
-            result = "No supported SCM was found to be initialized."
+        case .scmNotFound:
+            result = "No supported SCM was found."
+        case .scmNotInitialized:
+            result = "An SCM has not been initialized in this directory."
         case .alreadyInitialized:
             result = "Modulo has already been initialized."
         case .notInitialized:
