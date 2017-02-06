@@ -87,6 +87,15 @@ public enum SCMCheckoutType {
         return result
     }
     
+    func branchForPull() -> String? {
+        switch self {
+        case .branch(let name):
+            return name.replace("/", replacement: " ")
+        default:
+            return nil
+        }
+    }
+    
     func checkoutValue() -> String {
         var result: String
         switch self {
@@ -154,6 +163,7 @@ public protocol SCM {
     func branchName(_ path: String) -> String?
     func clone(_ url: String, path: String) -> SCMResult
     func fetch(_ path: String) -> SCMResult
+    func pull(_ path: String, remoteData: String?) -> SCMResult
     func checkout(_ type: SCMCheckoutType, path: String) -> SCMResult
     func remove(_ path: String) -> SCMResult
     func addModulesIgnore() -> SCMResult

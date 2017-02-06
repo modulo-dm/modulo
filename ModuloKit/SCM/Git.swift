@@ -78,7 +78,7 @@ open class Git: SCM {
         let initialWorkingPath = FileManager.workingPath()
         FileManager.setWorkingPath(path)
         
-        let updateCommand = "git fetch"
+        let updateCommand = "git fetch --all --tags"
         let status = runCommand(updateCommand)
         
         FileManager.setWorkingPath(initialWorkingPath)
@@ -90,6 +90,29 @@ open class Git: SCM {
         return .success
     }
 
+    open func pull(_ path: String, remoteData: String?) -> SCMResult {
+        if !FileManager.fileExists(path) {
+            return .error(code: 1, message: "Module path '\(path)' does not exist.")
+        }
+        
+        let initialWorkingPath = FileManager.workingPath()
+        FileManager.setWorkingPath(path)
+        
+        var updateCommand = "git pull"
+        if let remote = remoteData {
+            updateCommand = updateCommand + " \(remote)"
+        }
+        let status = runCommand(updateCommand)
+        
+        FileManager.setWorkingPath(initialWorkingPath)
+        
+        if status != 0 {
+            return .error(code: status, message: "Pulling updates for '\(path)' failed.")
+        }
+        
+        return .success
+    }
+    
     open func checkout(_ type: SCMCheckoutType, path: String) -> SCMResult {
         if !FileManager.fileExists(path) {
             return .error(code: 1, message: "Module path '\(path)' does not exist.")

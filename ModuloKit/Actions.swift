@@ -57,6 +57,8 @@ open class Actions {
         let modulePath = ModuleSpec.modulePath()
         
         for dep in dependencies {
+            let checkoutType = SCMCheckoutType.from(checkout: dep.checkout)
+            
             // figure out what to do, where to go, what's it called, etc.
             let moduleName = scm.nameFromRemoteURL(dep.repositoryURL)
             writeln(.stdout, "working on: \(moduleName)...")
@@ -71,13 +73,10 @@ open class Actions {
                     // rrrrrrrrrrt!  STOP!  Something is jacked up.
                     exit(cloneResult.errorMessage())
                 }
-                
-                // now check out what they asked for...
-                let checkoutType = SCMCheckoutType.from(checkout: dep.checkout)
+
+                // checkout what they asked for.
                 let checkoutResult = scm.checkout(checkoutType, path: clonePath)
-                
                 if checkoutResult != .success {
-                    // rrrrrrrrrrt!  STOP!  Something is jacked up.
                     exit(checkoutResult.errorMessage())
                 }
                 
@@ -86,6 +85,26 @@ open class Actions {
                     State.instance.explicitDependencies.append(dep)
                 } else {
                     State.instance.implictDependencies.append(dep)
+                }
+            } else {
+                // do a fetch ...
+                let fetchResult = scm.fetch(clonePath)
+                if fetchResult != .success {
+                    exit(fetchResult.errorMessage())
+                }
+                
+                // if we're on a branch do a pull
+                if let pullTarget = checkoutType.branchForPull() {
+                    let pullResult = scm.pull(clonePath, remoteData: pullTarget)
+                    if pullResult != .success {
+                        exit(pullResult.errorMessage())
+                    }
+                } else {
+                    // it's not a branch, do a regular checkout.
+                    let checkoutResult = scm.checkout(checkoutType, path: clonePath)
+                    if checkoutResult != .success {
+                        exit(checkoutResult.errorMessage())
+                    }
                 }
             }
             

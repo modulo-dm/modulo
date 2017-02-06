@@ -68,4 +68,29 @@ class TestUpdate: XCTestCase {
         Git().remove("test-add")
     }
     
+    func testUpdatePull() {
+        let status = Git().clone("git@github.com:modulo-dm/test-add.git", path: "test-add")
+        XCTAssertTrue(status == .success)
+        
+        FileManager.setWorkingPath("test-add")
+        
+        var result = Modulo.run(["update", "-v", "--all"])
+        XCTAssertTrue(result == .success)
+        
+        let spec = ModuleSpec.load(contentsOfFile: specFilename)
+        XCTAssertTrue(spec!.dependencies.count > 0)
+        XCTAssertTrue(spec!.dependencies[0].repositoryURL == "git@github.com:modulo-dm/test-init.git")
+        
+        XCTAssertTrue(FileManager.pathExists("../test-init"))
+        
+        // now run it all again and make sure it does a fetch/pull on the branches
+        State.instance.clear()
+        result = Modulo.run(["update", "-v", "--all"])
+        XCTAssertTrue(status == .success)
+        
+        FileManager.setWorkingPath("..")
+        
+        Git().remove("test-add")
+    }
+    
 }
