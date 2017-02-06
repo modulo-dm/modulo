@@ -242,7 +242,6 @@
 		659D68B41E35DD70008750C2 /* build-man.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "build-man.sh"; sourceTree = "<group>"; };
 		659D68B51E35DD70008750C2 /* install-man.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "install-man.sh"; sourceTree = "<group>"; };
 		659D68B61E36B089008750C2 /* modulo-update.1.ronn */ = {isa = PBXFileReference; lastKnownFileType = text; path = "modulo-update.1.ronn"; sourceTree = "<group>"; };
-		65BAAC8E1E3A6FCA00A24C45 /* modulo.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = modulo.rb; sourceTree = "<group>"; };
 		65BAAC961E3AA6F600A24C45 /* brew-howto.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "brew-howto.md"; sourceTree = "<group>"; };
 		65E60AE71DFF4FE000DAE913 /* TestDummyApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDummyApp.swift; sourceTree = "<group>"; };
 		65F7356D1E008A320091D3A0 /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = System.h; path = System/System.h; sourceTree = "<group>"; };
@@ -362,7 +361,6 @@
 		65BAAC8D1E3A6FCA00A24C45 /* Formula */ = {
 			isa = PBXGroup;
 			children = (
-				65BAAC8E1E3A6FCA00A24C45 /* modulo.rb */,
 				65BAAC961E3AA6F600A24C45 /* brew-howto.md */,
 			);
 			path = Formula;
