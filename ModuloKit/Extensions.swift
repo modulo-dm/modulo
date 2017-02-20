@@ -11,15 +11,15 @@ import Foundation
 public extension String {
     public var ns: NSString { return (self as NSString) }
     
-    /*public mutating func replace(string: String, replacement: String) {
-        let range = rangeOfString(string)
-        if let range = range {
-            replaceRange(range, with: replacement)
+    func replaceFirst(_ string: String, replacement: String) -> String {
+        if let range = range(of: string) {
+            return replacingCharacters(in: range, with: replacement)
         }
-    }*/
+        return self
+    }
     
     public func replace(_ string: String, replacement: String) -> String {
-        let str = self.replacingOccurrences(of: string, with: replacement)
+        let str = replacingOccurrences(of: string, with: replacement)
         
         return str
     }

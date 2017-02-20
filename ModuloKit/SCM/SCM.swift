@@ -90,7 +90,7 @@ public enum SCMCheckoutType {
     func branchForPull() -> String? {
         switch self {
         case .branch(let name):
-            return name.replace("/", replacement: " ")
+            return name.replaceFirst("/", replacement: " ")
         default:
             return nil
         }
