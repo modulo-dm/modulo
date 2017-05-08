@@ -151,6 +151,10 @@ open class Actions {
             result = .specNotFound
         }
         
+        if result == .success {
+            writeln(.stdout, "  no pending git operations or issues found.")
+        }
+        
         return result
     }
 }
