@@ -205,13 +205,13 @@ extension JSON: CustomStringConvertible {
             case is String, is NSNumber, is Float, is Double, is Int, is UInt, is Bool: return "\(object)"
             case is [Any], is [String : Any]:
                 if let data = try? JSONSerialization.data(withJSONObject: object, options: .prettyPrinted) {
-                    return NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String ?? ""
+                    return NSString(data: data, encoding: String.Encoding.utf8.rawValue) as String? ?? ""
                 }
             default: return ""
             }
         }
         
-        return "\(object)"
+        return "\(String(describing: object))"
     }
 }
 

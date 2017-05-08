@@ -15,7 +15,7 @@ import Foundation
 
 open class UpdateCommand: NSObject, Command {
     // internal properties
-    fileprivate var updateAll: Bool = false
+    fileprivate var updateAll: Bool = true
     fileprivate var dependencyName: String! = nil
     
     // Protocol conformance
@@ -30,7 +30,7 @@ open class UpdateCommand: NSObject, Command {
     open var quiet: Bool = false
     
     open func configureOptions() {
-        addOption(["-a", "--all"], usage: "update all dependencies") { (option, value) in
+        addOption(["-a", "--all"], usage: "update all dependencies (default)") { (option, value) in
             self.updateAll = true
         }
         
@@ -39,6 +39,7 @@ open class UpdateCommand: NSObject, Command {
         
         addFlaglessOptionValues(["<dependency name>"]) { (option, value) -> Void in
             self.dependencyName = value
+            self.updateAll = false
         }
     }
     
