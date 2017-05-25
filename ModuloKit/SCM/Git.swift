@@ -148,7 +148,7 @@ open class Git: SCM {
         FileManager.setWorkingPath(initialWorkingPath)
         
         if status != 0 {
-            return .error(code: status, message: "Unable to checkout '\(type.value)'.")
+            return .error(code: status, message: "Unable to checkout '\(type.value())'.")
         }
         
         let submodulesResult = collectAnySubmodules()
@@ -243,6 +243,38 @@ open class Git: SCM {
         
         return result
     }
+    
+    open func remotes(_ path: String) -> [String] {
+        var result = [String]()
+        
+        if !FileManager.fileExists(path) {
+            return result
+        }
+        
+        let initialWorkingPath = FileManager.workingPath()
+        FileManager.setWorkingPath(path)
+        
+        let command = "git remote"
+        _ = runCommand(command) { (status, output) -> Void in
+            if status == 0 {
+                if let output = output {
+                    let lines = output.components(separatedBy: "\n")
+                    let remotes = lines.map { (item) -> String in
+                        var remote = item
+                        remote = remote.trimmingCharacters(in: CharacterSet.whitespaces)
+                        remote = remote.trimmingCharacters(in: CharacterSet(["*"," "]))
+                        return remote
+                    }
+                    
+                    result = remotes
+                }
+            }
+        }
+        
+        FileManager.setWorkingPath(initialWorkingPath)
+        
+        return result
+    }
 
     open func tags(_ path: String) -> [Semver] {
         var result = [Semver]()
@@ -269,6 +301,10 @@ open class Git: SCM {
         FileManager.setWorkingPath(initialWorkingPath)
         
         return result
+    }
+    
+    open func verifyCheckout(_ checkout: SCMCheckoutType) -> Bool {
+        return false
     }
 }
 

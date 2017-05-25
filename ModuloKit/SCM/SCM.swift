@@ -72,7 +72,7 @@ public enum SCMCheckoutType {
         var result: String
         switch self {
         case .branch(let name):
-            result = name
+            result = remoteify(name)
             break
         case .tag(let name):
             result = name
@@ -100,7 +100,7 @@ public enum SCMCheckoutType {
         var result: String
         switch self {
         case .branch(let name):
-            result = "branch:\(name)"
+            result = "branch:\(remoteify(name))"
             break
         case .tag(let name):
             result = "tag:\(name)"
@@ -112,6 +112,17 @@ public enum SCMCheckoutType {
             result = value
             break
         }
+        return result
+    }
+    
+    private func remoteify(_ branch: String) -> String {
+        var result = branch
+        
+        // they just specified the branch, not the remote.  assume 'origin'.
+        if branch.contains("/") == false {
+            result = "origin/\(branch)"
+        }
+
         return result
     }
     
@@ -170,6 +181,8 @@ public protocol SCM {
     func checkStatus(_ path: String, assumedCheckout: String?) -> SCMResult
     func branches(_ path: String) -> [String]
     func tags(_ path: String) -> [Semver]
+    func remotes(_ path: String) -> [String]
+    func verifyCheckout(_ checkout: SCMCheckoutType) -> Bool
 }
 
 extension SCM {

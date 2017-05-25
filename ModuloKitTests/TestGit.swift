@@ -25,13 +25,25 @@ class TestGit: XCTestCase {
     }
 
     func testGettingGitTags() {
-        let status = Git().clone("git@github.com:Electrode-iOS/ELWebService.git", path: "ELWebService")
+        let status = Git().clone("git@github.com:modulo-dm/test-checkout.git", path: "test-checkout")
         XCTAssertTrue(status == .success)
         
-        let tags = Git().tags("ELWebService")
+        let tags = Git().tags("test-checkout").map {
+            $0.stringValue
+        }
         print(tags)
         
-        Git().remove("ELWebService")
+        Git().remove("test-checkout")
+    }
+    
+    func testGettingBranches() {
+        let status = Git().clone("git@github.com:modulo-dm/test-checkout.git", path: "test-checkout")
+        XCTAssertTrue(status == .success)
+        
+        let branches = Git().branches("test-checkout")
+        print(branches)
+        
+        Git().remove("test-checkout")
     }
 
 }

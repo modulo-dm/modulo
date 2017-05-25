@@ -137,4 +137,23 @@ class TestCheckout: XCTestCase {
         XCTAssertTrue(Git().hashesMatch(hash, "c4d62082ab93002e39295f6bde6659a9b68d3c59"))
     }
     
+    func testSpecifiedCheckoutMatchesActual() {
+        runCommand("mkdir checkout-test")
+        
+        FileManager.setWorkingPath("checkout-test")
+        
+        runCommand("git init")
+        
+        var result = Modulo.run(["init", "--app"])
+        XCTAssertTrue(result == .success)
+        
+        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--branch", "notags-branch", "-u", "-v"])
+        XCTAssertTrue(result == .success)
+        
+        XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
+        
+        let branch = Git().branchAtPath("modules/test-checkout")
+        XCTAssertTrue(branch == "origin/notags-branch")
+    }
+    
 }
