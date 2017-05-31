@@ -410,6 +410,7 @@ internal enum SemverComparator: CustomStringConvertible, Equatable, Hashable {
     case lessThan(version: Semver)
     case greaterThanOrEqual(version: Semver)
     case lessThanOrEqual(version: Semver)
+    case exactMatch(version: Semver)
     case logicalOr
     
     static func basicComparator(string: String) -> SemverComparator {
@@ -429,9 +430,10 @@ internal enum SemverComparator: CustomStringConvertible, Equatable, Hashable {
             return .lessThanOrEqual(version: v)
         } else if string.contains("<") {
             return .lessThan(version: v)
+        } else if string.contains("||") {
+            return .logicalOr
         }
-        
-        return .logicalOr
+        return .exactMatch(version: v)
     }
     
     var description: String {
@@ -447,6 +449,9 @@ internal enum SemverComparator: CustomStringConvertible, Equatable, Hashable {
             
         case .lessThanOrEqual(let version):
             return "<=\(version.stringValue)"
+            
+        case .exactMatch(let version):
+            return "\(version.stringValue)"
             
         case .logicalOr:
             return "||"
@@ -465,6 +470,9 @@ internal enum SemverComparator: CustomStringConvertible, Equatable, Hashable {
             return version
             
         case .lessThanOrEqual(let version):
+            return version
+            
+        case .exactMatch(let version):
             return version
             
         case .logicalOr:
@@ -647,8 +655,14 @@ public struct SemverRange {
                     resultSet.append(.lessThan(version: ver2))
                 }
             } else {
-                // it doesn't match anything.
-                valid = false
+                let exactVersion = Semver(item)
+                
+                if exactVersion.valid {
+                    resultSet.append(.exactMatch(version: exactVersion))
+                } else {
+                    // it doesn't match anything.
+                    valid = false
+                }
                 break
             }
             
@@ -693,6 +707,10 @@ extension Semver {
                 
             case .lessThanOrEqual(let version):
                 verResult = self <= version
+                
+            case .exactMatch(let version):
+                verResult = self == version
+                overallResult = verResult
                 
             case .logicalOr:
                 break

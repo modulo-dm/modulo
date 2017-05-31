@@ -221,6 +221,18 @@ class SemverTests: XCTestCase {
         ver = Semver("1.1")
         XCTAssertTrue(ver.satisfies(range))
     }
+    
+    func testExact() {
+        let range = SemverRange("0.1.2")
+        
+        var ver = Semver("0.1.2")
+        
+        XCTAssertTrue(ver.satisfies(range))
+        
+        ver = Semver("0.1.3")
+        
+        XCTAssertFalse(ver.satisfies(range))
+    }
 }
 
 
