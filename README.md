@@ -67,7 +67,7 @@ Utilities/
 
 ## Installation
 
-### `homebrew` Install
+### Install via `homebrew`
 
 Homebrew will download and build `modulo` from source, so you'll need Xcode 8.3.3 for this to work.~~
 
@@ -75,7 +75,7 @@ Homebrew will download and build `modulo` from source, so you'll need Xcode 8.3.
 $ brew install modulo-dm/homebrew-tap/modulo
 ```
 
-### `homebrew` Upgrade
+### Upgrade to the latest version via `homebrew`
 
 ```bash
 $ brew upgrade modulo
