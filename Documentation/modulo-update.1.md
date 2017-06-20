@@ -20,7 +20,7 @@ This command updates any previously specified dependencies.  Updates can consist
 * `--all`:
 This will iterate through all dependencies and perform an update.
 
-* <dependencyname>:
+* <<dependencyname>>:
 Instructs Modulo to just perform an update on the specified dependency.  See `map` for a list of dependencies.
 
 * `-v, --verbose`:
