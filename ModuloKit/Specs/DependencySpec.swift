@@ -17,16 +17,19 @@ public struct DependencySpec {
     var repositoryURL: String
     // version or version range
     var version: SemverRange?
-    // tells modulo the dependency is unmanaged
-    var unmanaged: Bool? = true
+
+    var unmanaged: Bool {
+        get {
+            return (version == nil)
+        }
+    }
 }
 
 extension DependencySpec: Decodable {
     public static func decode(_ json: JSON?) throws -> DependencySpec {
         return try DependencySpec(
             repositoryURL: json ==> "repositoryURL",
-            version: json ==> "version",
-            unmanaged: json ==> "unmanaged"
+            version: json ==> "version"
         )
     }
     
@@ -39,8 +42,7 @@ extension DependencySpec: Encodable {
     public func encode() throws -> JSON {
         return try encodeToJSON([
             "repositoryURL" <== repositoryURL,
-            "version" <== version,
-            "unmanaged" <== unmanaged
+            "version" <== version
         ])
     }
 }

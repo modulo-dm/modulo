@@ -31,7 +31,7 @@ class TestDummyApp: XCTestCase {
         var result = Modulo.run(["init", "--app"])
         XCTAssertTrue(result == .success)
         
-        result = Modulo.run(["add", "git@github.com:modulo-dm/test-add-update.git", "-u", "-v"])
+        result = Modulo.run(["add", "git@github.com:modulo-dm/test-add-update.git", "--unmanaged", "-u", "-v"])
         XCTAssertTrue(result == .success)
         
         let spec = ModuleSpec.load(contentsOfFile: specFilename)
@@ -39,6 +39,9 @@ class TestDummyApp: XCTestCase {
         XCTAssertTrue(spec!.name == "test-dummy")
         XCTAssertTrue(spec!.dependencies.count > 0)
         XCTAssertTrue(spec!.dependencyForURL("git@github.com:modulo-dm/test-add-update.git") != nil)
+        
+        let checkedOut = Git().branchName("modules/test-add-update")
+        XCTAssertTrue(checkedOut == "master")
         
         XCTAssertTrue(FileManager.fileExists("modules/test-add-update"))
         XCTAssertTrue(FileManager.fileExists("modules/test-dep1"))

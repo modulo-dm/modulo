@@ -23,7 +23,7 @@ open class Actions {
     }
     
     open func addDependency(_ url: String, version: SemverRange?, unmanaged: Bool) -> ErrorCode {
-        let dep = DependencySpec(repositoryURL: url, version: version, unmanaged: unmanaged)
+        let dep = DependencySpec(repositoryURL: url, version: version)
         if var workingSpec = ModuleSpec.workingSpec() {
             // does this dep already exist in here??
             if let _ = workingSpec.dependencyForURL(url) {

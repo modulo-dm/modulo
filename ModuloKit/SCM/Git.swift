@@ -379,11 +379,40 @@ extension Git {
     }
     
     internal func branchAtPath(_ path: String) -> String? {
-        var result = detachedBranchAtPath(path)
+        var result = localBranchAtPath(path)
+        
+        if result == nil {
+            result = detachedBranchAtPath(path)
+        }
+        
         if result == nil {
             result = remoteTrackingBranch(path)
         }
+        
         return result?.trim()
+    }
+    
+    internal func localBranchAtPath(_ path: String) -> String? {
+        var result: String? = nil
+        
+        let initialWorkingPath = FileManager.workingPath()
+        FileManager.setWorkingPath(path)
+        
+        _ = runCommand("git branch") { (status, output) in
+            if let output = output {
+                let lines = output.components(separatedBy: "\n")
+                for line in lines {
+                    if line.contains("* ") {
+                        let value = line.replace("* ", replacement: "")
+                        result = value
+                    }
+                }
+            }
+        }
+        
+        FileManager.setWorkingPath(initialWorkingPath)
+        
+        return result
     }
     
     internal func detachedBranchAtPath(_ path: String) -> String? {

@@ -72,7 +72,7 @@ open class SetCommand: NSObject, Command {
             let deps = spec.dependencies
             
             for dep in deps {
-                if dep.unmanaged != nil, let unmanaged = dep.unmanaged, unmanaged == true {
+                if dep.unmanaged {
                     writeln(.stdout, "  name   : \(dep.name()) (unmanaged)")
                 } else {
                     writeln(.stdout, "  name   : \(dep.name())")
@@ -104,7 +104,7 @@ open class SetCommand: NSObject, Command {
                 spec.save()
             } else if unmanaged {
                 spec.removeDependency(dep)
-                dep.unmanaged = unmanaged
+                dep.version = nil
                 spec.dependencies.append(dep)
                 spec.save()
             }
