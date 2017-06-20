@@ -538,8 +538,24 @@ public struct SemverRange {
                            Token.Dash.rawValue,
                            Token.Space.rawValue]
         
-        // look for the range marker ' - '
-        for item in set {
+        for originalItem in set {
+            var item = originalItem
+            
+            let basicMatches = item.matchesForRegex(VersionXRegex)
+            if basicMatches.count == 0 {
+                valid = false
+                continue
+            }
+            
+            let versionComponents = item.components(separatedBy: ".")
+            
+            // if they supplied an incomplete version #, fill in the latter places.
+            if versionComponents.count == 1 {
+                item = versionComponents[0] + ".x.x"
+            } else if versionComponents.count == 2 {
+                item = versionComponents[0] + "." + versionComponents[1] + ".x"
+            }
+            
             if item.containsString(Token.Dash.rawValue) {
                 // -
                 // now we need to split it in two.

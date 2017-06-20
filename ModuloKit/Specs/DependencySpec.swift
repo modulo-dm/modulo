@@ -15,18 +15,18 @@ import Foundation
 public struct DependencySpec {
     // repository url to fetch the dep from
     var repositoryURL: String
-    // can be a branch, commit, or tag
-    var checkout: String
-    // if this has a value, don't allow updates
-    let redirectURL: String?
+    // version or version range
+    var version: SemverRange?
+    // tells modulo the dependency is unmanaged
+    var unmanaged: Bool? = true
 }
 
 extension DependencySpec: Decodable {
     public static func decode(_ json: JSON?) throws -> DependencySpec {
         return try DependencySpec(
             repositoryURL: json ==> "repositoryURL",
-            checkout: json ==> "checkout",
-            redirectURL: json ==> "redirectURL"
+            version: json ==> "version",
+            unmanaged: json ==> "unmanaged"
         )
     }
     
@@ -39,8 +39,8 @@ extension DependencySpec: Encodable {
     public func encode() throws -> JSON {
         return try encodeToJSON([
             "repositoryURL" <== repositoryURL,
-            "checkout" <== checkout,
-            "redirectURL" <== redirectURL
+            "version" <== version,
+            "unmanaged" <== unmanaged
         ])
     }
 }

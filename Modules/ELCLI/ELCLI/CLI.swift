@@ -29,8 +29,8 @@ open class CLI {
     
     open func addCommands(_ commands: Array<Command>) {
         commands.each {
-            $0.configureOptions()
             $0.addGlobalCommandOptions()
+            $0.configureOptions()
             self.supportedCommands.append($0)
         }
     }

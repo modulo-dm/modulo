@@ -15,9 +15,10 @@ import Foundation
 
 open class AddCommand: NSObject, Command {
     // internal properties
-    fileprivate var checkoutType: SCMCheckoutType? = nil
+    fileprivate var version: SemverRange? = nil
     fileprivate var repositoryURL: String! = nil
     fileprivate var shouldUpdate: Bool = false
+    fileprivate var unmanaged: Bool = false
     
     // Protocol conformance
     open var name: String { return "add" }
@@ -25,7 +26,9 @@ open class AddCommand: NSObject, Command {
     open var longHelpDescription: String {
         return "Add the given repository as a module to the current project and clone it " +
             "into the project itself or a higher level container project.\n\n" +
-            "In the instance no tag, branch, or commit is specified, 'master' is used."
+            "In unmanaged mode, it is up to the user to manage what is checked out.\n" +
+            "In this case, the update command will simply do a pull.\n\n" +
+            "More information on version ranges can be found at: \n\n  https://docs.npmjs.com/misc/semver"
     }
     open var failOnUnrecognizedOptions: Bool { return true }
     
@@ -33,22 +36,14 @@ open class AddCommand: NSObject, Command {
     open var quiet: Bool = false
     
     open func configureOptions() {
-        addOptionValue(["--tag"], usage: "specify the version tag to use", valueSignature: "<tag>") { (option, value) -> Void in
+        addOptionValue(["--version"], usage: "specify the version or range to use", valueSignature: "<version>") { (option, value) -> Void in
             if let value = value {
-                self.checkoutType = .tag(name: value)
+                self.version = SemverRange(value)
             }
         }
         
-        addOptionValue(["--branch"], usage: "specify the branch to use", valueSignature: "<branch>") { (option, value) -> Void in
-            if let value = value {
-                self.checkoutType = .branch(name: value)
-            }
-        }
-        
-        addOptionValue(["--commit"], usage: "specify the commit to use", valueSignature: "<hash>") { (option, value) -> Void in
-            if let value = value {
-                self.checkoutType = .commit(hash: value)
-            }
+        addOption(["--unmanaged"], usage: "specifies that this module will be unmanaged") { (option, value) in
+            self.unmanaged = true
         }
         
         addOption(["-u", "--update"], usage: "performs the update command after adding a module") { (option, value) in
@@ -62,8 +57,20 @@ open class AddCommand: NSObject, Command {
     
     open func execute(_ otherParams: Array<String>?) -> Int {
         let actions = Actions()
+        
+        if version == nil && unmanaged == false {
+            writeln(.stderr, "A version or range must be specified via --version, or --unmanaged must be used.")
+            return ErrorCode.commandError.rawValue
+        }
+        
+        if let version = version {
+            if version.valid == false {
+                writeln(.stderr, "The range or version specified is not valid.  Please see: https://docs.npmjs.com/misc/semver")
+                return ErrorCode.commandError.rawValue
+            }
+        }
 
-        let result = actions.addDependency(repositoryURL, checkout: checkoutType)
+        let result = actions.addDependency(repositoryURL, version: version, unmanaged: unmanaged)
         if result == .success {
             if shouldUpdate {
                 writeln(.stdout, "Added \(repositoryURL).")

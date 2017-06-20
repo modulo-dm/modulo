@@ -26,35 +26,30 @@ open class SetCommand: NSObject, Command {
     
     // subcommands
     fileprivate var view = true
-    fileprivate var checkoutType: SCMCheckoutType? = nil
     fileprivate var repositoryURL: String? = nil
     fileprivate var depName: String? = nil
+    fileprivate var version: SemverRange? = nil
+    fileprivate var unmanaged: Bool = false
     
     open func configureOptions() {
-        addOptionValue(["--url"], usage: "sets the SCM url of the specified module.", valueSignature: "<repo url>") { (option, value) -> Void in
+        addOptionValue(["--url"], usage: "sets the SCM url of the specified module", valueSignature: "<repo url>") { (option, value) -> Void in
             self.view = false
             self.repositoryURL = value
         }
         
-        addOptionValue(["--tag"], usage: "sets the tag this dependency should checkout", valueSignature: "<tag>") { (option, value) -> Void in
+        addOptionValue(["--version"], usage: "sets the version or range this dependency should checkout", valueSignature: "<version>") { (option, value) -> Void in
             self.view = false
             if let value = value {
-                self.checkoutType = .tag(name: value)
+                let range = SemverRange(value)
+                if range.valid == true {
+                    self.version = range
+                    self.unmanaged = false
+                }
             }
         }
         
-        addOptionValue(["--branch"], usage: "sets the branch this dependency should checkout", valueSignature: "<branch>") { (option, value) -> Void in
-            self.view = false
-            if let value = value {
-                self.checkoutType = .branch(name: value)
-            }
-        }
-        
-        addOptionValue(["--commit"], usage: "sets the commit this dependency should checkout", valueSignature: "<hash>") { (option, value) -> Void in
-            self.view = false
-            if let value = value {
-                self.checkoutType = .commit(hash: value)
-            }
+        addOption(["--unmanaged"], usage: "sets this dependency to be unmanaged") { (option, value) in
+            self.unmanaged = true
         }
         
         addFlaglessOptionValues(["<dependency name>"]) { (option, value) -> Void in
@@ -77,9 +72,17 @@ open class SetCommand: NSObject, Command {
             let deps = spec.dependencies
             
             for dep in deps {
-                writeln(.stdout, "  name    : \(dep.name())")
-                writeln(.stdout, "  SCM url : \(dep.repositoryURL)")
-                writeln(.stdout, "  checkout: \(dep.checkout)\n")
+                if dep.unmanaged != nil, let unmanaged = dep.unmanaged, unmanaged == true {
+                    writeln(.stdout, "  name   : \(dep.name()) (unmanaged)")
+                } else {
+                    writeln(.stdout, "  name   : \(dep.name())")
+                }
+                
+                writeln(.stdout, "  SCM url: \(dep.repositoryURL)")
+                
+                if let ver = dep.version {
+                    writeln(.stdout, "  version: \(ver)\n")
+                }
             }
         } else {
             guard let depName = depName else {
@@ -93,14 +96,20 @@ open class SetCommand: NSObject, Command {
                 return -1
             }
 
-            if let type = checkoutType {
+            if let ver = version {
                 // TODO: this sucks.. make a method to do this.
                 spec.removeDependency(dep)
-                dep.checkout = type.checkoutValue()
+                dep.version = ver
                 spec.dependencies.append(dep)
-                
                 spec.save()
-            } else if let url = repositoryURL {
+            } else if unmanaged {
+                spec.removeDependency(dep)
+                dep.unmanaged = unmanaged
+                spec.dependencies.append(dep)
+                spec.save()
+            }
+            
+            if let url = repositoryURL {
                 // TODO: this sucks.. make a method to do this.
                 spec.removeDependency(dep)
                 dep.repositoryURL = url

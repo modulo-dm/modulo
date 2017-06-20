@@ -33,7 +33,7 @@ class TestAdd: XCTestCase {
         
         FileManager.setWorkingPath("test-add")
         
-        let result = Modulo.run(["add", "git@github.com:modulo-dm/test-add-update.git", "-v"])
+        let result = Modulo.run(["add", "git@github.com:modulo-dm/test-add-update.git", "--version", "1.0", "-v"])
         XCTAssertTrue(result == .success)
         
         let spec = ModuleSpec.load(contentsOfFile: specFilename)
@@ -54,7 +54,7 @@ class TestAdd: XCTestCase {
         
         FileManager.setWorkingPath("test-add")
         
-        let result = Modulo.run(["add", "git@github.com:modulo-dm/test-init.git", "-v", "--update"])
+        let result = Modulo.run(["add", "git@github.com:modulo-dm/test-init.git", "--version", "1.0", "-v", "--update"])
         XCTAssertTrue(result == .dependencyAlreadyExists)
     }
     
@@ -65,7 +65,7 @@ class TestAdd: XCTestCase {
         
         FileManager.setWorkingPath("test-add")
         
-        let result = Modulo.run(["add", "git@github.com:modulo-dm/test-add-update.git", "-v", "--update"])
+        let result = Modulo.run(["add", "git@github.com:modulo-dm/test-add-update.git", "--version", "1.0", "-v", "--update"])
         XCTAssertTrue(result == .success)
         
         let spec = ModuleSpec.load(contentsOfFile: specFilename)

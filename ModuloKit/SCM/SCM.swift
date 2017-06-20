@@ -62,107 +62,6 @@ public func == (left: SCMResult, right: SCMResult) -> Bool {
     }
 }
 
-public enum SCMCheckoutType {
-    case branch(name: String)
-    case tag(name: String)
-    case commit(hash: String)
-    case other(value: String)
-    
-    func value() -> String {
-        var result: String
-        switch self {
-        case .branch(let name):
-            result = remoteify(name)
-            break
-        case .tag(let name):
-            result = name
-            break
-        case .commit(let hash):
-            result = hash
-            break
-        case .other(let value):
-            result = value
-            break
-        }
-        return result
-    }
-    
-    func branchForPull() -> String? {
-        switch self {
-        case .branch(let name):
-            return name.replaceFirst("/", replacement: " ")
-        default:
-            return nil
-        }
-    }
-    
-    func checkoutValue() -> String {
-        var result: String
-        switch self {
-        case .branch(let name):
-            result = "branch:\(remoteify(name))"
-            break
-        case .tag(let name):
-            result = "tag:\(name)"
-            break
-        case .commit(let hash):
-            result = "hash:\(hash)"
-            break
-        case .other(let value):
-            result = value
-            break
-        }
-        return result
-    }
-    
-    private func remoteify(_ branch: String) -> String {
-        var result = branch
-        
-        // they just specified the branch, not the remote.  assume 'origin'.
-        if branch.contains("/") == false {
-            result = "origin/\(branch)"
-        }
-
-        return result
-    }
-    
-    static func from(checkout: String) -> SCMCheckoutType {
-        var result: SCMCheckoutType = .other(value: "")
-        
-        let parts = checkout.components(separatedBy: ":")
-        if parts.count == 2 {
-            let type = parts[0]
-            let value = parts[1]
-            switch type {
-            case "branch":
-                result = .branch(name: value)
-                
-            case "tag":
-                result = .tag(name: value)
-                
-            case "hash":
-                result = .commit(hash: value)
-                
-            default:
-                result = .other(value: value)
-            }
-        } else {
-            // they just specified the branch, not the remote.  assume 'origin'.
-            if checkout.contains("/") {
-                // maybe they edited the file by hand, and just put "origin/branch" in there.
-                result = .branch(name: checkout)
-            } else {
-                // maybe they didn't and just put 'master'.
-                result = .branch(name: "origin/\(checkout)")
-            }
-        }
-        
-        return result
-    }
-    
-}
-
-
 public protocol SCM {
     var verbose: Bool { get set }
     var isInstalled: Bool { get }
@@ -172,17 +71,18 @@ public protocol SCM {
     func remoteURL() -> String?
     func nameFromRemoteURL(_ url: String) -> String
     func branchName(_ path: String) -> String?
+    func remoteTrackingBranch(_ path: String) -> String?
     func clone(_ url: String, path: String) -> SCMResult
     func fetch(_ path: String) -> SCMResult
     func pull(_ path: String, remoteData: String?) -> SCMResult
-    func checkout(_ type: SCMCheckoutType, path: String) -> SCMResult
+    func checkout(version: SemverRange, path: String) -> SCMResult
     func remove(_ path: String) -> SCMResult
     func addModulesIgnore() -> SCMResult
-    func checkStatus(_ path: String, assumedCheckout: String?) -> SCMResult
+    func checkStatus(_ path: String) -> SCMResult
     func branches(_ path: String) -> [String]
     func tags(_ path: String) -> [Semver]
     func remotes(_ path: String) -> [String]
-    func verifyCheckout(_ checkout: SCMCheckoutType) -> Bool
+    //func verifyCheckout(_ path: String, checkout: SCMCheckoutType) -> Bool
 }
 
 extension SCM {

@@ -22,16 +22,8 @@ open class Actions {
         }
     }
     
-    open func addDependency(_ url: String, checkout: SCMCheckoutType?) -> ErrorCode {
-        // configure the default branch if we weren't given one.
-        var checkoutType: SCMCheckoutType
-        if checkout == nil {
-            checkoutType = .branch(name: scm.defaultCheckout)
-        } else {
-            checkoutType = checkout!
-        }
-        
-        let dep = DependencySpec(repositoryURL: url, checkout: checkoutType.checkoutValue(), redirectURL: nil)
+    open func addDependency(_ url: String, version: SemverRange?, unmanaged: Bool) -> ErrorCode {
+        let dep = DependencySpec(repositoryURL: url, version: version, unmanaged: unmanaged)
         if var workingSpec = ModuleSpec.workingSpec() {
             // does this dep already exist in here??
             if let _ = workingSpec.dependencyForURL(url) {
@@ -57,8 +49,6 @@ open class Actions {
         let modulePath = ModuleSpec.modulePath()
         
         for dep in dependencies {
-            let checkoutType = SCMCheckoutType.from(checkout: dep.checkout)
-            
             // figure out what to do, where to go, what's it called, etc.
             let moduleName = scm.nameFromRemoteURL(dep.repositoryURL)
             writeln(.stdout, "working on: \(moduleName)...")
@@ -74,10 +64,12 @@ open class Actions {
                     exit(cloneResult.errorMessage())
                 }
 
-                // checkout what they asked for.
-                let checkoutResult = scm.checkout(checkoutType, path: clonePath)
-                if checkoutResult != .success {
-                    exit(checkoutResult.errorMessage())
+                if let version = dep.version, version.valid == true {
+                    // checkout what they asked for.
+                    let checkoutResult = scm.checkout(version: version, path: clonePath)
+                    if checkoutResult != .success {
+                        exit(checkoutResult.errorMessage())
+                    }
                 }
                 
                 // things worked, so add it to the approprate place in the overall state.
@@ -93,17 +85,23 @@ open class Actions {
                     exit(fetchResult.errorMessage())
                 }
                 
-                // if we're on a branch do a pull
-                if let pullTarget = checkoutType.branchForPull() {
-                    let pullResult = scm.pull(clonePath, remoteData: pullTarget)
-                    if pullResult != .success {
-                        exit(pullResult.errorMessage())
+                // if they're unmanaged and on a branch, tracking a remote, just do a pull
+                if dep.unmanaged == true, let currentBranch = scm.branchName(clonePath) {
+                    if scm.remoteTrackingBranch(currentBranch) != nil {
+                        let pullResult = scm.pull(clonePath, remoteData: nil)
+                        if pullResult != .success {
+                            exit(pullResult.errorMessage())
+                        }
                     }
                 } else {
-                    // it's not a branch, do a regular checkout.
-                    let checkoutResult = scm.checkout(checkoutType, path: clonePath)
-                    if checkoutResult != .success {
-                        exit(checkoutResult.errorMessage())
+                    if let version = dep.version, version.valid == true {
+                        // checkout what they asked for.
+                        let checkoutResult = scm.checkout(version: version, path: clonePath)
+                        if checkoutResult != .success {
+                            exit(checkoutResult.errorMessage())
+                        }
+                    } else {
+                        exit("\(dep.name()) doesn't have a version and isn't unmanaged, not sure what to do.")
                     }
                 }
             }
@@ -129,8 +127,7 @@ open class Actions {
         if let workingSpec = ModuleSpec.workingSpec() {
             // need to look at main dir too, not just deps.
             let mainPath = workingSpec.path.removeLastPathComponent()
-            let branchName = scm.branchName(mainPath)
-            let status = scm.checkStatus(mainPath, assumedCheckout: branchName)
+            let status = scm.checkStatus(mainPath)
             if status != .success {
                 result = ErrorCode(rawValue: Int(status.errorCode()))!
                 writeln(.stdout, "  main project has \(status.errorMessage()).")
@@ -141,7 +138,7 @@ open class Actions {
             deps.forEach { (dependency) in
                 let name = dependency.name()
                 let path = ModuleSpec.modulePath().appendPathComponent(name)
-                let status = scm.checkStatus(path, assumedCheckout: dependency.checkout)
+                let status = scm.checkStatus(path)
                 if status != .success {
                     result = ErrorCode(rawValue: Int(status.errorCode()))!
                     writeln(.stdout, "  \(name) has \(status.errorMessage()).")

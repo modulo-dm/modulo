@@ -23,25 +23,6 @@ class TestCheckout: XCTestCase {
         super.tearDown()
     }
     
-    func testBranchCheckout() {
-        runCommand("mkdir checkout-test")
-        
-        FileManager.setWorkingPath("checkout-test")
-        
-        runCommand("git init")
-        
-        var result = Modulo.run(["init", "--app"])
-        XCTAssertTrue(result == .success)
-        
-        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--branch", "origin/v2-branch", "-u", "-v"])
-        XCTAssertTrue(result == .success)
-        
-        XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
-        
-        let branch = Git().branchAtPath("modules/test-checkout")
-        XCTAssertTrue(branch == "origin/v2-branch")
-    }
-    
     func testTagCheckout() {
         runCommand("mkdir checkout-test")
         
@@ -52,7 +33,7 @@ class TestCheckout: XCTestCase {
         var result = Modulo.run(["init", "--app"])
         XCTAssertTrue(result == .success)
         
-        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--tag", "v2.0.0", "-u", "-v"])
+        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--version", "v2.0.0", "-u", "-v"])
         XCTAssertTrue(result == .success)
         
         XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
@@ -71,7 +52,7 @@ class TestCheckout: XCTestCase {
         var result = Modulo.run(["init", "--app"])
         XCTAssertTrue(result == .success)
         
-        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--tag", ">0.0.2 <=2.0.1", "-u", "-v"])
+        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--version", ">0.0.2 <=2.0.1", "-u", "-v"])
         XCTAssertTrue(result == .success)
         
         XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
@@ -80,7 +61,7 @@ class TestCheckout: XCTestCase {
         XCTAssertTrue(tags.contains("v2.0.1"))
     }
 
-    func testTagNonSemverCheckout() {
+    func testTagNonSemverFails() {
         runCommand("mkdir checkout-test")
         
         FileManager.setWorkingPath("checkout-test")
@@ -90,70 +71,10 @@ class TestCheckout: XCTestCase {
         var result = Modulo.run(["init", "--app"])
         XCTAssertTrue(result == .success)
         
-        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--tag", "nosemver", "-u", "-v"])
-        XCTAssertTrue(result == .success)
+        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--version", "nosemver", "-u", "-v"])
+        XCTAssertTrue(result == .commandError)
         
-        XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
-        
-        let tags = Git().headTagsAtPath("modules/test-checkout")
-        XCTAssertTrue(tags.contains("nosemver"))
-    }
-    
-    func testCommitCheckoutShort() {
-        runCommand("mkdir checkout-test")
-        
-        FileManager.setWorkingPath("checkout-test")
-        
-        runCommand("git init")
-        
-        var result = Modulo.run(["init", "--app"])
-        XCTAssertTrue(result == .success)
-        
-        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--commit", "c4d6208", "-u", "-v"])
-        XCTAssertTrue(result == .success)
-        
-        XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
-        
-        guard let hash = Git().hashAtPath("modules/test-checkout") else { XCTFail(); return }
-        XCTAssertTrue(Git().hashesMatch(hash, "c4d6208"))
-    }
-    
-    func testCommitCheckoutLong() {
-        runCommand("mkdir checkout-test")
-        
-        FileManager.setWorkingPath("checkout-test")
-        
-        runCommand("git init")
-        
-        var result = Modulo.run(["init", "--app"])
-        XCTAssertTrue(result == .success)
-        
-        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--commit", "c4d62082ab93002e39295f6bde6659a9b68d3c59", "-u", "-v"])
-        XCTAssertTrue(result == .success)
-        
-        XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
-        
-        guard let hash = Git().hashAtPath("modules/test-checkout") else { XCTFail(); return }
-        XCTAssertTrue(Git().hashesMatch(hash, "c4d62082ab93002e39295f6bde6659a9b68d3c59"))
-    }
-    
-    func testSpecifiedCheckoutMatchesActual() {
-        runCommand("mkdir checkout-test")
-        
-        FileManager.setWorkingPath("checkout-test")
-        
-        runCommand("git init")
-        
-        var result = Modulo.run(["init", "--app"])
-        XCTAssertTrue(result == .success)
-        
-        result = Modulo.run(["add", "git@github.com:modulo-dm/test-checkout.git", "--branch", "notags-branch", "-u", "-v"])
-        XCTAssertTrue(result == .success)
-        
-        XCTAssertTrue(FileManager.fileExists("modules/test-checkout"))
-        
-        let branch = Git().branchAtPath("modules/test-checkout")
-        XCTAssertTrue(branch == "origin/notags-branch")
+        XCTAssertTrue(!FileManager.fileExists("modules/test-checkout"))
     }
     
 }

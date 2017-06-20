@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		468A8B171DF3F8B10060D93C /* TestGit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468A8B161DF3F8B10060D93C /* TestGit.swift */; };
 		653A1E5A1E2CA3BB00F24E70 /* TestCheckout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A1E591E2CA3BB00F24E70 /* TestCheckout.swift */; };
+		65598BF61EE088C2003C21CB /* SemverCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65598BF51EE088C2003C21CB /* SemverCodable.swift */; };
+		65598BF71EE088C2003C21CB /* SemverCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65598BF51EE088C2003C21CB /* SemverCodable.swift */; };
 		655F0C1F1DC3D6CE009DDD72 /* ELFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C761D14942D00411727 /* ELFoundation.framework */; };
 		655F0C241DC3D6D9009DDD72 /* ELCodable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55CAD1D1496A100411727 /* ELCodable.framework */; };
 		659D689C1E33E748008750C2 /* SetCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659D689B1E33E748008750C2 /* SetCommand.swift */; };
@@ -231,6 +233,7 @@
 /* Begin PBXFileReference section */
 		468A8B161DF3F8B10060D93C /* TestGit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestGit.swift; sourceTree = "<group>"; };
 		653A1E591E2CA3BB00F24E70 /* TestCheckout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCheckout.swift; sourceTree = "<group>"; };
+		65598BF51EE088C2003C21CB /* SemverCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemverCodable.swift; sourceTree = "<group>"; };
 		659D689B1E33E748008750C2 /* SetCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetCommand.swift; sourceTree = "<group>"; };
 		659D68A51E340516008750C2 /* MapCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCommand.swift; sourceTree = "<group>"; };
 		659D68AB1E3572A7008750C2 /* building.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = building.md; sourceTree = "<group>"; };
@@ -419,6 +422,7 @@
 				CAE55C981D1494B200411727 /* Extensions.swift */,
 				CA3354501D185C7600ACD91C /* Actions.swift */,
 				CA0A3F121D5A3D7700A7F0BB /* Semver.swift */,
+				65598BF51EE088C2003C21CB /* SemverCodable.swift */,
 				CAE55C9D1D1494B200411727 /* Specs */,
 				CAE55C9A1D1494B200411727 /* SCM */,
 				CAE55C951D1494B200411727 /* Commands */,
@@ -877,6 +881,7 @@
 				CAE55CCE1D1497A200411727 /* TestHelper.swift in Sources */,
 				CAE55CE61D149BD800411727 /* JSON.swift in Sources */,
 				CAE55CCD1D1497A200411727 /* String.swift in Sources */,
+				65598BF61EE088C2003C21CB /* SemverCodable.swift in Sources */,
 				CACB213E1D3D8D7B00ACA574 /* RemoveCommand.swift in Sources */,
 				CAE55D161D14C9FB00411727 /* DependencySpec.swift in Sources */,
 				CAE55CD21D1497A200411727 /* Swizzling.swift in Sources */,
@@ -908,6 +913,7 @@
 				CACB20C31D3457A100ACA574 /* StatusCommand.swift in Sources */,
 				CAE55D1D1D14CA1800411727 /* AddCommand.swift in Sources */,
 				CAE55CA91D1494B200411727 /* State.swift in Sources */,
+				65598BF71EE088C2003C21CB /* SemverCodable.swift in Sources */,
 				CAE55CA51D1494B200411727 /* Git.swift in Sources */,
 				CAE55CA81D1494B200411727 /* ModuleSpec.swift in Sources */,
 				CAE55CA71D1494B200411727 /* DependencySpec.swift in Sources */,
