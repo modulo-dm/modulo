@@ -13,7 +13,7 @@ This command initializes a project/directory for use with Modulo.  A `.modulo` f
 ## OPTIONS
 
 * `--app`:
-    Initializes modulo as an application.  Any dependencies will be located in `.\modules` upon add/update.
+    Initializes modulo as an application.  Any dependencies will be located in `.\modules` upon add/update.  This option also adds an entry to SCM's ignore file to ignore the `modules` directory.
 
 * `--module`:
     Initializes modulo as an module.  Any dependencies will be located in `..\` upon add/update.

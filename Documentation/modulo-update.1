@@ -1,7 +1,7 @@
 .\" generated with Ronn/v0.7.3
 .\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "MODULO\-UPDATE" "1" "January 2017" "Modulo" "Modulo manual"
+.TH "MODULO\-UPDATE" "1" "June 2017" "Modulo" "Modulo manual"
 .
 .SH "NAME"
 \fBmodulo\-update\fR \- Update the project based on the current set of dependencies\.
@@ -42,6 +42,10 @@ This will iterate through all dependencies and perform an update\.
 Instructs Modulo to just perform an update on the specified dependency\. See \fBmap\fR for a list of dependencies\.
 .
 .TP
+\fB\-\-meh\fR
+Update will perform a no\-op if modulo isn\'t being used on this project\. Useful for build system integration\.
+.
+.TP
 \fB\-v, \-\-verbose\fR
 Prints verbose output\. Use this to see what underlying SCM commands are being used and any other important information\.
 .
@@ -56,4 +60,10 @@ modulo\-layout(1), modulo\-map(1)
 Report bugs to the Github Project located at https://github\.com/modulo\-dm/modulo/\. You\'ll be able to see the status and track any issues you create\.
 .
 .SH "AUTHORS"
-Brandon Sneed \fIbrandon@redf\.net\fR Peat Bakke \fIpeat@peat\.org\fR
+Brandon Sneed \fIbrandon@redf\.net\fR
+.
+.br
+Peat Bakke \fIpeat@peat\.org\fR
+.
+.br
+

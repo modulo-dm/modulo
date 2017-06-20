@@ -20,8 +20,11 @@ This command updates any previously specified dependencies.  Updates can consist
 * `--all`:
 This will iterate through all dependencies and perform an update.
 
-* `<dependencyname>`:
+* <dependencyname>:
 Instructs Modulo to just perform an update on the specified dependency.  See `map` for a list of dependencies.
+
+* `--meh`:
+Update will perform a no-op if modulo isn't being used on this project.  Useful for build system integration.
 
 * `-v, --verbose`:
 Prints verbose output.  Use this to see what underlying SCM commands are being used and any other important information.
@@ -39,7 +42,7 @@ Report bugs to the Github Project located at https://github.com/modulo-dm/modulo
 
 ## AUTHORS
 
-Brandon Sneed <brandon@redf.net>
-Peat Bakke <peat@peat.org>
+Brandon Sneed <brandon@redf.net><br />
+Peat Bakke <peat@peat.org><br />
 
 
