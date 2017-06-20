@@ -81,7 +81,7 @@ $ brew install modulo-dm/homebrew-tap/modulo
 $ brew upgrade modulo
 ```
 
-### From Source
+### Build it yourself, from source
 
 Clone this repo, then ...
 
