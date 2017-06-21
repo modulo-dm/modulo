@@ -117,16 +117,18 @@ Each command has more specific help associated with it:
 $ modulo add --help
 usage: modulo add [options] <repo url>
 
-Add the given repository as a module to the current project and clone it into the project itself or a higher level container project.
+Add the given repository as a module to the current project.
 
-In the instance no tag, branch, or commit is specified, 'master' is used.
+In unmanaged mode, it is up to the user to manage what is checked out.
+In this case, the update command will simply do a pull.
 
-     --tag <tag>           specify the version tag to use
-     --branch <branch>     specify the branch to use
-     --commit <hash>       specify the commit to use
-     -u, --update          performs the update command after adding a module
+More information on version ranges can be found at https://docs.npmjs.com/misc/semver
+
      --help                show help for this command
      -v, --verbose         be verbose
+     --version <version>   specify the version or range to use
+     --unmanaged           specifies that this module will be unmanaged
+     -u, --update          performs the update command after adding a module
 
 ```
 
@@ -171,24 +173,26 @@ In the example above, 'MyProject' depends on the other 3 dependencies, and all l
 Use the `add` command:
 
 ```bash
-$ modulo add git@github.com:modulo-dm/test-init.git
-
-Added git@github.com:modulo-dm/test-init.git.  Run the `update` command to complete the process.
-```
-
-When no branch/tag/commit is specified, a branch, "origin/master" is assumed.  You can get more specific as to what your dependency is by using the --commit, --branch, --tag flags, like so:
-
-```bash
-$ modulo add git@github.com/modulo-dm/test-checkout.git --tag ">0.0.2 <=2.0.1"
+$ modulo add git@github.com/modulo-dm/test-checkout.git --version ">0.0.2 <=2.0.1"
 
 Added git@github.com:modulo-dm/test-checkout.git.  Run the `update` command to complete the process.
 ```
 
-You'll notice here that a semver range was used in place of the tag.  That means that `modulo update` will get the latest tag that satisfies the specified range.  You can combine this process into a single step by specifying `--update` on the command line.
+You'll notice here that a semver range was used as the version.  That means that `modulo update` will get the latest tag that satisfies the specified range.  You can combine this process into a single step by specifying `--update` on the command line.
+
+By default Modulo only works with versions or version ranges, however if you'd like to manage this yourself the `--unmanaged` flag becomes useful.
+
+```bash
+$ modulo add --unmanaged git@github.com:modulo-dm/test-init.git
+
+Added git@github.com:modulo-dm/test-init.git.  Run the `update` command to complete the process.
+```
+
+At this point the developer would be responsible for choosing which branch/commit/tag `test-init` is set to.  The `update` command that would follow will simply perform a pull operation to bring the latest down.
 
 ### Updating dependencies
 
-Use the `update` command.  In instances where the dependency doesn't exist on the filesystem yet, Modulo will clone it to either `.\modules` or `..\` depending on whether you're working on an application or a module.  If the dependency does exist on the filesystem, a fetch will be performed.  Once either of those complete, it will checkout the tag/branch/commit necessary.
+Use the `update` command.  In instances where the dependency doesn't exist on the filesystem yet, Modulo will clone it to either `.\modules` or `..\` depending on whether you're working on an application or a module.  If the dependency does exist on the filesystem, a clone will be performed.  Once either of those complete, it will checkout the version necessary.
 
 ```bash
 $ modulo update --all
