@@ -39,7 +39,7 @@ open class InitCommand: NSObject, Command {
     }
     
     open func execute(_ otherParams: Array<String>?) -> Int {
-        let scm = currentSCM()
+        //let scm = currentSCM()
         let workingPath = FileManager.workingPath()
 
         // Already nested in a Modules/ directory? Init as a module.
@@ -52,12 +52,13 @@ open class InitCommand: NSObject, Command {
             exit(.alreadyInitialized)
         }
       
-        if isModule == false {
+        // Don't do this anymore.
+        /*if isModule == false {
             let scmResult = scm.addModulesIgnore()
             if scmResult != .success {
                 exit(scmResult.errorMessage())
             }
-        }
+        }*/
         
         let specPath = workingPath.appendPathComponent(specFilename)
         let spec = ModuleSpec(name: FileManager.directoryName(), module: isModule, sourcePath: nil, dependencies: [], path: specPath)

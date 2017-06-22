@@ -24,11 +24,10 @@ open class AddCommand: NSObject, Command {
     open var name: String { return "add" }
     open var shortHelpDescription: String { return "Adds a module dependency"  }
     open var longHelpDescription: String {
-        return "Add the given repository as a module to the current project and clone it " +
-            "into the project itself or a higher level container project.\n\n" +
+        return "Add the given repository as a module to the current project.\n\n" +
             "In unmanaged mode, it is up to the user to manage what is checked out.\n" +
             "In this case, the update command will simply do a pull.\n\n" +
-            "More information on version ranges can be found at: \n\n  https://docs.npmjs.com/misc/semver"
+            "More information on version ranges can be found at https://docs.npmjs.com/misc/semver"
     }
     open var failOnUnrecognizedOptions: Bool { return true }
     

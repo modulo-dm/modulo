@@ -140,6 +140,18 @@ extension FileManager {
     public static func fileExists(_ path: String) -> Bool {
         return FileManager.default.fileExists(atPath: path)
     }
+    
+    public static func empty(path: String) -> Bool {
+        var result = false
+        do {
+            let files = try FileManager.default.contentsOfDirectory(atPath: path)
+            result = (files.count == 0)
+        } catch {
+        
+        }
+        
+        return result
+    }
 
     public static func pathExists(_ path: String) -> Bool {
         return FileManager.default.fileExists(atPath: path)

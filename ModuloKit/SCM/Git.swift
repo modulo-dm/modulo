@@ -78,7 +78,7 @@ open class Git: SCM {
     }
     
     open func clone(_ url: String, path: String) -> SCMResult {
-        if FileManager.fileExists(path) {
+        if FileManager.fileExists(path) && FileManager.empty(path: path) == false {
             return .error(code: 1, message: "Module path '\(path)' already exists.")
         }
         
@@ -173,33 +173,41 @@ open class Git: SCM {
         return .success
     }
     
-    open func addModulesIgnore() -> SCMResult {
+    open func adjustIgnoreFile(pattern: String, removing: Bool) -> SCMResult {
         let localModulesPath = State.instance.modulePathName
-        
+        var ignoreFile = ""
+        let textBlob = "\n# Ignore \(pattern) for Modulo.\n\(localModulesPath)/\(pattern)"
+
         if FileManager.fileExists(".gitignore") {
-            var ignoreFile = try! String(contentsOfFile: ".gitignore")
-            
-            // check to see if this ignore file has the exclusion already...
-            if ignoreFile.containsString("\n\(localModulesPath)") {
+            do {
+                ignoreFile = try String(contentsOfFile: ".gitignore")
+            } catch {
+                return .error(code: 1, message: "Unable to read .gitignore.  Check your permissions.")
+            }
+        }
+        
+        if removing {
+            if ignoreFile.contains(textBlob) {
+                ignoreFile = ignoreFile.replace(textBlob, replacement: "")
+            } else {
+                // it ain't there, carry on.
                 return .success
             }
-            
-            ignoreFile += "\n# Ignore for modulo dependencies\n\(localModulesPath)\n"
-            do {
-                try ignoreFile.write(toFile: ".gitignore", atomically: true, encoding: String.Encoding.utf8)
-            } catch {
-                return .error(code: 1, message: "Unable to write to .gitignore.  Check your permissions.")
-            }
-            return .success
         } else {
-            let ignoreFile = "# Add files for git to ignore\n\n# ...\n\n# Ignore for modulo dependencies\n\(localModulesPath)\n"
-            do {
-                try ignoreFile.write(toFile: ".gitignore", atomically: true, encoding: String.Encoding.utf8)
-            } catch {
-                return .error(code: 1, message: "Unable to write to .gitignore.  Check your permissions.")
+            if ignoreFile.contains(textBlob) {
+                // it's already in there, why?  who cares.  don't add it again.
+                return .success
+            } else {
+                ignoreFile.append(textBlob)
             }
-            return .success
         }
+        
+        do {
+            try ignoreFile.write(toFile: ".gitignore", atomically: true, encoding: .utf8)
+        } catch {
+            return .error(code: 1, message: "Unable to write to .gitignore.  Check your permissions.")
+        }
+        return .success
     }
     
     open func checkStatus(_ path: String) -> SCMResult {
@@ -348,7 +356,7 @@ open class Git: SCM {
 extension Git {
     
     internal func collectAnySubmodules() -> SCMResult {
-        let updateResult = runCommand("git submodule update --init --recursive")
+        /*let updateResult = runCommand("git submodule update --init --recursive")
         if updateResult != 0 {
             return .error(code: 1, message: "Updating submodules failed.")
         }
@@ -356,7 +364,10 @@ extension Git {
         let syncResult = runCommand("git submodule sync")
         if syncResult != 0 {
             return .error(code: 1, message: "Synchronizing submodules failed.")
-        }
+        }*/
+        
+        runCommand("git submodule update --init --recursive")
+        runCommand("git submodule sync")
         
         return .success
     }

@@ -45,5 +45,55 @@ class TestGit: XCTestCase {
         
         Git().remove("test-checkout")
     }
+    
+    func testAddingToIgnoreFile() {
+        let status = Git().clone("git@github.com:modulo-dm/test-checkout.git", path: "test-checkout")
+        XCTAssertTrue(status == .success)
+        
+        FileManager.setWorkingPath("test-checkout")
+        
+        let localModulesPath = State.instance.modulePathName
+        let pattern = "testModule"
+        let textBlob = "\n# Ignore \(pattern) for Modulo.\n\(localModulesPath)/\(pattern)"
+        
+        let ignoreFile = "*.*\n*.DS_Store\n*.m\n*.mm" // haha, ignore all the objc's.  i kill me.
+        try! ignoreFile.write(toFile: ".gitignore", atomically: true, encoding: .utf8)
+        
+        _ = Git().adjustIgnoreFile(pattern: pattern, removing: false)
+        
+        let resultingFile = try! String(contentsOfFile: ".gitignore")
+        
+        let found = resultingFile.contains(textBlob)
+        XCTAssertTrue(found)
+        
+        FileManager.setWorkingPath("..")
+        
+        Git().remove("test-checkout")
+    }
 
+    func testRemovingFromIgnoreFile() {
+        let status = Git().clone("git@github.com:modulo-dm/test-checkout.git", path: "test-checkout")
+        XCTAssertTrue(status == .success)
+        
+        FileManager.setWorkingPath("test-checkout")
+        
+        let localModulesPath = State.instance.modulePathName
+        let pattern = "testModule"
+        let textBlob = "\n# Ignore \(pattern) for Modulo.\n\(localModulesPath)/\(pattern)"
+        
+        let ignoreFile = "*.*\n*.DS_Store\n*.m\n*.mm\n# Ignore testModule for Modulo.\nmodules/testModule"
+        try! ignoreFile.write(toFile: ".gitignore", atomically: true, encoding: .utf8)
+        
+        _ = Git().adjustIgnoreFile(pattern: pattern, removing: true)
+        
+        let resultingFile = try! String(contentsOfFile: ".gitignore")
+        
+        let found = resultingFile.contains(textBlob)
+        XCTAssertFalse(found)
+        
+        FileManager.setWorkingPath("..")
+        
+        Git().remove("test-checkout")
+    }
+    
 }

@@ -54,9 +54,15 @@ open class Actions {
             writeln(.stdout, "working on: \(moduleName)...")
             let clonePath = modulePath.appendPathComponent(moduleName)
             
+            // add it to the SCM ignore file.
+            let ignoreFileResult = scm.adjustIgnoreFile(pattern: dep.name(), removing: false)
+            if ignoreFileResult != .success {
+                exit(ignoreFileResult.errorMessage())
+            }
+            
             // you might think if the path DOES exist, we'd check for version compatibility here.
             // But no... we'll do that in a seperate step.
-            if FileManager.pathExists(clonePath) == false {
+            if FileManager.pathExists(clonePath) == false || FileManager.empty(path: clonePath) {
                 // try to clone it...
                 let cloneResult = scm.clone(dep.repositoryURL, path: clonePath)
                 if cloneResult != .success {
