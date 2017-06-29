@@ -12,11 +12,11 @@ Modulo doesn't try to build the world for you.  It focuses solely on managing yo
 
 Modulo also makes it really easy and painless to contribute back to a dependency.  Since it's not building anything, and your dependencies are simply clones of what you specified, the workflow is fast and simple.  If you've ever tried this with Carthage and CocoaPods, it can be very frustrating, not to mention training an entire team of individuals to do it.
 
-Modulo is more flexible.  It doesn't explicitly need support from the dependency.  A simple Git url will suffice, though more features are available if a dependency does explicitly support modulo.  Modulo can also checkout and work from branches, tags, and even specific commit hashes and switch between them very easily.
+Modulo is more flexible.  It doesn't explicitly need support from the dependency.  A simple Git url will suffice, though more features are available if a dependency does explicitly support modulo.
 
 Modulo is more informative.  With the --verbose option, it informs you of exactly what it's doing underneath.  It lets you know whether dependencies were pulled in implicitly vs. explicitly.  During updates or other changes, it checks the status of your project and any dependencies and lets you know if things are awry, such as unpushed changes, uncommitted changes, etc. It will let you know of these things and stop before causing problems.
 
-Errors and edge cases are much easier to recover from.  Following the happy path, CocoaPods and Carthage work very well.  When things get out of whack (in any number of possible ways), it's often very difficult to recover from.
+Errors and edge cases are much easier to recover from.
 
 ## Relationships
 
