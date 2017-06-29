@@ -54,7 +54,7 @@ class TestUpdate: XCTestCase {
         
         FileManager.setWorkingPath("test-add")
         
-        let result = Modulo.run(["update", "-v", "test-init"])
+        let result = Modulo.run(["update", "test-init"])
         XCTAssertTrue(result == .success)
         
         let spec = ModuleSpec.load(contentsOfFile: specFilename)

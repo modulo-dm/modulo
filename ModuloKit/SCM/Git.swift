@@ -152,7 +152,7 @@ open class Git: SCM {
         }
         
         if let checkoutTag = version.mostUpToDate(versions: existingTags) {
-            checkoutCommand = "git checkout \(checkoutTag.stringValue)"
+            checkoutCommand = "git checkout \(checkoutTag.stringValue) --quiet"
         } else {
             return .error(code: SCMDefaultError, message: "Unable to find a match for \(version.original).")
         }
@@ -254,16 +254,12 @@ open class Git: SCM {
                         branch = branch.trimmingCharacters(in: CharacterSet.whitespaces)
                         branch = branch.trimmingCharacters(in: CharacterSet(["*"," "]))
                         branch = branch.replaceFirst("remotes/", replacement: "")
-                        
-                        print(branch)
-                        
                         return branch
                     }.filter { (item) -> Bool in
                         
                         if item.contains(" -> ") || item.characters.count == 0 {
                             return false
                         } else {
-                            print("item = \(item)")
                             return true
                         }
                     }

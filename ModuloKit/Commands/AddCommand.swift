@@ -79,8 +79,9 @@ open class AddCommand: NSObject, Command {
                 }
             } else {
                 writeln(.stdout, "Added \(repositoryURL).  Run the `update` command to complete the process.")
-            }
+            }            
         }
+        
         
         return result.rawValue
     }

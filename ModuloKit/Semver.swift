@@ -705,10 +705,7 @@ extension Semver {
         var secondResult: Bool? = nil
         
         let comps = range.comparators
-        print(comps)
         for ver in comps {
-            print("\(self.stringValue) == \(ver)?")
-            
             var verResult = false
             
             switch ver {

@@ -22,6 +22,10 @@ public struct State {
     var explicitDependencies = [DependencySpec]()
     var removedDependencies = [DependencySpec]()
     
+    public func dependenciesWereCloned() -> Bool {
+        return (implictDependencies.count > 0 || explicitDependencies.count > 0)
+    }
+    
     public func showFinalInformation() {
         writeln(.stdout, "")
         

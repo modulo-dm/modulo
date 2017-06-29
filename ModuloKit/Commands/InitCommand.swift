@@ -45,21 +45,13 @@ open class InitCommand: NSObject, Command {
         // Already nested in a Modules/ directory? Init as a module.
         if isValidModuleDirectory(path: workingPath) {
             isModule = true
-            print("Initializing as a module, since you're already in the Modules directory ...")
+            writeln(.stdout, "Initializing as a module, since you're already in the Modules directory ...")
         }
 
         if ModuleSpec.exists() {
             exit(.alreadyInitialized)
         }
       
-        // Don't do this anymore.
-        /*if isModule == false {
-            let scmResult = scm.addModulesIgnore()
-            if scmResult != .success {
-                exit(scmResult.errorMessage())
-            }
-        }*/
-        
         let specPath = workingPath.appendPathComponent(specFilename)
         let spec = ModuleSpec(name: FileManager.directoryName(), module: isModule, sourcePath: nil, dependencies: [], path: specPath)
         let success = spec.save()

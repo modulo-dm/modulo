@@ -17,6 +17,8 @@ open class UpdateCommand: NSObject, Command {
     // internal properties
     fileprivate var updateAll: Bool = true
     fileprivate var dependencyName: String! = nil
+    fileprivate var failSilentlyIfUnused: Bool = false
+    fileprivate var nonzero: Bool = false
     
     // Protocol conformance
     open var name: String { return "update" }
@@ -34,7 +36,12 @@ open class UpdateCommand: NSObject, Command {
             self.updateAll = true
         }
         
+        addOption(["--nonzero"], usage: "return a non-zero result code if clones occurred.") { (option, value) in
+            self.nonzero = true
+        }
+        
         addOption(["--meh"], usage: "return success if modulo isn't being used or is uninitialized") { (option, value) in
+            self.failSilentlyIfUnused = true
         }
         
         addFlaglessOptionValues(["<dependency name>"]) { (option, value) -> Void in
@@ -63,9 +70,19 @@ open class UpdateCommand: NSObject, Command {
         }
         
         if deps.count == 0 {
-            return ErrorCode.noMatchingDependencies.rawValue
+            if failSilentlyIfUnused {
+                return ErrorCode.success.rawValue
+            } else {
+                return ErrorCode.noMatchingDependencies.rawValue
+            }
         } else {
             _ = actions.updateDependencies(deps, explicit: true)
+            
+            // if we actually cloned something, and the nonzero flag was used,
+            if nonzero && State.instance.dependenciesWereCloned() {
+                return 1
+            }
+            
             return ErrorCode.success.rawValue
         }
     }
