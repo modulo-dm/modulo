@@ -152,7 +152,9 @@ open class Git: SCM {
         }
         
         if let checkoutTag = version.mostUpToDate(versions: existingTags) {
-            checkoutCommand = "git checkout \(checkoutTag.stringValue) --quiet"
+            // use the original tag from the server as to not any interpretations slip through,
+            // ie: v2.1 getting turned into v2.1.0 which doesn't exist but is implied.
+            checkoutCommand = "git checkout \(checkoutTag.original) --quiet"
         } else {
             return .error(code: SCMDefaultError, message: "Unable to find a match for \(version.original).")
         }
@@ -322,9 +324,11 @@ open class Git: SCM {
                 if let output = output {
                     let tags = output.components(separatedBy: "\n")
                     for tag in tags {
-                        let semver = Semver(tag)
+                        var semver = Semver(tag)
+                        semver.normalize()
+                        
                         if semver.valid {
-                            result.append(Semver(tag))
+                            result.append(semver)
                         }
                     }
                 }
