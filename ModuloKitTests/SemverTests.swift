@@ -57,7 +57,7 @@ class SemverTests: XCTestCase {
         XCTAssertTrue(semver.build == "abcdef.1.2")
         
         semver = Semver("1.2.x")
-        XCTAssertTrue(semver.valid == true)
+        XCTAssertTrue(semver.valid == false)
     }
 
     func testEqualityOperators() {
@@ -232,6 +232,20 @@ class SemverTests: XCTestCase {
         ver = Semver("0.1.3")
         
         XCTAssertFalse(ver.satisfies(range))
+    }
+    
+    func testNonSemverCompat() {
+        var ver = Semver("v2.1")
+        
+        XCTAssertFalse(ver.valid)
+        
+        ver.normalize()
+        
+        XCTAssertTrue(ver.valid)
+        
+        let range = SemverRange("v2.1.x")
+        
+        XCTAssertTrue(ver.satisfies(range))
     }
 }
 
