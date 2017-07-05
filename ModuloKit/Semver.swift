@@ -179,6 +179,10 @@ extension Semver {
                 return
             }
         }
+        
+        if partial {
+            valid = false
+        }
 
         prefix = prefix(original)
     }
@@ -259,6 +263,7 @@ extension Semver {
             if fix == -1 {
                 fix = 0
             }
+            valid = true
         }
     }
     
