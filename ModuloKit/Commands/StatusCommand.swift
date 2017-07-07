@@ -21,17 +21,21 @@ open class StatusCommand: NSObject, Command {
         return "Gathers status about the module tree.  Uncommitted, unpushed, branch or tag mismatches, etc."
     }
     open var failOnUnrecognizedOptions: Bool { return true }
+    open var ignoreMain: Bool = false
     
     open var verbose: Bool = false
     open var quiet: Bool = false
     
     open func configureOptions() {
-        
+        addOption(["--ignoremain"], usage: "ignores the main project, scans modules only") { (option, value) in
+            self.ignoreMain = true
+        }
+
     }
     
     open func execute(_ otherParams: Array<String>?) -> Int {
         let actions = Actions()
-        let result = actions.checkDependenciesStatus()
+        let result = actions.checkDependenciesStatus(ignoreMain: ignoreMain)
         return result.rawValue
     }
 }

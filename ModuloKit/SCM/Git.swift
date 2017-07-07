@@ -509,23 +509,20 @@ extension Git {
     }
     
     internal func hasOutstandingPushes(_ path: String) -> Bool {
-        var result = true
+        var result = false
         
-        // they're on a branch, we don't care too much, but we need to know.
-        if branchName(path) != nil {
-            if let remoteBranch = remoteTrackingBranch(path) {
-                let initialWorkingPath = FileManager.workingPath()
-                FileManager.setWorkingPath(path)
-                
-                if let currentHash = hashAtPath(path) {
-                    let command = "git rev-list \(remoteBranch)...\(currentHash)"
-                    _ = runCommand(command) { (status, output) in
-                        result = (output?.characters.count != 0) && (status == 0)
-                    }
+        if let remoteBranch = remoteTrackingBranch(path) {
+            let initialWorkingPath = FileManager.workingPath()
+            FileManager.setWorkingPath(path)
+            
+            if let currentHash = hashAtPath(path) {
+                let command = "git rev-list \(remoteBranch)...\(currentHash)"
+                _ = runCommand(command) { (status, output) in
+                    result = (output?.characters.count != 0) && (status == 0)
                 }
-                
-                FileManager.setWorkingPath(initialWorkingPath)
             }
+            
+            FileManager.setWorkingPath(initialWorkingPath)
         }
         
         return result

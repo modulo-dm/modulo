@@ -36,7 +36,7 @@ open class UpdateCommand: NSObject, Command {
             self.updateAll = true
         }
         
-        addOption(["--nonzero"], usage: "return a non-zero result code if clones occurred.") { (option, value) in
+        addOption(["--nonzero"], usage: "return a non-zero result code if clones occurred") { (option, value) in
             self.nonzero = true
         }
         

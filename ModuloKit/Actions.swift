@@ -125,18 +125,20 @@ open class Actions {
         return ErrorCode.success
     }
     
-    open func checkDependenciesStatus() -> ErrorCode {
+    open func checkDependenciesStatus(ignoreMain: Bool = false) -> ErrorCode {
         var result: ErrorCode = .success
         
         writeln(.stdout, "status:")
         
         if let workingSpec = ModuleSpec.workingSpec() {
-            // need to look at main dir too, not just deps.
-            let mainPath = workingSpec.path.removeLastPathComponent()
-            let status = scm.checkStatus(mainPath)
-            if status != .success {
-                result = ErrorCode(rawValue: Int(status.errorCode()))!
-                writeln(.stdout, "  main project has \(status.errorMessage()).")
+            if ignoreMain == false {
+                // need to look at main dir too, not just deps.
+                let mainPath = workingSpec.path.removeLastPathComponent()
+                let status = scm.checkStatus(mainPath)
+                if status != .success {
+                    result = ErrorCode(rawValue: Int(status.errorCode()))!
+                    writeln(.stdout, "  main project has \(status.errorMessage()).")
+                }
             }
             
             // now check the deps.
