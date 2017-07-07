@@ -30,6 +30,8 @@ class TestScenarios: XCTestCase {
         
         runCommand("git init")
         
+        runCommand("git config --local user.email foo@example.com")
+        
         var result = Modulo.run(["init", "--app"])
         XCTAssertTrue(result == .success)
         
@@ -60,7 +62,7 @@ class TestScenarios: XCTestCase {
         XCTAssertTrue(result == .success)
         
         runCommand("git add -A")
-        runCommand("git commit -m \"initial with modulo adds\"")
+        testCommit("initial with modulo adds")
         
         // the main project should be clean now.
         result = Modulo.run(["status"])
@@ -72,6 +74,8 @@ class TestScenarios: XCTestCase {
         XCTAssertTrue(status == .success)
         
         FileManager.setWorkingPath("test-simeon")
+        
+        runCommand("git config --local user.email foo@example.com")
         
         var result = Modulo.run(["init", "--app"])
         XCTAssertTrue(result == .success)
@@ -103,7 +107,7 @@ class TestScenarios: XCTestCase {
         XCTAssertTrue(result == .success)
         
         runCommand("git add -A")
-        runCommand("git commit -m \"initial with modulo adds\"")
+        testCommit("initial with modulo adds")
         
         // the main project should have unpushed commits now.
         result = Modulo.run(["status"])

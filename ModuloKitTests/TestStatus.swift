@@ -70,12 +70,14 @@ class TestStatus: XCTestCase {
         
         FileManager.setWorkingPath("test-add")
         
+        runCommand("git config --local user.email foo@example.com")
+        
         var result = Modulo.run(["update", "--all", "-v"])
         XCTAssertTrue(result == .success)
         
         touchFile("blah.txt")
         runCommand("git add blah.txt")
-        runCommand("git commit -m \"test\"")
+        testCommit("test")
         
         result = Modulo.run(["status", "-v"])
         XCTAssertTrue(result == .dependencyUnclean)
@@ -91,6 +93,8 @@ class TestStatus: XCTestCase {
         
         FileManager.setWorkingPath("test-add")
         
+        runCommand("git config --local user.email foo@example.com")
+        
         var result = Modulo.run(["update", "--all", "-v"])
         XCTAssertTrue(result == .success)
         
@@ -98,7 +102,7 @@ class TestStatus: XCTestCase {
         
         touchFile("blah.txt")
         runCommand("git add blah.txt")
-        runCommand("git commit -m \"test\"")
+        testCommit("test")
         
         FileManager.setWorkingPath("../test-add")
         
