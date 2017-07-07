@@ -75,7 +75,7 @@ class TestStatus: XCTestCase {
         
         touchFile("blah.txt")
         runCommand("git add blah.txt")
-        runCommand("git commit -m \"test\"")
+        testCommit("test")
         
         result = Modulo.run(["status", "-v"])
         XCTAssertTrue(result == .dependencyUnclean)
@@ -98,7 +98,7 @@ class TestStatus: XCTestCase {
         
         touchFile("blah.txt")
         runCommand("git add blah.txt")
-        runCommand("git commit -m \"test\"")
+        testCommit("test")
         
         FileManager.setWorkingPath("../test-add")
         
