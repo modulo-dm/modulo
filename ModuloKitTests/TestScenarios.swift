@@ -60,7 +60,7 @@ class TestScenarios: XCTestCase {
         XCTAssertTrue(result == .success)
         
         runCommand("git add -A")
-        runCommand("git commit -m \"initial with modulo adds\"")
+        testCommit("initial with modulo adds")
         
         // the main project should be clean now.
         result = Modulo.run(["status"])
@@ -103,7 +103,7 @@ class TestScenarios: XCTestCase {
         XCTAssertTrue(result == .success)
         
         runCommand("git add -A")
-        runCommand("git commit -m \"initial with modulo adds\"")
+        testCommit("initial with modulo adds")
         
         // the main project should have unpushed commits now.
         result = Modulo.run(["status"])

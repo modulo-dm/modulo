@@ -33,3 +33,7 @@ func touchFile(_ path: String) {
 func runCommand(_ command: String) {
     Git().runCommand(command)
 }
+
+func testCommit(_ message: String) {
+    Git().runCommand("git commit -m \"\(message)\" --no-verify")
+}
