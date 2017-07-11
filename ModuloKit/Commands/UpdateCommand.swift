@@ -19,6 +19,7 @@ open class UpdateCommand: NSObject, Command {
     fileprivate var dependencyName: String! = nil
     fileprivate var failSilentlyIfUnused: Bool = false
     fileprivate var nonzero: Bool = false
+    fileprivate var hostname: String? = nil
     
     // Protocol conformance
     open var name: String { return "update" }
@@ -40,6 +41,10 @@ open class UpdateCommand: NSObject, Command {
             self.nonzero = true
         }
         
+        addOptionValue(["--host"], usage: "checks for host availablility, ie: github.com", valueSignature: "<host name>") { (option, value) in
+            self.hostname = value
+        }
+        
         addOption(["--meh"], usage: "return success if modulo isn't being used or is uninitialized") { (option, value) in
             self.failSilentlyIfUnused = true
         }
@@ -52,6 +57,13 @@ open class UpdateCommand: NSObject, Command {
     
     open func execute(_ otherParams: Array<String>?) -> Int {
         let actions = Actions()
+        
+        if let hostname = hostname {
+            if canConnect(hostname: hostname) == false {
+                writeln(.stdout, "Connection to \(hostname) unavailable.  Exiting.")
+                return ErrorCode.success.rawValue
+            }
+        }
         
         var deps = [DependencySpec]()
         if updateAll {

@@ -366,6 +366,7 @@ extension Git {
             return .error(code: 1, message: "Synchronizing submodules failed.")
         }*/
         
+        // we don't really care if this works or not.  it'll return an error even if there's nothing to do.
         runCommand("git submodule update --init --recursive")
         runCommand("git submodule sync")
         

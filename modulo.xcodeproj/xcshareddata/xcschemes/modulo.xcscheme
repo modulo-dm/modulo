@@ -64,7 +64,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "update --all"
+            argument = "update --all --host github.corp.ebay.com"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
