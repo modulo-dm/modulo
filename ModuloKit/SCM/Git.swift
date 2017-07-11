@@ -100,7 +100,7 @@ open class Git: SCM {
         let initialWorkingPath = FileManager.workingPath()
         FileManager.setWorkingPath(path)
         
-        let updateCommand = "git fetch --all --tags"
+        let updateCommand = "git fetch --recurse-submodules --all --tags"
         let status = runCommand(updateCommand)
         
         FileManager.setWorkingPath(initialWorkingPath)
@@ -120,7 +120,7 @@ open class Git: SCM {
         let initialWorkingPath = FileManager.workingPath()
         FileManager.setWorkingPath(path)
         
-        var updateCommand = "git pull --ff-only"
+        var updateCommand = "git pull --recurse-submodules --ff-only"
         if let remote = remoteData {
             updateCommand = updateCommand + " \(remote)"
         }
@@ -161,13 +161,14 @@ open class Git: SCM {
         
         let status = runCommand(checkoutCommand)
         
+        let submodulesResult = collectAnySubmodules()
+        
         FileManager.setWorkingPath(initialWorkingPath)
         
         if status != 0 {
             return .error(code: status, message: "Unable to checkout a match for '\(version.original)'.")
         }
         
-        let submodulesResult = collectAnySubmodules()
         if submodulesResult != .success {
             return submodulesResult
         }
