@@ -1,7 +1,7 @@
 .\" generated with Ronn/v0.7.3
 .\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "MODULO\-UPDATE" "1" "June 2017" "Modulo" "Modulo manual"
+.TH "MODULO\-UPDATE" "1" "July 2017" "Modulo" "Modulo manual"
 .
 .SH "NAME"
 \fBmodulo\-update\fR \- Update the project based on the current set of dependencies\.
@@ -34,12 +34,20 @@ Checking out the specified tag/branch/commit for each dependency\.
 .SH "OPTIONS"
 .
 .TP
-\fB\-\-all\fR
+\fB\-a, \-\-all\fR
 This will iterate through all dependencies and perform an update\.
 .
 .TP
 \fIdependencyname\fR
 Instructs Modulo to just perform an update on the specified dependency\. See \fBmap\fR for a list of dependencies\.
+.
+.TP
+`\-\-nonzero
+Returns a non\-zero result if modulo actually cloned dependencies\. This is useful for CI build systems\.
+.
+.TP
+\fB\-\-host <host name>\fR
+Checks for ability to connect to host name before continuing\. This allows for developers to work off\-line without being interrupted\.
 .
 .TP
 \fB\-\-meh\fR

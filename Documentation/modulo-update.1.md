@@ -11,18 +11,23 @@ modulo-update(1) -- Update the project based on the current set of dependencies.
 This command updates any previously specified dependencies.  Updates can consist of the following:
 
 * Cloning any dependencies that don't exist in the filesystem yet.
-* Performing a fetch on dependencies to get any new tags/branches/commits.
-* Verifying that it's safe to check out the specified version.
-* Checking out the specified version for each dependency.
-* Dependencies marked as unmanaged will simply perform a pull.
+* Performing a fetch on dependencies to get any new tags/branches/commits
+* Verifying that it's safe to check out the specified tag/branch/commit.
+* Checking out the specified tag/branch/commit for each dependency.
 
 ## OPTIONS
 
-* `--all`:
+* `-a, --all`:
 This will iterate through all dependencies and perform an update.
 
-* `<dependencyname>`:
+* <dependencyname>:
 Instructs Modulo to just perform an update on the specified dependency.  See `map` for a list of dependencies.
+
+* `--nonzero:
+Returns a non-zero result if modulo actually cloned dependencies.  This is useful for CI build systems.
+
+* `--host <host name>`:
+Checks for ability to connect to host name before continuing.  This allows for developers to work off-line without being interrupted.
 
 * `--meh`:
 Update will perform a no-op if modulo isn't being used on this project.  Useful for build system integration.
