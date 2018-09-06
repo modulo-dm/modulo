@@ -18,24 +18,30 @@ import Foundation
 public extension NSObject {
     /// Swizzles a class method on an Objective-C object.
     public class func swizzleClassMethod(_ originalSelector: Selector, swizzledSelector:Selector) {
-        if let c: AnyClass = object_getClass(self) {
-            let originalMethod = class_getClassMethod(c, originalSelector)
-            let swizzledMethod = class_getClassMethod(c, swizzledSelector)
-            
-            let didAddMethod = class_addMethod(c, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
-            
-            if didAddMethod {
-                class_replaceMethod(c, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod))
-            } else {
-                method_exchangeImplementations(originalMethod, swizzledMethod);
+        guard let c: AnyClass = object_getClass(self),
+            let originalMethod = class_getClassMethod(c, originalSelector),
+                let swizzledMethod = class_getClassMethod(c, swizzledSelector) else {
+                    print("Error replacing \(originalSelector) on \(String(describing: object_getClass(self))) with \(swizzledSelector).")
+                    return
             }
+            
+        let didAddMethod = class_addMethod(c, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
+
+        if didAddMethod {
+            class_replaceMethod(c, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod))
+        } else {
+            method_exchangeImplementations(originalMethod, swizzledMethod);
         }
     }
+
     
     /// Swizzles an instance method on an Objective-C object.
     public class func swizzleInstanceMethod(_ originalSelector: Selector, swizzledSelector:Selector) {
-        let originalMethod = class_getInstanceMethod(self, originalSelector)
-        let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)
+        guard let originalMethod = class_getInstanceMethod(self, originalSelector),
+            let swizzledMethod = class_getInstanceMethod(self, swizzledSelector) else {
+                print("Error replacing \(originalSelector) with \(swizzledSelector).")
+                return
+        }
         
         let didAddMethod = class_addMethod(self, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
         

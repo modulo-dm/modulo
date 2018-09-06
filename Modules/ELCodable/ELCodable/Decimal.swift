@@ -66,42 +66,42 @@ extension Decimal /*: FloatingPointType*/ { // It complains about _BitsType miss
     }
     /// `true` iff `self` is negative.
     public var isSignMinus: Bool {
-        return ((value as Double).sign == .minus)
+        return ((value as! Double).sign == .minus)
     }
     /// `true` iff `self` is normal (not zero, subnormal, infinity, or
     /// NaN).
     public var isNormal: Bool {
-        return (value as Double).isNormal
+        return (value as! Double).isNormal
     }
     /// `true` iff `self` is zero, subnormal, or normal (not infinity
     /// or NaN).
     public var isFinite: Bool {
-        return (value as Double).isFinite
+        return (value as! Double).isFinite
     }
     /// `true` iff `self` is +0.0 or -0.0.
     public var isZero: Bool {
-        return (value as Double).isZero
+        return (value as! Double).isZero
     }
     /// `true` iff `self` is subnormal.
     public var isSubnormal: Bool {
-        return (value as Double).isSubnormal
+        return (value as! Double).isSubnormal
     }
     /// `true` iff `self` is infinity.
     public var isInfinite: Bool {
-        return (value as Double).isInfinite
+        return (value as! Double).isInfinite
     }
     /// `true` iff `self` is NaN.
     public var isNaN: Bool {
-        return (value as Double).isNaN
+        return (value as! Double).isNaN
     }
     /// `true` iff `self` is a signaling NaN.
     public var isSignaling: Bool {
-        return (value as Double).isSignalingNaN
+        return (value as! Double).isSignalingNaN
     }
 }
 
-extension Decimal: Comparable, Equatable {
-}
+//extension Decimal: Comparable, Equatable {
+//}
 
 // MARK: Equatable
 public func ==(lhs: Decimal, rhs: Decimal) -> Bool {
@@ -156,9 +156,16 @@ extension Decimal: ExpressibleByIntegerLiteral {
     }
 }
 
-extension Decimal: AbsoluteValuable {
+extension Decimal: SignedNumeric & Comparable {
+    public init?<T>(exactly source: T) where T : BinaryInteger {
+        self.value = NSDecimalNumber.init(value: Int(source))
+    }
+
+    public var magnitude: Decimal {
+        return Decimal.abs(self)
+    }
+
     /// Returns the absolute value of `x`.
-    
     public static func abs(_ x: Decimal) -> Decimal {
         if x.value.compare(NSDecimalNumber.zero) == .orderedAscending {
             // number is neg, multiply by -1

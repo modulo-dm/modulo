@@ -113,7 +113,7 @@ extension Semver {
     fileprivate mutating func parse(_ value: String) {
         
         // it ain't got enough characters, ditch.
-        guard value.characters.count > 0 else {
+        guard value.count > 0 else {
             valid = false
             return
         }
@@ -136,21 +136,21 @@ extension Semver {
             
             if preReleaseMatches.count > 0 {
                 // remove the leading -, it *will* be there due to the regex.
-                preRelease = String(preReleaseMatches[0].characters.dropFirst())
+                preRelease = String(preReleaseMatches[0].dropFirst())
                 // now pick up any version data sitting in pre release.
                 let preReleaseVersionMatches = preRelease!.matchesForRegex(NumberRegex)
                 preReleaseVersionMatches.forEach { (number) in
                     preReleaseVersionData.append(Int(number)!)
                 }
                 // now remove any versions after the prerelease tag.
-                if let firstDot = preRelease!.characters.index(of: ".") {
-                    preRelease = preRelease!.substring(to: firstDot)
+                if let firstDot = preRelease!.index(of: ".") {
+                    preRelease = String(preRelease![..<firstDot])
                 }
             }
             
             if buildMatches.count > 0 {
                 // remove the leading +, it *will* be there due to the regex.
-                build = String(buildMatches[0].characters.dropFirst())
+                build = String(buildMatches[0].dropFirst())
             }
             
         } else {

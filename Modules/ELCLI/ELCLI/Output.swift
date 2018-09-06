@@ -124,9 +124,9 @@ public func printOption(_ option: Option) {
     
     let usageData = option.usage!
     
-    if flagData.characters.count > 26 {
+    if flagData.count > 26 {
         flagData += "\n"
-        flagData += usageData.padFront(27 + usageData.characters.count)
+        flagData += usageData.padFront(27 + usageData.count)
     } else {
         flagData += " " + usageData
     }

@@ -51,10 +51,10 @@ open class CLI {
         return 0
     }
     
-    open let appName: String
-    open let appVersion: String
-    open let appDescription: String
-    open let executableName: String
+    public let appName: String
+    public let appVersion: String
+    public let appDescription: String
+    public let executableName: String
 
     open var allArgumentsToExecutable: Array<String>? = nil
     
@@ -145,7 +145,7 @@ open class CLI {
                         if arg.hasPrefix(optionFlag + "=") {
                             // is this a "--flag=value" type argument?
                             // if so, break it into its parts.
-                            let parts = arg.characters.split(maxSplits: 1, omittingEmptySubsequences: true, whereSeparator: { return $0 == "=" })
+                            let parts = arg.split(maxSplits: 1, omittingEmptySubsequences: true, whereSeparator: { return $0 == "=" })
                             if parts.count == 2 {
                                 optionFlag = String(parts[0])
                                 value = String(parts[1])

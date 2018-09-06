@@ -23,8 +23,8 @@ public extension String {
 public extension String {
     public func padFront(_ maxLength: Int) -> String {
         var spaces = ""
-        if maxLength > self.characters.count {
-            for _ in 0..<(maxLength - self.characters.count) {
+        if maxLength > self.count {
+            for _ in 0..<(maxLength - self.count) {
                 spaces += " "
             }
         }
@@ -34,8 +34,8 @@ public extension String {
     
     public func padBack(_ maxLength: Int) -> String {
         var spaces = ""
-        if maxLength > self.characters.count {
-            for _ in 0..<(maxLength - self.characters.count) {
+        if maxLength > self.count {
+            for _ in 0..<(maxLength - self.count) {
                 spaces += " "
             }
         }

@@ -70,7 +70,7 @@ public extension String {
     }
     
     func clean() -> String {
-        var cc = characters
+        var cc = Substring(self)
         
         loop: while true {
             switch cc.first {
@@ -93,7 +93,7 @@ public extension String {
                 break loop
             }
         }
-        
+
         return String(cc)
     }
     
@@ -103,7 +103,7 @@ public extension String {
     }
     
     func stringByRemovingAll(_ characters: [Character]) -> String {
-        return String(self.characters.filter({ !characters.contains($0) }))
+        return String(self.filter({ !characters.contains($0) }))
     }
     
     func stringByRemovingAll(_ subStrings: [String]) -> String {
