@@ -25,7 +25,7 @@ public struct DependencySpec {
     }
 }
 
-extension DependencySpec: Decodable {
+extension DependencySpec: ELDecodable {
     public static func decode(_ json: JSON?) throws -> DependencySpec {
         return try DependencySpec(
             repositoryURL: json ==> "repositoryURL",
@@ -38,7 +38,7 @@ extension DependencySpec: Decodable {
     }
 }
 
-extension DependencySpec: Encodable {
+extension DependencySpec: ELEncodable {
     public func encode() throws -> JSON {
         return try encodeToJSON([
             "repositoryURL" <== repositoryURL,

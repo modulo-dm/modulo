@@ -72,13 +72,13 @@ open class AddCommand: NSObject, Command {
         let result = actions.addDependency(repositoryURL, version: version, unmanaged: unmanaged)
         if result == .success {
             if shouldUpdate {
-                writeln(.stdout, "Added \(repositoryURL).")
+                writeln(.stdout, "Added \(String(describing: repositoryURL)).")
                 if let spec = ModuleSpec.workingSpec(), let dep = spec.dependencyForURL(repositoryURL) {
                     let actions = Actions()
                     _ = actions.updateDependencies([dep], explicit: true)
                 }
             } else {
-                writeln(.stdout, "Added \(repositoryURL).  Run the `update` command to complete the process.")
+                writeln(.stdout, "Added \(String(describing: repositoryURL)).  Run the `update` command to complete the process.")
             }            
         }
         

@@ -260,7 +260,7 @@ open class Git: SCM {
                         return branch
                     }.filter { (item) -> Bool in
                         
-                        if item.contains(" -> ") || item.characters.count == 0 {
+                        if item.contains(" -> ") || item.count == 0 {
                             return false
                         } else {
                             return true
@@ -483,7 +483,7 @@ extension Git {
         FileManager.setWorkingPath(path)
         
         _ = runCommand("git stash list") { (status, output) in
-            result = (output?.characters.count != 0) && (status == 0)
+            result = (output?.count != 0) && (status == 0)
         }
         
         FileManager.setWorkingPath(initialWorkingPath)
@@ -520,7 +520,7 @@ extension Git {
             if let currentHash = hashAtPath(path) {
                 let command = "git rev-list \(remoteBranch)...\(currentHash)"
                 _ = runCommand(command) { (status, output) in
-                    result = (output?.characters.count != 0) && (status == 0)
+                    result = (output?.count != 0) && (status == 0)
                 }
             }
             

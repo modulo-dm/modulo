@@ -24,7 +24,7 @@ public struct ModuleSpec {
     public var path: String
 }
 
-extension ModuleSpec: Decodable {
+extension ModuleSpec: ELDecodable {
     public static func decode(_ json: JSON?) throws -> ModuleSpec {
         return try ModuleSpec(
             name: json ==> "name",
@@ -40,7 +40,7 @@ extension ModuleSpec: Decodable {
     }
 }
 
-extension ModuleSpec: Encodable {
+extension ModuleSpec: ELEncodable {
     public func encode() throws -> JSON {
         return try encodeToJSON([
             "name" <== name,

@@ -26,6 +26,7 @@
 		65F7356F1E008A320091D3A0 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 65F7356D1E008A320091D3A0 /* System.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65F735701E008A320091D3A0 /* System.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7356E1E008A320091D3A0 /* System.m */; };
 		65F735751E008E400091D3A0 /* System.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7356E1E008A320091D3A0 /* System.m */; };
+		C1FD87BC2141A6CF00B42D9B /* ELFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C761D14942D00411727 /* ELFoundation.framework */; };
 		CA0A3F131D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
 		CA0A3F141D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
 		CA0A3F1D1D5A557A00A7F0BB /* SemverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F1C1D5A557A00A7F0BB /* SemverTests.swift */; };
@@ -47,7 +48,6 @@
 		CAE55C5A1D1492A500411727 /* ModuloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C501D1492A500411727 /* ModuloKit.framework */; };
 		CAE55C5F1D1492A500411727 /* ModuloKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C5E1D1492A500411727 /* ModuloKitTests.swift */; };
 		CAE55C8C1D14944B00411727 /* ELCLI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C801D14943300411727 /* ELCLI.framework */; };
-		CAE55C8E1D14944B00411727 /* ELFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C761D14942D00411727 /* ELFoundation.framework */; };
 		CAE55CA11D1494B200411727 /* InitCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C961D1494B200411727 /* InitCommand.swift */; };
 		CAE55CA21D1494B200411727 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C971D1494B200411727 /* ErrorCode.swift */; };
 		CAE55CA31D1494B200411727 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE55C981D1494B200411727 /* Extensions.swift */; };
@@ -330,9 +330,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1FD87BC2141A6CF00B42D9B /* ELFoundation.framework in Frameworks */,
 				CAE55CB01D1496AB00411727 /* ELCodable.framework in Frameworks */,
 				CAE55C8C1D14944B00411727 /* ELCLI.framework in Frameworks */,
-				CAE55C8E1D14944B00411727 /* ELFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +384,13 @@
 			name = System;
 			sourceTree = "<group>";
 		};
+		C1FD87BB2141A6CF00B42D9B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CAE55C381D14928B00411727 = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +398,7 @@
 				CAE55C511D1492A500411727 /* ModuloKit */,
 				CAE55C5D1D1492A500411727 /* ModuloKitTests */,
 				CAE55C421D14928B00411727 /* Products */,
+				C1FD87BB2141A6CF00B42D9B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -707,20 +715,20 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = TheHolyGrail;
 				TargetAttributes = {
 					CAE55C401D14928B00411727 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 1000;
 					};
 					CAE55C4F1D1492A500411727 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 1000;
 					};
 					CAE55C581D1492A500411727 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -998,14 +1006,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1045,14 +1061,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1082,7 +1106,8 @@
 				OTHER_SWIFT_FLAGS = "-DNOFRAMEWORKS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = ModuloKit/System/BridgingHeader.h;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1092,7 +1117,8 @@
 				OTHER_SWIFT_FLAGS = "-DNOFRAMEWORKS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = ModuloKit/System/BridgingHeader.h;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1114,7 +1140,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1137,7 +1164,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.theholygrail.ModuloKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1154,7 +1182,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ModuloKitTests/ModuloKitTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1168,7 +1197,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.theholygrail.ModuloKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ModuloKitTests/ModuloKitTests-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

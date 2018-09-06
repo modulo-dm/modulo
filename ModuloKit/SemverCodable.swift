@@ -12,17 +12,17 @@ import Foundation
     import ELCodable
 #endif
 
-extension SemverRange: Encodable {
+extension SemverRange: ELEncodable {
     public func encode() throws -> JSON {
         if self.valid {
             return JSON(self.original)
         } else {
-            throw EncodeError.unencodable
+            throw ELEncodeError.unencodable
         }
     }
 }
 
-extension SemverRange: Decodable {
+extension SemverRange: ELDecodable {
     public static func decode(_ json: JSON?) throws -> SemverRange {
         if let value = json?.string {
             let range = SemverRange(value)
@@ -31,6 +31,6 @@ extension SemverRange: Decodable {
             }
         }
 
-        throw DecodeError.undecodable
+        throw ELDecodeError.undecodable
     }
 }

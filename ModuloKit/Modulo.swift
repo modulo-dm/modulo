@@ -17,12 +17,12 @@ import Foundation
 @objc
 open class Modulo: NSObject {
     
-    open static func run() {
+    public static func run() {
         let error = run([])
         exit(Int32(error.rawValue))
     }
     
-    open static func run(_ args: [String]) -> ErrorCode {
+    public static func run(_ args: [String]) -> ErrorCode {
         let cli = CLI(name: "modulo", version: "0.6.2", description: "A simple dependency manager")
         
         if args.count > 0 {

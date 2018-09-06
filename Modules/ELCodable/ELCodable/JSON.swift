@@ -189,7 +189,7 @@ extension JSON {
     
     public var objectType: String {
         if let object = object {
-            return "\(type(of: object))"
+            return "\(Swift.type(of: object))"
         } else {
             return "Unknown"
         }

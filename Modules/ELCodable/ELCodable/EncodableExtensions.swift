@@ -8,61 +8,61 @@
 
 import Foundation
 
-extension String: Encodable {
+extension String: ELEncodable {
     public func encode() throws -> JSON {
         return JSON(self as AnyObject?)
     }
 }
 
-extension Float: Encodable {
+extension Float: ELEncodable {
     public func encode() throws -> JSON {
         return JSON(self as AnyObject?)
     }
 }
 
-extension Double: Encodable {
+extension Double: ELEncodable {
     public func encode() throws -> JSON {
         return JSON(self as AnyObject?)
     }
 }
 
-extension Int: Encodable {
+extension Int: ELEncodable {
     public func encode() throws -> JSON {
         return JSON(self as AnyObject?)
     }
 }
 
-extension Int64: Encodable {
+extension Int64: ELEncodable {
     public func encode() throws -> JSON {
         return JSON(NSNumber(value: self as Int64))
     }
 }
 
-extension UInt: Encodable {
+extension UInt: ELEncodable {
     public func encode() throws -> JSON {
         return JSON(self as AnyObject?)
     }
 }
 
-extension UInt64: Encodable {
+extension UInt64: ELEncodable {
     public func encode() throws -> JSON {
         return JSON(NSNumber(value: self as UInt64))
     }
 }
 
-extension Bool: Encodable {
+extension Bool: ELEncodable {
     public func encode() throws -> JSON {
         return JSON(self as AnyObject?)
     }
 }
 
-extension Decimal: Encodable {
+extension Decimal: ELEncodable {
     public func encode() throws -> JSON {
         return JSON(self.value)
     }
 }
 
-extension Array where Element: Encodable {
+extension Array where Element: ELEncodable {
     public func encode() throws -> JSON {
         var array = [Any]()
         for item in self {
