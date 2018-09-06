@@ -347,7 +347,7 @@
 					};
 					CAE55BFD1D13A61900411727 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 1000;
 					};
 					CAE55C061D13A61A00411727 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -671,7 +671,8 @@
 				PRODUCT_NAME = ELCodable;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -694,7 +695,8 @@
 				PRODUCT_NAME = ELCodable;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = QADeployment;
 		};
@@ -717,7 +719,8 @@
 				PRODUCT_NAME = ELCodable;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

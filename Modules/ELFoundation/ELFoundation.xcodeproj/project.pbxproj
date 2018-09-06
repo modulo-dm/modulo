@@ -392,7 +392,7 @@
 				TargetAttributes = {
 					CA8CD5591B7A9DCA00DA8BF7 = {
 						CreatedOnToolsVersion = 7.0;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 1000;
 					};
 					CA8CD5621B7A9DCB00DA8BF7 = {
 						CreatedOnToolsVersion = 7.0;
@@ -654,7 +654,8 @@
 				PRODUCT_NAME = ELFoundation;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = QADeployment;
 		};
@@ -690,7 +691,8 @@
 				PRODUCT_NAME = ELFoundation;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -712,7 +714,8 @@
 				PRODUCT_NAME = ELFoundation;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

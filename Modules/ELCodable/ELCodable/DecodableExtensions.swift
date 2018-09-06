@@ -87,7 +87,7 @@ extension Bool: ELDecodable {
 extension Decimal: ELDecodable {
     public static func decode(_ json: JSON?) throws -> Decimal {
         if let value = json?.decimal {
-            return Decimal(value)
+            return value.decimalValue
         }
         throw ELDecodeError.undecodable
     }
