@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum DecodeError: Error {
+public enum ELDecodeError: Error {
     case emptyJSON
     case undecodable
     case validationUnimplemented
@@ -16,15 +16,15 @@ public enum DecodeError: Error {
     case notFound(key: String)
 }
 
-public protocol Decodable {
+public protocol ELDecodable {
     static func decode(_ json: JSON?) throws -> Self
     func validate() throws -> Self
 }
 
-public extension Decodable {
+public extension ELDecodable {
     func validate() throws -> Self {
         // do nothing.  user to override.
-        throw DecodeError.validationUnimplemented
+        throw ELDecodeError.validationUnimplemented
         //return self
     }
 }

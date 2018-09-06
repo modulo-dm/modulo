@@ -17,9 +17,9 @@ precedencegroup DecodingPrecedence {
     higherThan: CastingPrecedence
 }
 
-public func ==> <T: Decodable>(lhs: JSON?, rhs: String) throws -> T {
+public func ==> <T: ELDecodable>(lhs: JSON?, rhs: String) throws -> T {
     guard let json = lhs else {
-        throw DecodeError.emptyJSON
+        throw ELDecodeError.emptyJSON
     }
     
     do {
@@ -27,20 +27,20 @@ public func ==> <T: Decodable>(lhs: JSON?, rhs: String) throws -> T {
         if let value = value {
             return value
         } else {
-            throw DecodeError.notFound(key: rhs)
+            throw ELDecodeError.notFound(key: rhs)
         }
     } catch let error {
         throw error
     }
 }
 
-public func ==> <T: Decodable>(lhs: JSON?, rhs: String) throws -> [T] {
+public func ==> <T: ELDecodable>(lhs: JSON?, rhs: String) throws -> [T] {
     guard let json = lhs else {
-        throw DecodeError.emptyJSON
+        throw ELDecodeError.emptyJSON
     }
     
     guard let array = json[rhs]?.array else {
-        throw DecodeError.notFound(key: rhs)
+        throw ELDecodeError.notFound(key: rhs)
     }
     
     var results = [T]()
@@ -54,9 +54,9 @@ public func ==> <T: Decodable>(lhs: JSON?, rhs: String) throws -> [T] {
     return results
 }
 
-public func ==> <T: Decodable>(lhs: JSON?, rhs: String) throws -> T? {
+public func ==> <T: ELDecodable>(lhs: JSON?, rhs: String) throws -> T? {
     guard let json = lhs else {
-        throw DecodeError.emptyJSON
+        throw ELDecodeError.emptyJSON
     }
     
     let value = try? T.decode(json[rhs])
@@ -67,9 +67,9 @@ public func ==> <T: Decodable>(lhs: JSON?, rhs: String) throws -> T? {
     }
 }
 
-public func ==> <T: Decodable>(lhs: JSON?, rhs: String) throws -> [T]? {
+public func ==> <T: ELDecodable>(lhs: JSON?, rhs: String) throws -> [T]? {
     guard let json = lhs else {
-        throw DecodeError.emptyJSON
+        throw ELDecodeError.emptyJSON
     }
     
     guard let array = json[rhs]?.array else {
