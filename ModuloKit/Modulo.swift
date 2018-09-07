@@ -16,29 +16,29 @@ import Foundation
 
 @objc
 open class Modulo: NSObject {
-    
+
     public static func run() {
         let error = run([])
         exit(Int32(error.rawValue))
     }
-    
+
     public static func run(_ args: [String]) -> ErrorCode {
         let cli = CLI(name: "modulo", version: "0.6.4", description: "A simple dependency manager")
-        
+
         if args.count > 0 {
             cli.allArgumentsToExecutable = args
         }
-        
+
         cli.addCommands([InitCommand(), AddCommand(), UpdateCommand(), StatusCommand(), MapCommand(), SetCommand()])
-        
+
         if let error = ErrorCode(rawValue: cli.run()) {
             if error == .success {
                 State.instance.showFinalInformation()
             }
-            
+
             return error
         }
-        
+
         return ErrorCode.unknownError
     }
 }
