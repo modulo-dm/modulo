@@ -53,10 +53,15 @@ open class UpdateCommand: NSObject, Command {
             self.dependencyName = value
             self.updateAll = false
         }
+
+        addOption(["--verbose"], usage: "verbose logging on") { (option, value) in
+            self.verbose = true
+        }
     }
     
     open func execute(_ otherParams: Array<String>?) -> Int {
         let actions = Actions()
+        actions.scm.verbose = verbose
         
         if let hostname = hostname {
             if canConnect(hostname: hostname) == false {

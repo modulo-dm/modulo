@@ -14,7 +14,7 @@ import Foundation
 #endif
 
 open class Actions {
-    let scm = currentSCM()
+    var scm = currentSCM()
     
     public init() {
         if !ModuleSpec.exists() {
