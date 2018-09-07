@@ -23,7 +23,7 @@ open class Modulo: NSObject {
     }
     
     public static func run(_ args: [String]) -> ErrorCode {
-        let cli = CLI(name: "modulo", version: "0.6.2", description: "A simple dependency manager")
+        let cli = CLI(name: "modulo", version: "0.6.3", description: "A simple dependency manager")
         
         if args.count > 0 {
             cli.allArgumentsToExecutable = args
