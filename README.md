@@ -62,7 +62,7 @@ Utilities/
 
 ## Build Dependencies
 
-* \>= Xcode 8.1
+* \>= Xcode 9.4
 * Git
 
 ## Installation
