@@ -21,7 +21,7 @@ open class MapCommand: NSObject, Command {
     }
     open var failOnUnrecognizedOptions: Bool { return true }
     
-    open var verbose: Bool = false
+    open var verbose: Bool = State.instance.options.verboseOutput
     open var quiet: Bool = false
     
     fileprivate var simple = false

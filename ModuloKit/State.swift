@@ -16,11 +16,14 @@ import Foundation
 public struct State {
     public static var instance = State()
     
-    public var modulePathName = "modules"
+    public var modulePathName: String {
+        return options.depdencyInstallationPath
+    }
     
     var implictDependencies = [DependencySpec]()
     var explicitDependencies = [DependencySpec]()
     var removedDependencies = [DependencySpec]()
+    var options = OptionsSpec()
     
     public func dependenciesWereCloned() -> Bool {
         return (implictDependencies.count > 0 || explicitDependencies.count > 0)

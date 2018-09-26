@@ -82,7 +82,7 @@ open class Git: SCM {
             return .error(code: 1, message: "Module path '\(path)' already exists.")
         }
         
-        let cloneCommand = "git clone \(url) \(path)"
+        let cloneCommand = "git clone \(url) '\(path)'"
         let status = runCommand(cloneCommand)
         
         if status != 0 {

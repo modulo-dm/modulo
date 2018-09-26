@@ -25,7 +25,7 @@ open class InitCommand: NSObject, Command {
     }
     open var failOnUnrecognizedOptions: Bool { return true }
     
-    open var verbose: Bool = false
+    open var verbose: Bool = State.instance.options.verboseOutput
     open var quiet: Bool = false
     
     open func configureOptions() {
@@ -53,7 +53,7 @@ open class InitCommand: NSObject, Command {
         }
       
         let specPath = workingPath.appendPathComponent(specFilename)
-        let spec = ModuleSpec(name: FileManager.directoryName(), module: isModule, sourcePath: nil, dependencies: [], path: specPath)
+        let spec = ModuleSpec(name: FileManager.directoryName(), module: isModule, sourcePath: nil, dependencies: [], options: OptionsSpec(), path: specPath)
         let success = spec.save()
         
         if !success {

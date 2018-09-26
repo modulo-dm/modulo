@@ -47,7 +47,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/brsneed/work/ios_core"
+      customWorkingDirectory = "/Users/miedema/Code/ModuloTest"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
@@ -65,6 +65,14 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "update --all --host github.corp.ebay.com"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "update --verbose"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "update"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

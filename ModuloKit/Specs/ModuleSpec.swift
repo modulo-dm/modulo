@@ -20,6 +20,7 @@ public struct ModuleSpec {
     public let module: Bool
     public let sourcePath: String?
     public var dependencies: [DependencySpec]
+    public var options: OptionsSpec
     
     public var path: String
 }
@@ -31,6 +32,7 @@ extension ModuleSpec: ELDecodable {
             module: json ==> "module",
             sourcePath: json ==> "sourcePath",
             dependencies: json ==> "dependencies",
+            options: json ==> "options" ?? OptionsSpec(),
             path: ""
         )
     }
@@ -46,7 +48,8 @@ extension ModuleSpec: ELEncodable {
             "name" <== name,
             "module" <== module,
             "sourcePath" <== sourcePath,
-            "dependencies" <== dependencies
+            "dependencies" <== dependencies,
+            "options" <== options
         ])
     }
 }
@@ -65,6 +68,8 @@ extension ModuleSpec {
         if var spec = result {
             spec.path = filePath
             result = spec
+            // Set our state.instance options off of our own
+            State.instance.options = spec.options
         }
         
         return result
