@@ -27,6 +27,11 @@
 		65F735701E008A320091D3A0 /* System.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7356E1E008A320091D3A0 /* System.m */; };
 		65F735751E008E400091D3A0 /* System.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F7356E1E008A320091D3A0 /* System.m */; };
 		C1FD87BC2141A6CF00B42D9B /* ELFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE55C761D14942D00411727 /* ELFoundation.framework */; };
+		C43C19D1215B429B00F81253 /* DefaultsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43C19D0215B429B00F81253 /* DefaultsCommand.swift */; };
+		C43C19DA215B457200F81253 /* OptionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43C19D9215B457200F81253 /* OptionsSpec.swift */; };
+		C43C19DB215B479D00F81253 /* OptionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43C19D9215B457200F81253 /* OptionsSpec.swift */; };
+		C43C19DE215B551800F81253 /* TestDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43C19DD215B551800F81253 /* TestDefaults.swift */; };
+		C43C19DF215B556B00F81253 /* DefaultsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43C19D0215B429B00F81253 /* DefaultsCommand.swift */; };
 		CA0A3F131D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
 		CA0A3F141D5A3D7700A7F0BB /* Semver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F121D5A3D7700A7F0BB /* Semver.swift */; };
 		CA0A3F1D1D5A557A00A7F0BB /* SemverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A3F1C1D5A557A00A7F0BB /* SemverTests.swift */; };
@@ -255,6 +260,9 @@
 		65F7356D1E008A320091D3A0 /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = System.h; path = System/System.h; sourceTree = "<group>"; };
 		65F7356E1E008A320091D3A0 /* System.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = System.m; path = System/System.m; sourceTree = "<group>"; };
 		65F735711E008B680091D3A0 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BridgingHeader.h; path = System/BridgingHeader.h; sourceTree = "<group>"; };
+		C43C19D0215B429B00F81253 /* DefaultsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsCommand.swift; sourceTree = "<group>"; };
+		C43C19D9215B457200F81253 /* OptionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsSpec.swift; sourceTree = "<group>"; };
+		C43C19DD215B551800F81253 /* TestDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDefaults.swift; sourceTree = "<group>"; };
 		CA0A3F121D5A3D7700A7F0BB /* Semver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semver.swift; sourceTree = "<group>"; };
 		CA0A3F1C1D5A557A00A7F0BB /* SemverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemverTests.swift; sourceTree = "<group>"; };
 		CA3354441D15C91000ACD91C /* TestAdd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAdd.swift; sourceTree = "<group>"; };
@@ -463,6 +471,7 @@
 				CA33544B1D15CA4800ACD91C /* XCTestCase+Exceptions.h */,
 				CAE55C601D1492A500411727 /* Info.plist */,
 				CA3354481D15CA3500ACD91C /* ModuloKitTests-Bridging-Header.h */,
+				C43C19DD215B551800F81253 /* TestDefaults.swift */,
 			);
 			path = ModuloKitTests;
 			sourceTree = "<group>";
@@ -518,6 +527,7 @@
 				CACB213D1D3D8D7B00ACA574 /* RemoveCommand.swift */,
 				659D689B1E33E748008750C2 /* SetCommand.swift */,
 				659D68A51E340516008750C2 /* MapCommand.swift */,
+				C43C19D0215B429B00F81253 /* DefaultsCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -536,6 +546,7 @@
 			children = (
 				CAE55C9E1D1494B200411727 /* DependencySpec.swift */,
 				CAE55C9F1D1494B200411727 /* ModuleSpec.swift */,
+				C43C19D9215B457200F81253 /* OptionsSpec.swift */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -863,6 +874,7 @@
 				CAE55CF41D149C0B00411727 /* VersionCommand.swift in Sources */,
 				CAE55CE41D149BD800411727 /* EncodableExtensions.swift in Sources */,
 				CAE55CF51D149C0B00411727 /* Options.swift in Sources */,
+				C43C19DB215B479D00F81253 /* OptionsSpec.swift in Sources */,
 				CAE55CCC1D1497A200411727 /* NSURL.swift in Sources */,
 				CAE55CE31D149BD800411727 /* Encodable.swift in Sources */,
 				CAE55D141D14C9EE00411727 /* ErrorCode.swift in Sources */,
@@ -893,6 +905,7 @@
 				CAE55D151D14C9EE00411727 /* Extensions.swift in Sources */,
 				CAE55CD11D1497A200411727 /* ObjectAssociation.swift in Sources */,
 				CAE55D121D14C9EE00411727 /* Modulo.swift in Sources */,
+				C43C19DF215B556B00F81253 /* DefaultsCommand.swift in Sources */,
 				CAE55CCE1D1497A200411727 /* TestHelper.swift in Sources */,
 				CAE55CE61D149BD800411727 /* JSON.swift in Sources */,
 				CAE55CCD1D1497A200411727 /* String.swift in Sources */,
@@ -915,6 +928,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAE55CA11D1494B200411727 /* InitCommand.swift in Sources */,
+				C43C19D1215B429B00F81253 /* DefaultsCommand.swift in Sources */,
 				CAE55CA61D1494B200411727 /* SCM.swift in Sources */,
 				CAE55CA31D1494B200411727 /* Extensions.swift in Sources */,
 				CAE55CA21D1494B200411727 /* ErrorCode.swift in Sources */,
@@ -924,6 +938,7 @@
 				CA0A3F141D5A3D7700A7F0BB /* Semver.swift in Sources */,
 				CA3354511D185C7600ACD91C /* Actions.swift in Sources */,
 				65F735701E008A320091D3A0 /* System.m in Sources */,
+				C43C19DA215B457200F81253 /* OptionsSpec.swift in Sources */,
 				CACB213F1D3D8D7B00ACA574 /* RemoveCommand.swift in Sources */,
 				659D689C1E33E748008750C2 /* SetCommand.swift in Sources */,
 				CACB20C31D3457A100ACA574 /* StatusCommand.swift in Sources */,
@@ -943,6 +958,7 @@
 			files = (
 				653A1E5A1E2CA3BB00F24E70 /* TestCheckout.swift in Sources */,
 				CACB212D1D3D45B300ACA574 /* TestStatus.swift in Sources */,
+				C43C19DE215B551800F81253 /* TestDefaults.swift in Sources */,
 				CA0A3F1D1D5A557A00A7F0BB /* SemverTests.swift in Sources */,
 				65E60AE81DFF4FE000DAE913 /* TestDummyApp.swift in Sources */,
 				CAE55C5F1D1492A500411727 /* ModuloKitTests.swift in Sources */,

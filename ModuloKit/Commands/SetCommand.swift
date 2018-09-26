@@ -21,7 +21,7 @@ open class SetCommand: NSObject, Command {
     }
     open var failOnUnrecognizedOptions: Bool { return true }
     
-    open var verbose: Bool = false
+    open var verbose: Bool = State.instance.options.verbose
     open var quiet: Bool = false
     
     // subcommands

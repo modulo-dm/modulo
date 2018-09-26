@@ -23,13 +23,19 @@ open class Modulo: NSObject {
     }
 
     public static func run(_ args: [String]) -> ErrorCode {
-        let cli = CLI(name: "modulo", version: "0.6.4", description: "A simple dependency manager")
+        let cli = CLI(name: "modulo", version: "0.7.0", description: "A simple dependency manager")
+
+        // before we do anything make sure our options are applied to our
+        // current state. If we don't have a working spec the defaults will do fine
+        if let options = ModuleSpec.workingSpec()?.options {
+            State.instance.options = options
+        }
 
         if args.count > 0 {
             cli.allArgumentsToExecutable = args
         }
 
-        cli.addCommands([InitCommand(), AddCommand(), UpdateCommand(), StatusCommand(), MapCommand(), SetCommand()])
+        cli.addCommands([InitCommand(), AddCommand(), UpdateCommand(), StatusCommand(), MapCommand(), SetCommand(), DefaultsCommand()])
 
         if let error = ErrorCode(rawValue: cli.run()) {
             if error == .success {
