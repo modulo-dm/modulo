@@ -464,6 +464,7 @@
 				CA3354451D15C91000ACD91C /* TestInit.swift */,
 				CAE93D101D21A7BD00C00811 /* TestUpdate.swift */,
 				CACB212C1D3D45B300ACA574 /* TestStatus.swift */,
+				C43C19DD215B551800F81253 /* TestDefaults.swift */,
 				468A8B161DF3F8B10060D93C /* TestGit.swift */,
 				653A1E591E2CA3BB00F24E70 /* TestCheckout.swift */,
 				65B97FB31F0FE05B002C38CA /* TestScenarios.swift */,
@@ -471,7 +472,6 @@
 				CA33544B1D15CA4800ACD91C /* XCTestCase+Exceptions.h */,
 				CAE55C601D1492A500411727 /* Info.plist */,
 				CA3354481D15CA3500ACD91C /* ModuloKitTests-Bridging-Header.h */,
-				C43C19DD215B551800F81253 /* TestDefaults.swift */,
 			);
 			path = ModuloKitTests;
 			sourceTree = "<group>";

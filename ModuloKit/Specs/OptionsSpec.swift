@@ -14,7 +14,7 @@ import Foundation
 
 public struct OptionsSpec {
     /// Should we have `verbose` on all commands
-    var verbose: Bool = false
+    var verboseOutput: Bool = false
     /// Path to store our 'modules'/dependencies in
     var depdencyInstallationPath: String = "modules"
 }
@@ -22,7 +22,7 @@ public struct OptionsSpec {
 extension OptionsSpec: ELDecodable {
     public static func decode(_ json: JSON?) throws -> OptionsSpec {
         return try OptionsSpec(
-            verbose: json ==> "verbose",
+            verboseOutput: json ==> "verboseOutput",
             depdencyInstallationPath: json ==> "depdencyInstallationPath"
         )
     }
@@ -31,7 +31,7 @@ extension OptionsSpec: ELDecodable {
 extension OptionsSpec: ELEncodable {
     public func encode() throws -> JSON {
         return try encodeToJSON([
-            "verbose" <== verbose,
+            "verboseOutput" <== verboseOutput,
             "depdencyInstallationPath" <== depdencyInstallationPath
         ])
     }

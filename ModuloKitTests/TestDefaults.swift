@@ -6,4 +6,12 @@
 //  Copyright © 2018 TheHolyGrail. All rights reserved.
 //
 
-import Foundation
+import XCTest
+import ELCLI
+import ELFoundation
+@testable import ModuloKit
+
+class TestDefaults: XCTestCase {
+    let modulo = Modulo()
+    
+}

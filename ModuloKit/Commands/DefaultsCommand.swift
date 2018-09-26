@@ -36,7 +36,7 @@ open class DefaultsCommand: NSObject, Command {
 
     public var failOnUnrecognizedOptions: Bool { return true }
 
-    public var verbose: Bool = State.instance.options.verbose
+    public var verbose: Bool = State.instance.options.verboseOutput
     public var quiet: Bool = false
 
     public func execute(_ otherParams: Array<String>?) -> Int {
@@ -58,8 +58,8 @@ open class DefaultsCommand: NSObject, Command {
                     newValue = false
                 }
 
-                spec.options.verbose = newValue
-                State.instance.options.verbose = newValue
+                spec.options.verboseOutput = newValue
+                State.instance.options.verboseOutput = newValue
             }
             if let moduleFolderPath = moduleFolderPath,
                 !moduleFolderPath.isEmpty {
@@ -69,7 +69,7 @@ open class DefaultsCommand: NSObject, Command {
             spec.save()
         } else {
             if toggleVerbose {
-                writeln(.stdout, "Verbose - \(spec.options.verbose)")
+                writeln(.stdout, "VerboseOutput - \(spec.options.verboseOutput)")
             }
             if moduleFolderPath != nil {
                 writeln(.stdout, "depdencyInstallationPath - \(spec.options.depdencyInstallationPath)")
