@@ -17,12 +17,13 @@ public struct DependencySpec {
     var repositoryURL: String
     // version or version range
     var version: SemverRange?
-    /// Branch to track
-    var branch: String?
+    /// Optional unmanaged property to track
+    /// such as a branch name, commit hash, or nothing
+    var unmanagedValue: String?
 
     var unmanaged: Bool {
         get {
-            return (version == nil) && (branch == nil)
+            return (version == nil)
         }
     }
 }
@@ -32,7 +33,7 @@ extension DependencySpec: ELDecodable {
         return try DependencySpec(
             repositoryURL: json ==> "repositoryURL",
             version: json ==> "version",
-            branch: json ==> "branch"
+            unmanagedValue: json ==> "unmanagedValue"
         )
     }
     
@@ -46,7 +47,7 @@ extension DependencySpec: ELEncodable {
         return try encodeToJSON([
             "repositoryURL" <== repositoryURL,
             "version" <== version,
-            "branch" <== branch
+            "unmanagedValue" <== unmanagedValue
         ])
     }
 }

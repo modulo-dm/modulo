@@ -176,7 +176,7 @@ open class Git: SCM {
         return .success
     }
 
-    open func checkout(branch: String, path: String) -> SCMResult {
+    open func checkout(branchOrHash: String, path: String) -> SCMResult {
         if !FileManager.fileExists(path) {
             return .error(code: 1, message: "Module path '\(path)' does not exist.")
         }
@@ -186,25 +186,20 @@ open class Git: SCM {
         let initialWorkingPath = FileManager.workingPath()
         FileManager.setWorkingPath(path)
 
-        let existingBranches = branches(".")
+        // try fetching it directly
+        let fetchResult = runCommand("git fetch origin \(branchOrHash)")
 
-        var neededFetch = false
-        var fetchResult: Int32? = nil
-        if !existingBranches.contains(branch) {
-            // try fetching it directly
-            fetchResult = runCommand("git fetch origin \(branch)")
-            neededFetch = true
+        if branches(".").contains(branchOrHash) {
+            checkoutCommand = "git checkout origin/\(branchOrHash) --quiet"
+        } else {
+            checkoutCommand = "git checkout \(branchOrHash) --quiet"
         }
 
-        checkoutCommand = "git checkout origin/\(branch) --quiet"
-
-        if neededFetch,
-            let fetchResult = fetchResult,
-            fetchResult != 0 {
+        if fetchResult != 0 {
             if verbose {
-                writeln(.stderr, "Unable to find branch '\(branch)'.")
+                writeln(.stderr, "Unable to find unmanaged value '\(branchOrHash)'.")
             }
-            return .error(code: SCMDefaultError, message: "Unable to find a match for \(branch).")
+            return .error(code: SCMDefaultError, message: "Unable to find a match for \(branchOrHash).")
         }
 
         let status = runCommand(checkoutCommand)
@@ -214,7 +209,7 @@ open class Git: SCM {
         FileManager.setWorkingPath(initialWorkingPath)
 
         if status != 0 {
-            return .error(code: status, message: "Unable to checkout '\(branch)'.")
+            return .error(code: status, message: "Unable to checkout '\(branchOrHash)'.")
         }
 
         if submodulesResult != .success {

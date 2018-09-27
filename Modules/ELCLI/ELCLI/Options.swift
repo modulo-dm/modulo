@@ -11,10 +11,10 @@ import Foundation
 public typealias OptionClosure = (_ option: String?, _ value: String?) -> Void
 
 public struct Option {
-    let usage: String?
-    let flags: Array<String>?
-    let valueSignatures: Array<String>?
-    let closure: OptionClosure
+    public let usage: String?
+    public let flags: Array<String>?
+    public let valueSignatures: Array<String>?
+    public let closure: OptionClosure
     
     init(flags: Array<String>?, usage: String?, valueSignatures: Array<String>?, closure: @escaping OptionClosure) {
         self.flags = flags

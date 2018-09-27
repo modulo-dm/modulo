@@ -79,7 +79,7 @@ class TestAdd: XCTestCase {
         FileManager.setWorkingPath("..")
     }
 
-    func testAddModuleByBranch() {
+    func testAddUnmanagedModuleWithBranch() {
         let status = Git().clone("git@github.com:modulo-dm/test-add.git", path: "test-add")
         XCTAssertTrue(status == .success)
 
@@ -87,7 +87,7 @@ class TestAdd: XCTestCase {
 
         let repoURL = "git@github.com:modulo-dm/test-add-update.git"
 
-        let result = Modulo.run(["add", repoURL, "--branch", "master", "-v"])
+        let result = Modulo.run(["add", repoURL, "--unmanaged", "master", "-v"])
         XCTAssertTrue(result == .success)
 
 
@@ -99,9 +99,37 @@ class TestAdd: XCTestCase {
             XCTFail("Failed to find dependency for url \(repoURL) in spec \(spec)")
             return }
         XCTAssertNil(dep.version)
-        XCTAssertFalse(dep.unmanaged)
-        XCTAssertNotNil(dep.branch)
-        XCTAssertTrue(dep.branch == "master")
+        XCTAssertTrue(dep.unmanaged)
+        XCTAssertNotNil(dep.unmanagedValue)
+        XCTAssertTrue(dep.unmanagedValue == "master")
+
+        FileManager.setWorkingPath("..")
+
+        Git().remove("test-add")
+    }
+
+    func testAddModuleUnmanagedNoArgs() {
+        let status = Git().clone("git@github.com:modulo-dm/test-add.git", path: "test-add")
+        XCTAssertTrue(status == .success)
+
+        FileManager.setWorkingPath("test-add")
+
+        let repoURL = "git@github.com:modulo-dm/test-add-update.git"
+
+        let result = Modulo.run(["add", repoURL, "--unmanaged", "-v"])
+        XCTAssertTrue(result == .success)
+
+
+        guard let spec = ModuleSpec.load(contentsOfFile: specFilename) else {
+            XCTFail("Failed to get spec from file \(specFilename)")
+            return }
+        XCTAssertTrue(spec.dependencies.count > 0)
+        guard let dep = spec.dependencyForURL(repoURL) else {
+            XCTFail("Failed to find dependency for url \(repoURL) in spec \(spec)")
+            return }
+        XCTAssertNil(dep.version)
+        XCTAssertTrue(dep.unmanaged)
+        XCTAssertNil(dep.unmanagedValue)
 
         FileManager.setWorkingPath("..")
 

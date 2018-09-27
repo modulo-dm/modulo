@@ -22,8 +22,8 @@ open class Actions {
         }
     }
     
-    open func addDependency(_ url: String, version: SemverRange?, branch: String?, unmanaged: Bool) -> ErrorCode {
-        let dep = DependencySpec(repositoryURL: url, version: version, branch: branch)
+    open func addDependency(_ url: String, version: SemverRange?, unmanagedValue: String?, unmanaged: Bool) -> ErrorCode {
+        let dep = DependencySpec(repositoryURL: url, version: version, unmanagedValue: unmanagedValue)
         if var workingSpec = ModuleSpec.workingSpec() {
             // does this dep already exist in here??
             if let _ = workingSpec.dependencyForURL(url) {
@@ -77,8 +77,8 @@ open class Actions {
                         exit(checkoutResult.errorMessage())
                     }
                 }
-                if let branch = dep.branch {
-                    let checkoutResult = scm.checkout(branch: branch, path: clonePath)
+                if let unmanagedValue = dep.unmanagedValue {
+                    let checkoutResult = scm.checkout(branchOrHash: unmanagedValue, path: clonePath)
                     if checkoutResult != .success {
                         exit(checkoutResult.errorMessage())
                     }
@@ -102,7 +102,7 @@ open class Actions {
                 }
                 
                 // if they're unmanaged and on a branch, tracking a remote, just do a pull
-                if dep.unmanaged == true, let currentBranch = scm.branchName(clonePath) {
+                if dep.unmanaged == true && dep.unmanagedValue == nil, let currentBranch = scm.branchName(clonePath) {
                     if scm.remoteTrackingBranch(currentBranch) != nil {
                         let pullResult = scm.pull(clonePath, remoteData: nil)
                         if pullResult != .success {
@@ -116,13 +116,13 @@ open class Actions {
                         if checkoutResult != .success {
                             exit(checkoutResult.errorMessage())
                         }
-                    } else if let branch = dep.branch {
-                        let checkoutResult = scm.checkout(branch: branch, path: clonePath)
+                    } else if let unmanagedValue = dep.unmanagedValue {
+                        let checkoutResult = scm.checkout(branchOrHash: unmanagedValue, path: clonePath)
                         if checkoutResult != .success {
                             exit(checkoutResult.errorMessage())
                         }
                     } else {
-                        exit("\(dep.name()) doesn't have a version, branch, and isn't marked as 'unmanaged', not sure what to do.")
+                        exit("\(dep.name()) doesn't have a version and isn't marked as 'unmanaged', not sure what to do.")
                     }
                 }
             }
