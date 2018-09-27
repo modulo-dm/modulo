@@ -76,6 +76,7 @@ public protocol SCM {
     func fetch(_ path: String) -> SCMResult
     func pull(_ path: String, remoteData: String?) -> SCMResult
     func checkout(version: SemverRange, path: String) -> SCMResult
+    func checkout(branch: String, path: String) -> SCMResult
     func remove(_ path: String) -> SCMResult
     func adjustIgnoreFile(pattern: String, removing: Bool) -> SCMResult
     func checkStatus(_ path: String) -> SCMResult

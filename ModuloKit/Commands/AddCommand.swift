@@ -16,6 +16,7 @@ import Foundation
 open class AddCommand: NSObject, Command {
     // internal properties
     fileprivate var version: SemverRange? = nil
+    fileprivate var branch: String? = nil
     fileprivate var repositoryURL: String! = nil
     fileprivate var shouldUpdate: Bool = false
     fileprivate var unmanaged: Bool = false
@@ -40,6 +41,12 @@ open class AddCommand: NSObject, Command {
                 self.version = SemverRange(value)
             }
         }
+
+        addOptionValue(["--branch"], usage: "specify the branch to track", valueSignature: "<branch>") { (option, value) in
+            if let value = value {
+                self.branch = value
+            }
+        }
         
         addOption(["--unmanaged"], usage: "specifies that this module will be unmanaged") { (option, value) in
             self.unmanaged = true
@@ -57,8 +64,8 @@ open class AddCommand: NSObject, Command {
     open func execute(_ otherParams: Array<String>?) -> Int {
         let actions = Actions()
         
-        if version == nil && unmanaged == false {
-            writeln(.stderr, "A version or range must be specified via --version, or --unmanaged must be used.")
+        if version == nil && branch == nil && unmanaged == false {
+            writeln(.stderr, "A version or range must be specified via --version, a branch must be specified via --branch, or --unmanaged must be used.")
             return ErrorCode.commandError.rawValue
         }
         
@@ -69,7 +76,7 @@ open class AddCommand: NSObject, Command {
             }
         }
 
-        let result = actions.addDependency(repositoryURL, version: version, unmanaged: unmanaged)
+        let result = actions.addDependency(repositoryURL, version: version, branch: branch, unmanaged: unmanaged)
         if result == .success {
             if shouldUpdate {
                 writeln(.stdout, "Added \(String(describing: repositoryURL)).")

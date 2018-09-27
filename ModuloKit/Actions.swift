@@ -22,8 +22,8 @@ open class Actions {
         }
     }
     
-    open func addDependency(_ url: String, version: SemverRange?, unmanaged: Bool) -> ErrorCode {
-        let dep = DependencySpec(repositoryURL: url, version: version)
+    open func addDependency(_ url: String, version: SemverRange?, branch: String?, unmanaged: Bool) -> ErrorCode {
+        let dep = DependencySpec(repositoryURL: url, version: version, branch: branch)
         if var workingSpec = ModuleSpec.workingSpec() {
             // does this dep already exist in here??
             if let _ = workingSpec.dependencyForURL(url) {
@@ -77,6 +77,16 @@ open class Actions {
                         exit(checkoutResult.errorMessage())
                     }
                 }
+                if let branch = dep.branch {
+                    let checkoutResult = scm.checkout(branch: branch, path: clonePath)
+                    if checkoutResult != .success {
+                        exit(checkoutResult.errorMessage())
+                    }
+                    let pullResult = scm.pull(clonePath, remoteData: nil)
+                    if pullResult != .success {
+                        exit(pullResult.errorMessage())
+                    }
+                }
                 
                 // things worked, so add it to the approprate place in the overall state.
                 if explicit {
@@ -106,8 +116,13 @@ open class Actions {
                         if checkoutResult != .success {
                             exit(checkoutResult.errorMessage())
                         }
+                    } else if let branch = dep.branch {
+                        let checkoutResult = scm.checkout(branch: branch, path: clonePath)
+                        if checkoutResult != .success {
+                            exit(checkoutResult.errorMessage())
+                        }
                     } else {
-                        exit("\(dep.name()) doesn't have a version and isn't unmanaged, not sure what to do.")
+                        exit("\(dep.name()) doesn't have a version, branch, and isn't marked as 'unmanaged', not sure what to do.")
                     }
                 }
             }
