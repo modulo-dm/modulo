@@ -36,7 +36,7 @@ open class DefaultsCommand: NSObject, Command {
 
     public var failOnUnrecognizedOptions: Bool { return true }
 
-    public var verbose: Bool = State.instance.options.verboseOutput
+    public var verbose: Bool = State.instance.options.alwaysVerbose
     public var quiet: Bool = false
 
     public func execute(_ otherParams: Array<String>?) -> Int {
@@ -58,23 +58,27 @@ open class DefaultsCommand: NSObject, Command {
                     newValue = false
                 }
 
-                spec.options.verboseOutput = newValue
-                State.instance.options.verboseOutput = newValue
+                spec.options.alwaysVerbose = newValue
+                State.instance.options.alwaysVerbose = newValue
             }
             if let moduleFolderPath = moduleFolderPath,
                 !moduleFolderPath.isEmpty {
                 spec.options.depdencyInstallationPath = moduleFolderPath
                 State.instance.options.depdencyInstallationPath = moduleFolderPath
             }
+
+            if !toggleVerbose && moduleFolderPath == nil {
+                writeln(.stderr, """
+                    When `--set` is passed its assumed you want to set a default.
+                    Please specify one of the options
+                        --alwaysVerbose
+                        --moduleFolder
+                """)
+            }
             spec.save()
         } else {
-            if toggleVerbose {
-                writeln(.stdout, "VerboseOutput - \(spec.options.verboseOutput)")
-            }
-            if moduleFolderPath != nil {
-                writeln(.stdout, "depdencyInstallationPath - \(spec.options.depdencyInstallationPath)")
-            }
-
+            writeln(.stdout, "alwaysVerbose - \(spec.options.alwaysVerbose)")
+            writeln(.stdout, "depdencyInstallationPath - \(spec.options.depdencyInstallationPath)")
         }
 
         return ErrorCode.success.rawValue
@@ -85,9 +89,9 @@ open class DefaultsCommand: NSObject, Command {
             self.setValue = true
         }
 
-        addOptionValue(["--verboseOutput"],
+        addOptionValue(["--alwaysVerbose"],
             usage: "specify `verbose` for all commands that are run",
-            valueSignature: "<[true|false}>") { (option, value) in
+            valueSignature: "<[true|false]>") { (option, value) in
             self.toggleVerbose = true
             self.verboseValue = value
         }

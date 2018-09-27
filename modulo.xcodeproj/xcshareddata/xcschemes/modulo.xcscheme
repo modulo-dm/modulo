@@ -68,12 +68,16 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "defaults --set --alwaysVerbose true"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "update --verbose"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "update"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
