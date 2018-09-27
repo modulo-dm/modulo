@@ -1,7 +1,7 @@
 # By default export all variables
 export
 
-.PHONY: install release debug build setup clean
+.PHONY: install release debug build setup clean test
 
 PROJECT ?= 'modulo.xcodeproj'
 SCHEME  ?= 'modulo'
@@ -10,6 +10,9 @@ CONFIGURATION ?= 'Debug'
 
 # Build for debugging
 debug: build
+
+test:
+	xcodebuild -project $(PROJECT) -scheme ModuloKit test
 
 # Install `modulo` to `/usr/local/bin`
 install: release
