@@ -44,21 +44,7 @@ open class AddCommand: NSObject, Command {
         
         addOptionValue(["--unmanaged"], usage: "specifies that this module will be unmanaged", valueSignature: "<[hash|branch|nothing]>") { (option, value) -> Void in
             self.unmanaged = true
-            if let value = value {
-                if !value.hasPrefix("-") {
-                    self.unmanagedValue = value
-                }  else {
-                    if self.verbose {
-                        writeln(.stderr, "Assuming '\(value)' is a flag and not a branch/commit hash since it begins with '-' and will not track it.")
-                    }
-                    // TODO: Somehow reprocess this `value` as a flag
-                    self.options.filter({ (option) -> Bool in
-                        option.flags?.contains(value) ??  false
-                    }).forEach({ (option) in
-                        option.closure(value, nil)
-                    })
-                }
-            }
+            self.unmanagedValue = value
         }
         
         addOption(["-u", "--update"], usage: "performs the update command after adding a module") { (option, value) in
