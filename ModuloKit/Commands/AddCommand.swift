@@ -19,6 +19,7 @@ open class AddCommand: NSObject, Command {
     fileprivate var repositoryURL: String! = nil
     fileprivate var shouldUpdate: Bool = false
     fileprivate var unmanaged: Bool = false
+    fileprivate var unmanagedValue: String? = nil
     
     // Protocol conformance
     open var name: String { return "add" }
@@ -41,8 +42,9 @@ open class AddCommand: NSObject, Command {
             }
         }
         
-        addOption(["--unmanaged"], usage: "specifies that this module will be unmanaged") { (option, value) in
+        addOptionValue(["--unmanaged"], usage: "specifies that this module will be unmanaged", valueSignature: "<[hash|branch|nothing]>") { (option, value) -> Void in
             self.unmanaged = true
+            self.unmanagedValue = value
         }
         
         addOption(["-u", "--update"], usage: "performs the update command after adding a module") { (option, value) in
@@ -58,7 +60,7 @@ open class AddCommand: NSObject, Command {
         let actions = Actions()
         
         if version == nil && unmanaged == false {
-            writeln(.stderr, "A version or range must be specified via --version, or --unmanaged must be used.")
+            writeln(.stderr, "A version or range must be specified via --version or --unmanaged must be used.")
             return ErrorCode.commandError.rawValue
         }
         
@@ -69,7 +71,7 @@ open class AddCommand: NSObject, Command {
             }
         }
 
-        let result = actions.addDependency(repositoryURL, version: version, unmanaged: unmanaged)
+        let result = actions.addDependency(repositoryURL, version: version, unmanagedValue: unmanagedValue, unmanaged: unmanaged)
         if result == .success {
             if shouldUpdate {
                 writeln(.stdout, "Added \(String(describing: repositoryURL)).")

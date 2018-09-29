@@ -100,7 +100,7 @@ open class Git: SCM {
         let initialWorkingPath = FileManager.workingPath()
         FileManager.setWorkingPath(path)
         
-        let updateCommand = "git fetch --recurse-submodules --all --tags"
+        let updateCommand = "git fetch --recurse-submodules --all"
         let status = runCommand(updateCommand)
         
         FileManager.setWorkingPath(initialWorkingPath)
@@ -173,6 +173,49 @@ open class Git: SCM {
             return submodulesResult
         }
         
+        return .success
+    }
+
+    open func checkout(branchOrHash: String, path: String) -> SCMResult {
+        if !FileManager.fileExists(path) {
+            return .error(code: 1, message: "Module path '\(path)' does not exist.")
+        }
+
+        var checkoutCommand = ""
+
+        let initialWorkingPath = FileManager.workingPath()
+        FileManager.setWorkingPath(path)
+
+        // try fetching it directly
+        let fetchResult = runCommand("git fetch origin \(branchOrHash)")
+
+        if branches(".").contains(branchOrHash) {
+            checkoutCommand = "git checkout origin/\(branchOrHash) --quiet"
+        } else {
+            checkoutCommand = "git checkout \(branchOrHash) --quiet"
+        }
+
+        if fetchResult != 0 {
+            if verbose {
+                writeln(.stderr, "Unable to find unmanaged value '\(branchOrHash)'.")
+            }
+            return .error(code: SCMDefaultError, message: "Unable to find a match for \(branchOrHash).")
+        }
+
+        let status = runCommand(checkoutCommand)
+
+        let submodulesResult = collectAnySubmodules()
+
+        FileManager.setWorkingPath(initialWorkingPath)
+
+        if status != 0 {
+            return .error(code: status, message: "Unable to checkout '\(branchOrHash)'.")
+        }
+
+        if submodulesResult != .success {
+            return submodulesResult
+        }
+
         return .success
     }
     

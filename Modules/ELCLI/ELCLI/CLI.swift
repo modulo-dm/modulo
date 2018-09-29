@@ -154,7 +154,20 @@ open class CLI {
                             // it's a "--flag value" type argument.
                             if index < arguments.count - 1 {
                                 value = arguments[index + 1]
-                                skipNext = true
+                                // If we're assuming `--flag value` make sure
+                                // our `value` isn't a stop marker or flag. If it is
+                                // our value should instead be `nil`'d out so our
+                                // command does not get a value where it is our next
+                                // argument.
+                                if let argValue = value,
+                                    isStopMarker(argValue) || isFlag(argValue) {
+                                    value = nil
+                                } else {
+                                    // However if that's not the case we should skip
+                                    // the next command because we really did get
+                                    // `--flag value`
+                                    skipNext = true
+                                }
                             }
                         }
                     }

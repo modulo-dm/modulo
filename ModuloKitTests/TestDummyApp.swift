@@ -41,7 +41,7 @@ class TestDummyApp: XCTestCase {
         XCTAssertTrue(spec!.dependencyForURL("git@github.com:modulo-dm/test-add-update.git") != nil)
         
         let checkedOut = Git().branchName("modules/test-add-update")
-        XCTAssertTrue(checkedOut == "master")
+        XCTAssertTrue(checkedOut == "master", "checkedOut should have been 'master' but was '\(String(describing: checkedOut))'")
         
         XCTAssertTrue(FileManager.fileExists("modules/test-add-update"))
         XCTAssertTrue(FileManager.fileExists("modules/test-dep1"))
